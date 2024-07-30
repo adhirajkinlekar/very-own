@@ -1,0 +1,32 @@
+.card-custom {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-img-top-custom {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+    height: 180px;
+  }
+  
+  .rating_container{
+    font-size: 1.4rem;
+    display: flex;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center; 
+    margin-left: 0.5rem;
+  }
+  
+  .star {
+    color: #ddd; /* Color for unfilled stars */
+    margin-right: 0.25rem;
+  }
+  
+  .star.filled {
+    color: #b3a93f; /* Color for filled stars */
+  }
+  

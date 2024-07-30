@@ -1,0 +1,11 @@
+a {
+  text-decoration: none !important;  
+  color: inherit; /* Use the color of the parent element */
+  cursor: pointer;
+}
+
+ .content{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+ }

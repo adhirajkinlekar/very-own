@@ -1,0 +1,25 @@
+# Use an official Node runtime as a parent image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port for React development server
+EXPOSE 3000
+
+# Start the React development server
+CMD ["npm", "start"]
+
+# Commands : 
+
+  # Docker build - docker build -f dockerfile.dev -t adhirajk/courses_ai .
+
+  # Docker run - docker run -p 3000:3000 -v /app/node_modules -v ${PWD}:/app adhirajk/courses_ai
