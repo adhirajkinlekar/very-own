@@ -1,4 +1,133 @@
-.course-detail{
+.course-page { 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  .course-header {
+    margin-bottom: 20px;
+  }
+  
+  .course-header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .course-description {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .course-stats {
+    margin-top: 20px;
+  }
+  
+  .rating {
+    color: #e59819;
+    margin-right: 10px;
+  }
+  
+  .course-creator {
+    margin-top: 20px;
+  }
+  
+  .course-creator a {
+    color: #0f7c90;
+    text-decoration: none;
+  }
+  
+  .course-info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6a6f73;
+  }
+  
+  .course-info span {
+    margin-right: 10px;
+  }
+  
+  .related-topics {
+    margin-bottom: 20px;
+  }
+  
+  .related-topics h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .topics button {
+    background: white;
+    border: 1px solid #6a6f73;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .course-content-wrapper {
     display: flex;
-    justify-content: center;
-}
+  }
+  
+  .course-content {
+    width: 65%;
+    padding-right: 20px;
+  }
+  
+  .course-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .course-content ul {
+    padding-left: 20px;
+  }
+  
+  .course-content li {
+    margin-bottom: 10px;
+  }
+  
+  .course-sidebar {
+    width: 35%;
+  }
+  
+  .preview-section img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .preview-button, .enroll-button, .business-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .preview-button {
+    background: #0f7c90;
+    color: white;
+  }
+  
+  .enrollment-section, .business-section {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #d1d7dc;
+  }
+  
+  .enroll-button {
+    background: #a435f0;
+    color: white;
+  }
+  
+  .subscription-info {
+    font-size: 14px;
+    color: #6a6f73;
+  }
+  
+  .business-button {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }

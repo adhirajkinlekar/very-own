@@ -6,7 +6,7 @@ import "./home_page.styles.css";
 
 const HomePage = () => {
     return (
-        <div>
+        <div className='container'>
             <Profile />
             <h5 class="fancy-underline">Course list</h5>
             <CardList />

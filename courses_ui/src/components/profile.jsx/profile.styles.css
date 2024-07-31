@@ -1,15 +1,8 @@
- .container {
-    background-color: rgb(252, 251, 250); 
-    padding: 0px;
-    margin: 0px;
-    border-radius: 10px;
- }
 .profile-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;  
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff; 
   }
   
   .profile-header {

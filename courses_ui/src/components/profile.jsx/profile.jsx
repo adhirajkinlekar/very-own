@@ -6,16 +6,15 @@ import "./profile.styles.css";
 class Profile extends Component {
     render() {
         return (
-            <div className='container'>
-
+          
                 <div className="profile-card">
-                    <div className="profile-header">
+                    {/* <div className="profile-header">
                         <img src="https://yt3.googleusercontent.com/ytc/AIdro_mw_uMuYGJpYoUEIvCrsfeYck6ajAjDG3VTPSFsqioBiw=s900-c-k-c0x00ffffff-no-rj" alt="Profile" className="avatar" />
                         <div className="profile-info">
                             <h2>Colt Steele</h2>
                             <p>Developer and Instructor</p>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="profile-description">
                         <p>
                             Hi! I'm Colt. I'm a developer with a serious love for teaching.
@@ -26,8 +25,7 @@ class Profile extends Component {
                         <b>
                             Join me on this crazy adventure!
                         </b>
-                    </div>
-                </div>
+                    </div> 
             </div>
 
         );
