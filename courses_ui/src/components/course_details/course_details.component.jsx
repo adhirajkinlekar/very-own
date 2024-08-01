@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import './course_detail.styles.css';
+import AppContext from '../../context/app_context';
 
 // A pure function is a function that returns the exact same output with the given input everytime.
 const CourseDetails = () => {
+
+    const { isAuthenticated } = useContext(AppContext);
 
     const { id } = useParams();
 
     const [course, setCourse] = useState(null); // [value, setValue], null is initial value
 
+    // useEffect is a hook that lets you perform side effects in functional components. 
+    // Side effects include data fetching, setting up a subscription, and manually changing the DOM. 
+    // It serves a similar purpose to lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
+    
     useEffect(() => {
         const courses = [{
             id: 1,
@@ -29,7 +36,9 @@ const CourseDetails = () => {
         // If value hasn't changed, component will not re-run, this behavior is same when it comes to class based components as well
         setCourse(course); 
 
-    }, [id]); // Re-run the effect when the ID changes
+    }, [id]); // called after first render and everytime the ID value changes
+              // [] - called after first render, never called again
+              // no arguments - called after first render, never called again
 
     return (
         <div>
@@ -68,7 +77,7 @@ const CourseDetails = () => {
                         <div className='col-4'>
                             <section className="preview-section">
                                 <img src={course.imageUrl} alt={course.title} />
-                                <button className="preview-button">Preview this course</button>
+                                <button className="preview-button">{ isAuthenticated ? 'Go to course' : 'Preview this course' }</button>
                             </section>
                         </div>
                     </div>
@@ -99,7 +108,7 @@ const CourseDetails = () => {
                     </div>
                 </div>
             ) : (
-                <div>No course available</div>
+                <div>Course is not available or has been archived</div>
             )}
         </div>
     );

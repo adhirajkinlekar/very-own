@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
  
 class Card extends Component {
     
-    componentWillUnmount(){
+    // componentWillUnmount(){
 
-    }
+    // }
 
-    shouldComponentUpdate(){
+    // shouldComponentUpdate(){
 
-    }
-    
+    // }
+
     // when the state or props change, the render method is called again.
     // However, React's lifecycle methods (like shouldComponentUpdate) can control whether the component re-renders or not. 
 
@@ -20,7 +20,7 @@ class Card extends Component {
 
 
         return (
-            <Link to={`/course/${id}`}>
+            <Link to={`/courses/${id}`}>
                 <div className="card card-custom mx-auto mt-4" style={{ width: '25rem' }}>
                     <img
                         src={imageURL} // Use curly braces without quotes for JSX expressions

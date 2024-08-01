@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <div className='container'>
             <Profile />
-            <h5 class="fancy-underline">Course list</h5>
+            <h5 className="fancy-underline">Course list</h5>
             <CardList />
         </div>
     );
