@@ -2,9 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import './course_detail.styles.css';
 import AppContext from '../../context/app_context';
+import { useNavigate } from 'react-router-dom';
 
 // A pure function is a function that returns the exact same output with the given input everytime.
 const CourseDetails = () => {
+
+    const navigate = useNavigate();
 
     const { isAuthenticated, tanentId } = useContext(AppContext);
 
@@ -12,6 +15,15 @@ const CourseDetails = () => {
 
     const [course, setCourse] = useState(null); // [value, setValue], null is initial value
 
+
+    const handleButtonClick = () => {
+        if (isAuthenticated) {
+          navigate(`./learn`);
+        } else {
+          navigate('/auth');
+        }
+      };
+    
     // useEffect is a hook that lets you perform side effects in functional components. 
     // Side effects include data fetching, setting up a subscription, and manually changing the DOM. 
     // It serves a similar purpose to lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
@@ -99,7 +111,7 @@ const CourseDetails = () => {
                         <div className='col-4'>
                             <section className="preview-section">
                                 <img src={course.imageUrl} alt={course.title} />
-                                <button className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
+                                <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
                             </section>
                         </div>
                     </div>
@@ -114,19 +126,7 @@ const CourseDetails = () => {
                             </ul>
                         </section>
 
-                        <aside className="course-sidebar">
-                            {/* <div className="enrollment-section">
-                       <p>Included in Personal Plan</p>
-                       <button className="enroll-button">Go to course</button>
-                       <p className="subscription-info">This course is included in your Personal Plan subscription</p>
-                     </div>
-                     
-                     <div className="business-section">
-                       <h3>Training 5 or more people?</h3>
-                       <p>Get your team access to 26,000+ top Udemy courses anytime, anywhere.</p>
-                       <button className="business-button">Try Udemy Business</button>
-                     </div> */}
-                        </aside>
+                        
                     </div>
                 </div>
             ) : (

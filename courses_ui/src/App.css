@@ -1,15 +1,18 @@
 a {
-  text-decoration: none !important;  
+  text-decoration: none !important;
   color: inherit; /* Use the color of the parent element */
   cursor: pointer;
 }
 
-.profile-header{
-  background-color:rgb(248, 248, 248);
+.profile-header {
+  background-color: rgb(248, 248, 248);
   border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
 }
- .content{
+
+.content {
   display: flex;
   justify-content: center;
-  align-items: center; 
- }
+  align-items: center;
+}
