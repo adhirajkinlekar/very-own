@@ -1,49 +1,64 @@
-import { Component } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Card from '../card/card.component';
+import AppContext from '../../context/app_context';  
 
-class CardList extends Component {
+const CardList = ()=> {
 
-    constructor() {
-        super();
+   // const { isAuthenticated } = useContext(AppContext);
 
-        this.state = {
-            courses: []
-        }
-    }
+    const { tanentId } = useContext(AppContext); 
 
-    componentDidMount = () => {
+    const [academyCourses, setAcademyCourses] = useState([]); 
+    
+    useEffect(() => {
 
         const courses = [
-            { id: 1, 
-              title: 'JavaScript Algorithms and Data Structures Masterclass', 
-              topic: 'Software Development', 
-              rating: 4, 
-              imageURL: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg' },
-            { id: 2, 
-              title: 'The Git & Github Bootcamp', 
-              topic: 'Software Development', 
-              rating: 5, 
-              imageURL: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg' },
-            { id: 3, 
-              title: 'The Linux Command Line Bootcamp: Beginner To Power User', 
-              topic: 'Software Development', 
-              rating: 4, 
-              imageURL: 'https://img-c.udemycdn.com/course/750x422/3998050_2ed8.jpg' },
+            {
+                id: 1,
+                title: 'JavaScript Algorithms and Data Structures Masterclass',
+                topic: 'Software Development',
+                rating: 4,
+                imageURL: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
+                academyId: "coltsteele",
+            },
+            {
+                id: 2,
+                title: 'The Git & Github Bootcamp',
+                topic: 'Software Development',
+                rating: 5,
+                imageURL: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg',
+                academyId: "coltsteele",
+            },
+            {
+                id: 3,
+                title: 'The Linux Command Line Bootcamp: Beginner To Power User',
+                topic: 'Software Development',
+                rating: 4,
+                imageURL: 'https://img-c.udemycdn.com/course/750x422/3998050_2ed8.jpg',
+                academyId: "coltsteele",
+            },
+            {
+                id: 4,
+                title: 'Code with Ethereum & Solidity: The Complete Developer Guide',
+                topic: 'Software Development',
+                rating: 5,
+                imageURL: 'https://img-b.udemycdn.com/course/750x422/1466612_bead_3.jpg',
+                academyId: "stepheng",
+            },
         ];
 
-        this.setState({ courses })
-    }
+        const academyCourses = courses.filter(x => x.academyId === tanentId);
 
-    render() {
-
-        const { courses } = this.state;
-
+        setAcademyCourses(academyCourses);
+        
+    },[tanentId]);
+ 
         return (
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
                 {
-                    courses.map(course => (
+                    academyCourses.map(course => (
                         <div key={course.id}>
-                            <Card 
+                            <Card
                                 id={course.id}
                                 title={course.title}
                                 imageURL={course.imageURL}
@@ -52,8 +67,7 @@ class CardList extends Component {
                     ))
                 }
             </div>
-        )
-    }
+        ) 
 }
 
 export default CardList

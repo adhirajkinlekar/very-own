@@ -1,32 +1,70 @@
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
 import HomePage from './components/home_page/home_page.component';
-import AppContext from './context/app_context';
+import AppContext from './context/app_context'; 
 
-// learn about props.children
+// learn about 
+// - props.children
+// - custom hooks
+// - useReducer hook
 
-class App extends Component {
+const App = () => {
   // const [state, setState] = useState("Hello, World!");
 
-  render() {
-    return (
-      <Router>
-        {/* <MyContext.Provider value={{ state, setState }}> */}
-        <AppContext.Provider value={{ isAuthenticated: true }}>
+  const url = window.location.hostname;
+
+  const [tanentId] = useState(url.split('.')[0]);
+
+  const [academy, setAcademy] = useState(null);
+
+
+  useEffect(() => {
+
+    const academies = [{
+      id: "coltsteele",
+      name: 'Colt Steele',
+      description: 'Developer and Bootcamp Instructor',
+      about: "<p> Hi! I'm Colt. I'm a developer with a serious love for teaching. I've spent the last few years teaching people to program at 2 different immersive bootcamps where I've helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square. </p> <b> Join me on this crazy adventure! </b>",
+      imageUrl: 'https://img-c.udemycdn.com/user/200_H/4466306_6fd8_3.jpg',
+      isActive: true
+    }, {
+      id: 'stepheng',
+      name: 'Stephen Grider',
+      description: 'Engineering Architect',
+      about: "<p> Stephen Grider has been building complex Javascript front ends for top corporations in the San Francisco Bay Area.  With an innate ability to simplify complex topics, Stephen has been mentoring engineers beginning their careers in software development for years, and has now expanded that experience onto Udemy, authoring the highest rated React course. He teaches on Udemy to share the knowledge he has gained with other software engineers.  Invest in yourself by learning from Stephen's published courses.</p",
+      imageUrl: 'https://avatars.githubusercontent.com/u/5003903?v=4',
+      isActive: true
+    }];
+
+    const academy = academies.find(x => x.id === tanentId && x.isActive) || null; // Initial value is null, but find returns undefined
+
+    // When the state changes in a functional component, the entire function is re-executed. 
+    // This means all the code inside the function runs again
+    // If value hasn't changed, component will not re-run, this behavior is same when it comes to class based components as well
+    setAcademy(academy);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Dependency of tanentId is not required as we are sure that tanentId will never update, hence eslint is disabled for the warning here 
+
+  return (
+    <Router>
+      {/* <MyContext.Provider value={{ state, setState }}> */}
+      <AppContext.Provider value={{ isAuthenticated: true, tanentId, academy}}>
+        <React.Fragment> {academy ? (
           <div className="app">
             <div className="profile-header p-3">
               <Link to={`/`}>
                 <div style={{ display: 'flex' }}>
-                  <img src="https://yt3.googleusercontent.com/ytc/AIdro_mw_uMuYGJpYoUEIvCrsfeYck6ajAjDG3VTPSFsqioBiw=s900-c-k-c0x00ffffff-no-rj" alt="Profile" className="avatar" />
+                  <img src={academy.imageUrl} alt="Profile" className="avatar" />
                   <div className="profile-info">
-                    <h2>Colt Steele</h2>
-                    <p>Developer and Instructor</p>
+                    <h2>{academy.name}</h2>
+                    <p>{academy.description}</p>
                   </div>
                 </div>
               </Link>
-
             </div>
             <div className='content'>
               <Routes>
@@ -34,11 +72,14 @@ class App extends Component {
                 <Route path="/courses/:id" element={<CourseDetails />} />
               </Routes>
             </div>
-          </div>
-        </AppContext.Provider>
-      </Router>
-    );
-  }
+          </div>) :
+          (
+            <div style={{ textAlign: 'center' }}>Academy could not be found or it no longer exists</div>
+          )}
+        </React.Fragment>
+      </AppContext.Provider>
+    </Router>
+  );
 }
 
 export default App;

@@ -6,7 +6,7 @@ import AppContext from '../../context/app_context';
 // A pure function is a function that returns the exact same output with the given input everytime.
 const CourseDetails = () => {
 
-    const { isAuthenticated } = useContext(AppContext);
+    const { isAuthenticated, tanentId } = useContext(AppContext);
 
     const { id } = useParams();
 
@@ -15,40 +15,62 @@ const CourseDetails = () => {
     // useEffect is a hook that lets you perform side effects in functional components. 
     // Side effects include data fetching, setting up a subscription, and manually changing the DOM. 
     // It serves a similar purpose to lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
-    
+
     useEffect(() => {
         const courses = [{
             id: 1,
             title: 'JavaScript Algorithms and Data Structures Masterclass',
             description: 'The Missing Computer Science and Coding Interview Bootcamp',
-            imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg'
+            imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
+            academyId: "coltsteele",
+            isActive: true
         }, {
             id: 2,
             title: 'The Git & Github Bootcamp',
             description: 'Master the essentials and the tricky bits: rebasing, squashing, stashing, reflogs, blobs, trees, & more!',
-            imageUrl: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg'
+            imageUrl: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg',
+            academyId: "coltsteele",
+            isActive: true
+        },
+        {
+            id: 3,
+            title: 'The Linux Command Line Bootcamp: Beginner To Power User',
+            description: 'Level Up Your Skills And Take Control Of Your Machine, w/ Dozens of Commands, Projects, and Challenges!',
+            imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
+            academyId: "coltsteele",
+            isActive: false
+        },
+        {
+            id: 4,
+            title: 'Code with Ethereum & Solidity: The Complete Developer Guide',
+            description: 'Intensive masterclass on ChatGPT, LangChain, and Python. Make production-ready apps focused on real-world AI integration',
+            imageUrl: 'https://img-b.udemycdn.com/course/750x422/1466612_bead_3.jpg',
+            academyId: "stepheng",
+            isActive: true
         }];
 
-        const course = courses.find(x => x.id === parseInt(id))|| null; // Initial value is null, but find returns undefined
+        const course = courses.find(x => x.id === parseInt(id) && tanentId === x.academyId && x.isActive) || null; // Initial value is null, but find returns undefined
 
         // When the state changes in a functional component, the entire function is re-executed. 
         // This means all the code inside the function runs again
         // If value hasn't changed, component will not re-run, this behavior is same when it comes to class based components as well
-        setCourse(course); 
+        setCourse(course);
 
-    }, [id]); // called after first render and everytime the ID value changes
-              // [] - called after first render, never called again
-              // no arguments - called after first render, never called again
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]); 
+    // called after first render and everytime the ID value changes
+    // [] - called after first render, never called again
+    // no arguments - called after first render, never called again
 
     return (
-        <div>
+        <div className="container">
             {course ? (
-                <div className="card course-page">
+                <div className=" course-page">
                     <div className='col-12' style={{ display: 'flex', justifyContent: 'center' }}>
                         <div className='col-8'>
 
                             <header className="course-header">
-                                <h1>{course.title}</h1>
+                                <h1><b>{course.title}</b></h1>
                                 <p className="course-description">{course.description}</p>
 
                                 <div className="course-stats">
@@ -77,7 +99,7 @@ const CourseDetails = () => {
                         <div className='col-4'>
                             <section className="preview-section">
                                 <img src={course.imageUrl} alt={course.title} />
-                                <button className="preview-button">{ isAuthenticated ? 'Go to course' : 'Preview this course' }</button>
+                                <button className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
                             </section>
                         </div>
                     </div>
@@ -108,7 +130,7 @@ const CourseDetails = () => {
                     </div>
                 </div>
             ) : (
-                <div>Course is not available or has been archived</div>
+                <div style={{ textAlign: 'center' }}>Course is not available or has been archived</div>
             )}
         </div>
     );
