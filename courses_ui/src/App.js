@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
-import HomePage from './components/home_page/home_page.component';
-import SignInForm from './components/auth/sign_in.component';
-import SignUpForm from './components/auth/sign_up.component';
+import HomePage from './components/home_page/home_page.component'; 
 import AppContext from './context/app_context';
 import CoursePage from './components/learn/learn.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
+// Do not create a separate login page to show courses purchased courses, show a drop down on home page and let the user choose to see all or purchased courses
+
+const getCookie = (name) => {
+  const nameEQ = `${name}=`;
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+};
+
+const deleteCookie = (name) => {
+  // Set cookie's expiration date to a past date
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.veryown.com`;
+};
+
 const App = () => {
   const url = window.location.hostname;
-  const [tanentId] = useState(url.split('.')[0]);
+  const [tenantId] = useState(url.split('.')[0]);
   const [academy, setAcademy] = useState(null);
-  const [isAuthenticated, setAuthStatus] = useState(true);
+
+  
+  const [isAuthenticated, setAuthStatus] = useState(getCookie('isAuthenticated') === 'true');
 
   useEffect(() => {
     const academies = [
@@ -36,38 +54,25 @@ const App = () => {
       }
     ];
 
-    const academy = academies.find(x => x.id === tanentId && x.isActive) || null;
+    const academy = academies.find(x => x.id === tenantId && x.isActive) || null;
+
     setAcademy(academy);
-  }, [tanentId]);
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  }, [tenantId]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
-    console.log('Sign-In Form Data:', formData);
-  };
-
-  const handleSignUpSubmit = (e) => {
-    e.preventDefault();
-    console.log('Sign-Up Form Data:', formData);
-  };
 
   const handleSignOut = () => {
+
+    deleteCookie('isAuthenticated')
+
     setAuthStatus(false);
   };
 
+
+
   return (
     <Router>
-      <AppContext.Provider value={{ isAuthenticated, tanentId, academy }}>
+      <AppContext.Provider value={{ isAuthenticated, tenantId, academy }}>
         <React.Fragment>
           {academy ? (
             <div className="app">
@@ -101,10 +106,10 @@ const App = () => {
                     </div>
                   ) : (
                     <div className="d-flex">
-                      <Link to={`/auth/signin`} className="me-2">
+                      <Link to={`http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`} className="me-2">
                         <button className="btn btn-light">Sign In</button>
                       </Link>
-                      <Link to={`/auth/signup`}>
+                      <Link to={`http://sso.academy.veryown.com:3001/auth/signup`}>
                         <button className="btn btn-light">Sign Up</button>
                       </Link>
                     </div>
@@ -116,8 +121,6 @@ const App = () => {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/courses/:id" element={<CourseDetails />} />
                   <Route path="/courses/:id/learn" element={<CoursePage />} />
-                  <Route path="/auth/signin" element={<SignInForm handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />} />
-                  <Route path="/auth/signup" element={<SignUpForm handleSubmit={handleSignUpSubmit} handleChange={handleChange} formData={formData} />} />
                 </Routes>
               </div>
             </div>

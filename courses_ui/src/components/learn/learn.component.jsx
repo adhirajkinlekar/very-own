@@ -83,7 +83,7 @@ const CoursePage = () => {
                     </div>
                 ) : (
                     <div className="text-container">
-                        <div dangerouslySetInnerHTML={{ __html: selectedLecture.content }}></div>
+                        <div className='m-3' dangerouslySetInnerHTML={{ __html: selectedLecture.content }}></div>
                     </div>
                 )}
             </main>

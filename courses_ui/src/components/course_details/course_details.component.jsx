@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CourseDetails = () => {
     const navigate = useNavigate();
-    const { isAuthenticated, tanentId } = useContext(AppContext);
+    const { isAuthenticated, tenantId } = useContext(AppContext);
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
@@ -16,7 +16,7 @@ const CourseDetails = () => {
         if (isAuthenticated) {
             navigate(`./learn`);
         } else {
-            navigate('/auth/signin');
+            window.location.href = `http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`;
         }
     };
 
@@ -61,7 +61,7 @@ const CourseDetails = () => {
             }
         ];
 
-        const course = courses.find(x => x.id === parseInt(id) && tanentId === x.academyId && x.isActive) || null;
+        const course = courses.find(x => x.id === parseInt(id) && tenantId === x.academyId && x.isActive) || null;
         setCourse(course);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);

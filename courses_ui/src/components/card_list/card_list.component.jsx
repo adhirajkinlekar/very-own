@@ -6,7 +6,7 @@ const CardList = ()=> {
 
    // const { isAuthenticated } = useContext(AppContext);
 
-    const { tanentId } = useContext(AppContext); 
+    const { tenantId } = useContext(AppContext); 
 
     const [academyCourses, setAcademyCourses] = useState([]); 
     
@@ -47,11 +47,11 @@ const CardList = ()=> {
             },
         ];
 
-        const academyCourses = courses.filter(x => x.academyId === tanentId);
+        const academyCourses = courses.filter(x => x.academyId === tenantId);
 
         setAcademyCourses(academyCourses);
         
-    },[tanentId]);
+    },[tenantId]);
  
         return (
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
