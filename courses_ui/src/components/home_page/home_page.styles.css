@@ -1,8 +1,8 @@
-.container { 
-    padding: 0px;
-    margin: 0px;
+.container-home {  
     border-radius: 10px;
     margin-top: 50px;
+    margin-top: 50px;
+    padding: 20px;
  }
 
 .fancy-underline {

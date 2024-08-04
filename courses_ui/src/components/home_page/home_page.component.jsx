@@ -8,7 +8,7 @@ const HomePage = () => {
     const { academy } = useContext(AppContext); 
 
     return (
-        <div className='container'>
+        <div className='container-home col-9'>
             <div className="profile-card">
                 <div className="profile-description" dangerouslySetInnerHTML={{ __html: academy.about }}></div>
             </div>

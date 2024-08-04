@@ -1,6 +1,6 @@
 a {
   text-decoration: none !important;
-  color: inherit; /* Use the color of the parent element */
+  color: inherit;
   cursor: pointer;
 }
 
@@ -8,11 +8,30 @@ a {
   background-color: rgb(248, 248, 248);
   border-bottom: 1px solid #ccc;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.profile-info p {
+  margin: 0;
+  color: #666;
 }
 
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }

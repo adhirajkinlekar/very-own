@@ -5,71 +5,66 @@ import AppContext from '../../context/app_context';
 import { useNavigate } from 'react-router-dom';
 
 // A pure function is a function that returns the exact same output with the given input everytime.
+
 const CourseDetails = () => {
-
     const navigate = useNavigate();
-
     const { isAuthenticated, tanentId } = useContext(AppContext);
-
     const { id } = useParams();
-
-    const [course, setCourse] = useState(null); // [value, setValue], null is initial value
-
+    const [course, setCourse] = useState(null);
 
     const handleButtonClick = () => {
         if (isAuthenticated) {
-          navigate(`./learn`);
+            navigate(`./learn`);
         } else {
-          navigate('/auth');
+            navigate('/auth/signin');
         }
-      };
-    
+    };
+
     // useEffect is a hook that lets you perform side effects in functional components. 
     // Side effects include data fetching, setting up a subscription, and manually changing the DOM. 
     // It serves a similar purpose to lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
 
+
     useEffect(() => {
-        const courses = [{
-            id: 1,
-            title: 'JavaScript Algorithms and Data Structures Masterclass',
-            description: 'The Missing Computer Science and Coding Interview Bootcamp',
-            imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
-            academyId: "coltsteele",
-            isActive: true
-        }, {
-            id: 2,
-            title: 'The Git & Github Bootcamp',
-            description: 'Master the essentials and the tricky bits: rebasing, squashing, stashing, reflogs, blobs, trees, & more!',
-            imageUrl: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg',
-            academyId: "coltsteele",
-            isActive: true
-        },
-        {
-            id: 3,
-            title: 'The Linux Command Line Bootcamp: Beginner To Power User',
-            description: 'Level Up Your Skills And Take Control Of Your Machine, w/ Dozens of Commands, Projects, and Challenges!',
-            imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
-            academyId: "coltsteele",
-            isActive: false
-        },
-        {
-            id: 4,
-            title: 'Code with Ethereum & Solidity: The Complete Developer Guide',
-            description: 'Intensive masterclass on ChatGPT, LangChain, and Python. Make production-ready apps focused on real-world AI integration',
-            imageUrl: 'https://img-b.udemycdn.com/course/750x422/1466612_bead_3.jpg',
-            academyId: "stepheng",
-            isActive: true
-        }];
+        const courses = [
+            {
+                id: 1,
+                title: 'JavaScript Algorithms and Data Structures Masterclass',
+                description: 'The Missing Computer Science and Coding Interview Bootcamp',
+                imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
+                academyId: "coltsteele",
+                isActive: true
+            },
+            {
+                id: 2,
+                title: 'The Git & Github Bootcamp',
+                description: 'Master the essentials and the tricky bits: rebasing, squashing, stashing, reflogs, blobs, trees, & more!',
+                imageUrl: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg',
+                academyId: "coltsteele",
+                isActive: true
+            },
+            {
+                id: 3,
+                title: 'The Linux Command Line Bootcamp: Beginner To Power User',
+                description: 'Level Up Your Skills And Take Control Of Your Machine, w/ Dozens of Commands, Projects, and Challenges!',
+                imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
+                academyId: "coltsteele",
+                isActive: false
+            },
+            {
+                id: 4,
+                title: 'Code with Ethereum & Solidity: The Complete Developer Guide',
+                description: 'Intensive masterclass on ChatGPT, LangChain, and Python. Make production-ready apps focused on real-world AI integration',
+                imageUrl: 'https://img-b.udemycdn.com/course/750x422/1466612_bead_3.jpg',
+                academyId: "stepheng",
+                isActive: true
+            }
+        ];
 
-        const course = courses.find(x => x.id === parseInt(id) && tanentId === x.academyId && x.isActive) || null; // Initial value is null, but find returns undefined
-
-        // When the state changes in a functional component, the entire function is re-executed. 
-        // This means all the code inside the function runs again
-        // If value hasn't changed, component will not re-run, this behavior is same when it comes to class based components as well
+        const course = courses.find(x => x.id === parseInt(id) && tanentId === x.academyId && x.isActive) || null;
         setCourse(course);
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]); 
+    }, [id]);
     // called after first render and everytime the ID value changes
     // [] - called after first render, never called again
     // no arguments - called after first render, never called again
@@ -77,28 +72,23 @@ const CourseDetails = () => {
     return (
         <div className="container">
             {course ? (
-                <div className=" course-page">
-                    <div className='col-12' style={{ display: 'flex', justifyContent: 'center' }}>
-                        <div className='col-8'>
-
+                <div className="course-page">
+                    <div className='course-content-wrapper'>
+                        <div className='course-content'>
                             <header className="course-header">
-                                <h1><b>{course.title}</b></h1>
+                                <h1>{course.title}</h1>
                                 <p className="course-description">{course.description}</p>
-
                                 <div className="course-stats">
                                     <span className="rating">4.4 ★★★★☆ (4,781 ratings)</span>
                                     <span className="students">41,273 students</span>
                                 </div>
-
-                                <p className="course-creator">Created by Mehmet Ozkaya </p>
-
+                                <p className="course-creator">Created by Mehmet Ozkaya</p>
                                 <div className="course-info">
                                     <span>Last updated 4/2024</span>
                                     <span>English</span>
                                     <span>English, Arabic [Auto], 9 more</span>
                                 </div>
                             </header>
-
                             <section className="related-topics">
                                 <h2>Explore related topics</h2>
                                 <div className="topics">
@@ -107,26 +97,18 @@ const CourseDetails = () => {
                                     <button>IT & Software</button>
                                 </div>
                             </section>
-                        </div>
-                        <div className='col-4'>
-                            <section className="preview-section">
-                                <img src={course.imageUrl} alt={course.title} />
-                                <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
+                            <section className="course-content">
+                                <h2>What you'll learn</h2>
+                                <ul>
+                                    <li>Design Microservices Architecture with using Design Patterns, Principles and the Best Practices</li>
+                                    <li>Learn how to handle millions of request with designing system for High Availability, High Scalability, low latency, and resilience to network failures</li>
+                                </ul>
                             </section>
                         </div>
-                    </div>
-
-
-                    <div className="course-content-wrapper">
-                        <section className="course-content">
-                            <h2>What you'll learn</h2>
-                            <ul>
-                                <li>Design Microservices Architecture with using Design Patterns, Principles and the Best Practices</li>
-                                <li>Learn how to handle millions of request with designing system for High Availability, High Scalability, low latency, and resilience to network failures</li>
-                            </ul>
-                        </section>
-
-                        
+                        <div className='preview-section'>
+                            <img src={course.imageUrl} alt={course.title} />
+                            <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
+                        </div>
                     </div>
                 </div>
             ) : (
