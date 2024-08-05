@@ -1,37 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
-import HomePage from './components/home_page/home_page.component'; 
+import HomePage from './components/home_page/home_page.component';
 import AppContext from './context/app_context';
 import CoursePage from './components/learn/learn.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
-// Do not create a separate login page to show courses purchased courses, show a drop down on home page and let the user choose to see all or purchased courses
-
-const getCookie = (name) => {
-  const nameEQ = `${name}=`;
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-};
-
-const deleteCookie = (name) => {
-  // Set cookie's expiration date to a past date
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.veryown.com`;
-};
-
-const App = () => {
+const App = () => { 
+  
   const url = window.location.hostname;
   const [tenantId] = useState(url.split('.')[0]);
   const [academy, setAcademy] = useState(null);
-
-  
   const [isAuthenticated, setAuthStatus] = useState(getCookie('isAuthenticated') === 'true');
 
   useEffect(() => {
@@ -48,7 +29,7 @@ const App = () => {
         id: 'stepheng',
         name: 'Stephen Grider',
         description: 'Engineering Architect',
-        about: "<p> Stephen Grider has been building complex Javascript front ends for top corporations in the San Francisco Bay Area.  With an innate ability to simplify complex topics, Stephen has been mentoring engineers beginning their careers in software development for years, and has now expanded that experience onto Udemy, authoring the highest rated React course. He teaches on Udemy to share the knowledge he has gained with other software engineers.  Invest in yourself by learning from Stephen's published courses.</p",
+        about: "<p> Stephen Grider has been building complex Javascript front ends for top corporations in the San Francisco Bay Area. With an innate ability to simplify complex topics, Stephen has been mentoring engineers beginning their careers in software development for years, and has now expanded that experience onto Udemy, authoring the highest rated React course. He teaches on Udemy to share the knowledge he has gained with other software engineers. Invest in yourself by learning from Stephen's published courses.</p>",
         imageUrl: 'https://avatars.githubusercontent.com/u/5003903?v=4',
         isActive: true
       }
@@ -57,23 +38,19 @@ const App = () => {
     const academy = academies.find(x => x.id === tenantId && x.isActive) || null;
 
     setAcademy(academy);
-
   }, [tenantId]);
-
 
   const handleSignOut = () => {
 
-    deleteCookie('isAuthenticated')
+    deleteCookie('isAuthenticated');
 
     setAuthStatus(false);
   };
 
-
-
   return (
     <Router>
       <AppContext.Provider value={{ isAuthenticated, tenantId, academy }}>
-        <React.Fragment>
+        <>
           {academy ? (
             <div className="app">
               <div className="profile-header p-3">
@@ -94,8 +71,7 @@ const App = () => {
                         type="button"
                         id="dropdownMenuButton"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
                         <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '35px', color: 'gray' }} />
                       </button>
                       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -103,15 +79,15 @@ const App = () => {
                         <li><button className="dropdown-item">Profile</button></li>
                         <li><button className="dropdown-item" onClick={handleSignOut}>Sign Out</button></li>
                       </ul>
-                    </div>
-                  ) : (
+                    </div> ) 
+                    : (
                     <div className="d-flex">
-                      <Link to={`http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`} className="me-2">
+                      <a href={`http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`} className="me-2">
                         <button className="btn btn-light">Sign In</button>
-                      </Link>
-                      <Link to={`http://sso.academy.veryown.com:3001/auth/signup`}>
+                      </a>
+                      <a href={`http://sso.academy.veryown.com:3001/auth/signup`}>
                         <button className="btn btn-light">Sign Up</button>
-                      </Link>
+                      </a>
                     </div>
                   )}
                 </div>
@@ -125,12 +101,28 @@ const App = () => {
               </div>
             </div>
           ) : (
-            <div className="text-center"> Academy could not be found or it no longer exists </div>
+            <div className="text-center">Academy could not be found or it no longer exists</div>
           )}
-        </React.Fragment>
+        </>
       </AppContext.Provider>
     </Router>
   );
+};
+
+const getCookie = (name) => {
+  const nameEQ = `${name}=`;
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+};
+
+const deleteCookie = (name) => {
+  // Set cookie's expiration date to a past date
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
 };
 
 export default App;
