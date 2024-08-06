@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
 
@@ -8,10 +8,12 @@ import SignUpForm from './components/auth/sign_up.component';
 
 const SignInPage = () => {
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const [tenantId] = useState(queryParams.get('tenantId'));
-
+  const { tenantId_service } = useParams(); // Destructure the parameter 
+  
+   // Assign the first item to tenantId and the second item to service, defaulting to null if not present
+  const [tenantId] = useState(tenantId_service ? tenantId_service.split('_')[0] : null);
+  const [service] = useState(tenantId_service ? tenantId_service.split('_')[1] : null);
+ 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -29,9 +31,8 @@ const SignInPage = () => {
 
     setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
  
-    window.location.href = `http://${tenantId}.academy.veryown.com:3000/`;
+    window.location.href = `http://${tenantId}.${service}.veryown.com:3000/`;
   };
-
 
   const setCookie = (name, value, days) => {
     const d = new Date();
@@ -74,8 +75,8 @@ const App = () => {
       <div className="container mt-4">
         <Router>
           <Routes>
-            <Route path="/auth/signin" element={<SignInPage />} />
-            <Route path="/auth/signup" element={<SignUpPage />} />
+            <Route path="/secure/:tenantId_service/signin" element={<SignInPage />} />
+            <Route path="/secure/signup" element={<SignUpPage />} />
             <Route path="/:tenantId" element={<div>Tenant Specific Content</div>} /> {/* Example route for tenants */}
           </Routes>
         </Router>

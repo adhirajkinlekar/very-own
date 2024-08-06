@@ -16,7 +16,7 @@ const CourseDetails = () => {
         if (isAuthenticated) {
             navigate(`./learn`);
         } else {
-            window.location.href = `http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`;
+            window.location.href = `http://sso.veryown.com:3001/secure/${tenantId}_academy/signin`;
         }
     };
 
@@ -107,7 +107,7 @@ const CourseDetails = () => {
                         </div>
                         <div className='preview-section'>
                             <img src={course.imageUrl} alt={course.title} />
-                            <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Preview this course'}</button>
+                            <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Login to view'}</button>
                         </div>
                     </div>
                 </div>

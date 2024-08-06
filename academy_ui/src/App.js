@@ -49,8 +49,7 @@ const App = () => {
 
   return (
     <Router>
-      <AppContext.Provider value={{ isAuthenticated, tenantId, academy }}>
-        <>
+      <AppContext.Provider value={{ isAuthenticated, tenantId, academy }}> 
           {academy ? (
             <div className="app">
               <div className="profile-header p-3">
@@ -82,7 +81,7 @@ const App = () => {
                     </div> ) 
                     : (
                     <div className="d-flex">
-                      <a href={`http://sso.academy.veryown.com:3001/auth/signin?tenantId=${tenantId}`} className="me-2">
+                      <a href={`http://sso.veryown.com:3001/secure/${tenantId}_academy/signin`} className="me-2">
                         <button className="btn btn-light">Sign In</button>
                       </a>
                       <a href={`http://sso.academy.veryown.com:3001/auth/signup`}>
@@ -102,8 +101,7 @@ const App = () => {
             </div>
           ) : (
             <div className="text-center">Academy could not be found or it no longer exists</div>
-          )}
-        </>
+          )} 
       </AppContext.Provider>
     </Router>
   );
