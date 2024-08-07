@@ -3,18 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "admin_ui": {
+    "admin_academy_ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
+          "style": "scss"
         }
       },
       "root": "",
@@ -24,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/admin_ui",
+            "outputPath": "dist/admin_academy_ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -39,11 +32,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/@ng-select/ng-select/scss/default.theme.scss"
+              "src/styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -73,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "admin_ui:build:production"
+              "buildTarget": "admin_academy_ui:build:production"
             },
             "development": {
-              "buildTarget": "admin_ui:build:development"
+              "buildTarget": "admin_academy_ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,7 +91,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss" 
+              "src/styles.scss"
             ],
             "scripts": []
           }

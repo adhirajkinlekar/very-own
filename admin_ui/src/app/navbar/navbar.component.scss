@@ -1,0 +1,15 @@
+::ng-deep .ng-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+  }
+  
+  ::ng-deep .ng-select .ng-select-container {
+    background-color: #f9f9f9;
+  }
+  
+  ::ng-deep .ng-select .ng-select-container .ng-value {
+    color: #333;
+  }
+  
+   
