@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
 import HomePage from './components/home_page/home_page.component';
 import AppContext from './context/app_context';
