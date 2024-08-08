@@ -29,11 +29,11 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        // name: "adminAcademyUi",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './/src/app/app.component.ts',
-        // },
+           name: "adminAcademyUi",
+           filename: "remoteEntry.js",
+           exposes: {
+                './app.module': './src/app/app.module.ts',
+           },
 
         // For hosts (please adjust)
         // remotes: {
