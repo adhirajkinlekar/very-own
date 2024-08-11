@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,15 +9,15 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  options = [
-    { id: 1, name: 'All' },
-    { id: 2, name: 'Academy' },
-    { id: 3, name: 'Streaming' }
-  ];
+  constructor(private router: Router, public appService: AppService){
+ 
+  }
 
-  selectedOption: number = 1;
+  // when navigated by routes to services/serviceId, update the selected value
+  onChange(selected: any) { 
 
-  onChange(selected: any) {
-    console.log('Selected option:', selected);
+    console.log({selected})
+    if(selected.id == 0) this.router.navigateByUrl('/');
+    else if(selected.id == 1) this.router.navigateByUrl(`/my_services/academy/${selected.id}`);
   }
 }
