@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AcademyComponent } from './academy/academy.component';
+import { CreateAcademyComponent } from './create-academy/create-academy.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,10 @@ const routes: Routes = [
         component: AcademyComponent // Replace with your actual child component
       },
     ]
-  }, 
+  }, {
+    path: 'create',
+    component: CreateAcademyComponent
+  }
 ];
 
 @NgModule({
