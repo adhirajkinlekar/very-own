@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
+// ideally maintain two records for users one for customers of services and one for creator. When a user signs up as a creator it creates an additional super admin user record in admin service 
+
 const App = () => { 
   
   const url = window.location.hostname;
