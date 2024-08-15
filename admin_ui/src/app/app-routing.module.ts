@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceTypesComponent } from './service-types/service-types.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -26,7 +25,20 @@ const routes: Routes = [
         }).then(m => m.AppModule) 
        }
     ]
-  }
+  },
+  {
+    path: 'services', 
+    children: [
+      {
+        path: "academy",
+        loadChildren: () => loadRemoteModule({
+          type:"module",
+          remoteEntry: "http://localhost:4201/remoteEntry.js",
+          exposedModule: './app.module',
+        }).then(m => m.AppModule) 
+       }
+    ]
+  } 
 ];  
 
 @NgModule({

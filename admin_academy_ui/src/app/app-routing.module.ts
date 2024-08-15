@@ -3,20 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AcademyComponent } from './academy/academy.component';
 import { CreateAcademyComponent } from './create-academy/create-academy.component';
+import { CreatecourseComponent } from './createcourse/createcourse.component';
 
 const routes: Routes = [
   {
-    path: '', // The default route for this micro app
+    path: '',  
     component: AppComponent,
     children: [
       {
-        path: '', // Child route
-        component: AcademyComponent // Replace with your actual child component
+        path: '',  
+        component: AcademyComponent  
       },
     ]
   }, {
     path: 'create',
     component: CreateAcademyComponent
+  },
+  {
+    path: 'course/create',
+    component: CreatecourseComponent
   }
 ];
 

@@ -11,4 +11,12 @@ export class AcademyComponent {
   courses: number = 2;
 
    
+  handleClick(){
+
+    const navigateEvent = new CustomEvent('navigate-to-container', {
+      detail: { path: 'my_services/academy/1/course/create' }
+    });
+    
+    window.dispatchEvent(navigateEvent);
+  }
 }

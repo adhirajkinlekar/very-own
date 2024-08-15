@@ -20,8 +20,6 @@ export class AppService {
   selectedOption: number = this.AppConstants.default_option;
 
   constructor() { }
-
-
   
 
   extractParts(url: string): [string, string] {

@@ -13,12 +13,12 @@ export class AppComponent {
 
   constructor(private router: Router, private service: AppService) {
 
-    // this.router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd),
-    //   take(1)
-    // ).subscribe((event: NavigationEnd) => {
-    //   console.log({ route:  event.urlAfterRedirects }) 
-    // }) ;
+    window.addEventListener('navigate-to-container', (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const path = customEvent.detail.path;
+
+      this.router.navigate([path]);
+    }); 
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
