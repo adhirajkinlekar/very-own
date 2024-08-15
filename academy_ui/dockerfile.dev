@@ -20,6 +20,6 @@ CMD ["npm", "start"]
 
 # Commands : 
 
-  # Docker build - docker build -f dockerfile.dev -t adhirajk/courses_ai .
+  # Docker build - docker build -f dockerfile.dev -t adhirajk/courses_i .
 
   # Docker run - docker run -p 3000:3000 -v /app/node_modules -v ${PWD}:/app adhirajk/courses_ai

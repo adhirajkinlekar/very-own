@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class CreateAcademyComponent {
 
   myForm: FormGroup;
+  imagePreview: string | ArrayBuffer | null = null;
+
 
   constructor(private fb: FormBuilder, private router: Router) {
     // Initialize the form group here
@@ -21,6 +23,17 @@ export class CreateAcademyComponent {
 
   ngOnInit(): void {
     // Any initialization logic
+  }
+
+  onImageSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit(): void {

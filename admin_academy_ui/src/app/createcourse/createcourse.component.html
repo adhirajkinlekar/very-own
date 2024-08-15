@@ -1,0 +1,47 @@
+<div class="container my-5 p-4 border rounded bg-light">
+    <h2 class="text-center mb-4">Create a New Course</h2>
+  
+    <div class="mb-3">
+      <label for="courseTitle" class="form-label">Course Title:</label>
+      <input id="courseTitle" class="form-control" [(ngModel)]="course.title" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="courseHeadline" class="form-label">Course Headline:</label>
+      <input id="courseHeadline" class="form-control" [(ngModel)]="course.headline" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="courseDescription" class="form-label">Course Description:</label>
+      <textarea id="courseDescription" class="form-control" rows="3" [(ngModel)]="course.description" required></textarea>
+    </div>
+  
+    <h3 class="mt-5">Sections</h3>
+    
+    <div *ngFor="let section of course.sections; let i = index" class="border p-3 mb-4 rounded">
+      <h4 class="mb-3">Section {{i + 1}}</h4>
+  
+      <div class="mb-3">
+        <button class="btn academy_color_other btn-sm" (click)="removeSection(i)">Remove Section</button>
+      </div>
+  
+      <input class="form-control mb-3" [(ngModel)]="section.title" placeholder="Section Title" required>
+  
+      <h5>Lectures</h5>
+      
+      <div *ngFor="let lecture of section.lectures; let j = index" class="mb-3 p-2 border rounded">
+        <input class="form-control mb-2" [(ngModel)]="lecture.title" placeholder="Lecture Title" required>
+        <input type="file" class="form-control mb-2" [(ngModel)]="lecture.url" placeholder="Lecture URL" required>
+        <button class="btn academy_color_other btn-sm" (click)="removeLecture(i, j)">Remove Lecture</button>
+      </div>
+  
+      <button class="btn academy_color_secondary btn-sm mt-3" (click)="addLecture(i)">Add Lecture</button>
+    </div>
+  
+    <button class="btn academy_color_secondary mt-4" (click)="addSection()">Add Section</button>
+  
+    <div class="text-center mt-5">
+      <button class="btn btn-success" (click)="createCourse()" [disabled]="!isValid()">Create Course</button>
+    </div>
+  </div>
+  

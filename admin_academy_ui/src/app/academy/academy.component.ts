@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './academy.component.scss'
 })
 export class AcademyComponent {
-  profits: number = 156.78;
-  customers: number = 36;
-  courses: number = 2;
+  profits: number = 0;
+  customers: number = 0;
+  courses: number = 1;
 
    
   handleClick(){
