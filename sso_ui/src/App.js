@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
 
-// User should be able to see a list of memberships but not all courses. User will have to visit individual tenants.
-// Implement SSO login
-
 const SignInPage = () => {
+  const { tenantId_service } = useParams();  
 
-  const { tenantId_service } = useParams(); // Destructure the parameter 
-  
-   // Assign the first item to tenantId and the second item to service, defaulting to null if not present
-  const [tenantId] = useState(tenantId_service ? tenantId_service.split('_')[0] : null);
-  const [service] = useState(tenantId_service ? tenantId_service.split('_')[1] : null);
- 
+  const tenantId = tenantId_service ? tenantId_service.split('_')[0] : null;
+  const service = tenantId_service ? tenantId_service.split('_')[1] : null;
+
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    confirmPassword: '',
+    password: ''
   });
 
   const handleChange = (e) => {
@@ -25,13 +19,31 @@ const SignInPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSignInSubmit = (e) => {
-
+  const handleSignInSubmit = async (e) => {
     e.preventDefault();
 
-    setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
- 
-    window.location.href = `http://${tenantId}.${service}.veryown.com:3000/`;
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      console.log('Success:', result);
+
+      setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
+
+   //   navigate(`http://${tenantId}.${service}.veryown.com:3000/`);
+
+      window.location.href = `http://${tenantId}.${service}.veryown.com:3000`;
+      
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const setCookie = (name, value, days) => {
@@ -40,8 +52,7 @@ const SignInPage = () => {
     const expires = `expires=${d.toUTCString()}`;
     document.cookie = `${name}=${value};${expires};path=/;domain=.veryown.com`; // Note the leading dot in domain
   };
-
-
+ 
   return (
     <SignInForm handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
   );
