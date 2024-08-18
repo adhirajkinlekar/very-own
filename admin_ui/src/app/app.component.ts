@@ -29,10 +29,9 @@ export class AppComponent {
 
         const [serviceType, serviceId] = this.service.extractParts(route);
 
-        const option = this.service.options.find(x=> x.type == serviceType && x.id == parseInt(serviceId))
+        const option = this.service.options.find(x=> x.type == serviceType && x.id == serviceId)
 
-        console.log([option, {options: this.service.options}])
-
+ 
         if(option) this.service.selectedOption = option.id;
 
         else this.service.selectedOption = this.service.AppConstants.default_option

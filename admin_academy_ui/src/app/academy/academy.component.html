@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="container-fluid bg-success text-white py-4">
     <div class="container">
-      <h1 class="display-4 text-center">My Academy</h1>
+      <h1 class="display-4 text-center">{{academyName}}</h1>
      </div>
   </div>
   <div class="d-flex justify-content-end">
@@ -35,7 +35,7 @@
         <div class="card mb-4 shadow-sm">
           <div class="card-body">
             <h5 class="card-title">Total Courses</h5>
-            <p class="card-text display-4">{{ courses | number }}</p>
+            <p class="card-text display-4">{{ courses.length }}</p>
           </div>
         </div>
       </div>
@@ -55,18 +55,25 @@
       </div>
     </div>
 
+  
     <div style="margin-top: 30px;">
 
-      <div class="card" style="width: 18rem;">
-        <!-- <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image cap"> -->
-        <div class="card-body">
-          <h5 class="card-title">My course 1</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="card" 
+           *ngFor="let course of courses"
+           [ngStyle]="{ 'background-image': 'url(' + course.imageUrl + ')', 
+                        'background-size': 'cover', 
+                        'background-position': 'center', 
+                        'padding': '20px' }" 
+           style="width: 18rem;">
+        <div class="card-body text-white">
+          <h5 class="card-title">{{ course.courseName }}</h5>
           <a href="#" class="btn btn-success">View course</a>
         </div>
       </div>
-
+    
     </div>
+    
+    
   </div>
   
 

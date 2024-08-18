@@ -15,9 +15,8 @@ export class NavbarComponent {
 
   // when navigated by routes to services/serviceId, update the selected value
   onChange(selected: any) { 
-
-    console.log({selected})
-    if(selected.id == 0) this.router.navigateByUrl('/');
-    else if(selected.id == 1) this.router.navigateByUrl(`/my_services/academy/${selected.id}`);
+ 
+    if(selected.id == this.appService.AppConstants.default_option) this.router.navigateByUrl('/');
+    else this.router.navigateByUrl(`/my_services/academy/${selected.id}`);
   }
 }

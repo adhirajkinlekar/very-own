@@ -1,5 +1,7 @@
 
 import { Component } from '@angular/core';
+import { AcademyService } from '../academy.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Lecture {
   title: string;
@@ -26,6 +28,18 @@ interface Course {
 
 
 export class CreatecourseComponent {
+  academyId: string | null = null;
+
+  constructor(private academyService: AcademyService,  private route: ActivatedRoute){
+
+    this.route.paramMap.subscribe((params: any) => {
+      this.academyId = params.get('academyId');
+      // Now you can use the id to fetch data or perform other operations
+     });
+
+
+  };
+  
   course: Course = {
     title: '',
     headline: '',
@@ -69,14 +83,17 @@ export class CreatecourseComponent {
 
   createCourse() {
     if (this.isValid()) {
-      console.log('Course created:', this.course);
-      // Here you would typically send the course data to your backend
+      this.academyService.createCourse(this.course, this.academyId).subscribe(data=>{
 
-      const navigateEvent = new CustomEvent('navigate-to-container', {
-        detail: { path: 'my_services/academy/1' }
-      });
-      
-      window.dispatchEvent(navigateEvent);
+        const navigateEvent = new CustomEvent('navigate-to-container', {
+          detail: { path: `my_services/academy/${this.academyId}` }
+        });
+        
+        window.dispatchEvent(navigateEvent);
+      },
+    err=>{
+
+    })
     }
   }
 }

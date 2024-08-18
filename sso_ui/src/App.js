@@ -32,8 +32,7 @@ const SignInPage = () => {
       });
 
       const result = await response.json();
-
-      console.log('Success:', result);
+ 
 
       setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
 

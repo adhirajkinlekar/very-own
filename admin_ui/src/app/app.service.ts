@@ -8,16 +8,16 @@ export class AppService {
   AppConstants = {
     route_my_services : "my_services",
     service_type_academy: "academy",
-    default_option: 0
+    default_option: '0'
   };
 
   options = [
     { id: this.AppConstants.default_option, name: 'All', type: 'default' },
-    { id: 1, name: 'my_academy', type: this.AppConstants.service_type_academy},
+    { id: '66c1a81a10ce243407a495ea', name: 'Stephen Teaches Tech', type: this.AppConstants.service_type_academy},
  // { id: 2, name: 'my_streaming' }
   ];
 
-  selectedOption: number = this.AppConstants.default_option;
+  selectedOption: string = this.AppConstants.default_option;
 
   constructor() { }
   

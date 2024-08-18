@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'my_services', 
     children: [
       {
-        path: "academy/:id",
+        path: "academy/:academyId",
         loadChildren: () => loadRemoteModule({
           type:"module",
           remoteEntry: "http://localhost:4201/remoteEntry.js",

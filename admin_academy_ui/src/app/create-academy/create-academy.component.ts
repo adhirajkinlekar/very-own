@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AcademyService } from '../academy.service';
 
 @Component({
   selector: 'app-create-academy',
@@ -13,7 +14,7 @@ export class CreateAcademyComponent {
   imagePreview: string | ArrayBuffer | null = null;
 
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private academyService: AcademyService) {
     // Initialize the form group here
     this.myForm = this.fb.group({
       name: ['', Validators.required],
@@ -37,12 +38,18 @@ export class CreateAcademyComponent {
   }
 
   onSubmit(): void {
+
+    this.academyService.createAcademy({academyName: this.myForm.value.name, description: this.myForm.value. description}).subscribe(()=>{
+      const navigateEvent = new CustomEvent('navigate-to-container', {
+        detail: { path: 'my_services/academy/1' }
+      });
+      
+      window.dispatchEvent(navigateEvent);
+    }, err =>{
+ 
+    })
      
-    const navigateEvent = new CustomEvent('navigate-to-container', {
-      detail: { path: 'my_services/academy/1' }
-    });
-    
-    window.dispatchEvent(navigateEvent);
+   
 
     // this.router.navigateByUrl('my_services/academy/1') check if it works direcly
 

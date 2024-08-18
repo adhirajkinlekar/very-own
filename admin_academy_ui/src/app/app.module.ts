@@ -7,6 +7,7 @@ import { AcademyComponent } from './academy/academy.component';
 import { CreateAcademyComponent } from './create-academy/create-academy.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreatecourseComponent } from './createcourse/createcourse.component';
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
  
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import { CreatecourseComponent } from './createcourse/createcourse.component';
     CreatecourseComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule
     ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()) // New way
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
