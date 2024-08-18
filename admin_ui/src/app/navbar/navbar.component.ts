@@ -8,7 +8,7 @@ import { AppService } from '../app.service';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-
+ 
   constructor(private router: Router, public appService: AppService){
  
   }

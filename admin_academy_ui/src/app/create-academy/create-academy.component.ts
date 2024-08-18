@@ -39,9 +39,11 @@ export class CreateAcademyComponent {
 
   onSubmit(): void {
 
-    this.academyService.createAcademy({academyName: this.myForm.value.name, description: this.myForm.value. description}).subscribe(()=>{
+    this.academyService.createAcademy({academyName: this.myForm.value.name, description: this.myForm.value. description}).subscribe((data)=>{
+
+      console.log({data})
       const navigateEvent = new CustomEvent('navigate-to-container', {
-        detail: { path: 'my_services/academy/1' }
+        detail: { path: `my_services/academy/${data._id}` }
       });
       
       window.dispatchEvent(navigateEvent);

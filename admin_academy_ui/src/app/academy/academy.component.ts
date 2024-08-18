@@ -12,7 +12,7 @@ export class AcademyComponent {
 
   profits: number = 0;
   customers: number = 0;
-  courses: any = {};
+  courses: any =  [];
   academyName: string = '';
   constructor(private academyService: AcademyService, private route: ActivatedRoute){
 
@@ -32,6 +32,11 @@ export class AcademyComponent {
     })
   }
    
+  truncateText(text: string, limit: number = 50): string {
+    if (!text) return '';
+    return text.length > limit ? text.substring(0, limit) + '...' : text;
+  }
+
   handleClick(){
 
     const navigateEvent = new CustomEvent('navigate-to-container', {

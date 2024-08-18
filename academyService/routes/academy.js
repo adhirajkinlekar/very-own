@@ -23,9 +23,8 @@ router.post('/', async (req, res) => {
         const savedAcademy = await newAcademy.save();
 
         // create a child document in admin services, admin document  
-        
 
-        res.status(201).json(savedAcademy);
+        res.status(201).json({academyId: savedAcademy.id});
 
     } catch (error) {
         res.status(500).json({ error: 'Failed to create academy' });
