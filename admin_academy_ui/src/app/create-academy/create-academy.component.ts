@@ -15,6 +15,7 @@ export class CreateAcademyComponent {
 
 
   constructor(private fb: FormBuilder, private router: Router, private academyService: AcademyService) {
+
     // Initialize the form group here
     this.myForm = this.fb.group({
       name: ['', Validators.required],
@@ -41,7 +42,6 @@ export class CreateAcademyComponent {
 
     this.academyService.createAcademy({academyName: this.myForm.value.name, description: this.myForm.value. description}).subscribe((data)=>{
 
-      console.log({data})
       const navigateEvent = new CustomEvent('navigate-to-container', {
         detail: { path: `my_services/academy/${data._id}` }
       });

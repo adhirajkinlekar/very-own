@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   enrolledServices: number = 1; // Example data, replace with actual
-  totalRevenue: number = 156.78; // Example data, replace with actual
+  totalRevenue: number = 0; // Example data, replace with actual
  
 }

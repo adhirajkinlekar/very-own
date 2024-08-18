@@ -29,7 +29,8 @@ interface Course {
 
 export class CreatecourseComponent {
   academyId: string | null = null;
-
+  description:string = ""
+ 
   constructor(private academyService: AcademyService,  private route: ActivatedRoute){
 
     this.route.paramMap.subscribe((params: any) => {
@@ -86,7 +87,7 @@ export class CreatecourseComponent {
       this.academyService.createCourse(this.course, this.academyId).subscribe(data=>{
 
         const navigateEvent = new CustomEvent('navigate-to-container', {
-          detail: { path: `my_services/academy/${this.academyId}` }
+          detail: { path: `academy/${this.academyId}` }
         });
         
         window.dispatchEvent(navigateEvent);

@@ -17,6 +17,6 @@ export class NavbarComponent {
   onChange(selected: any) { 
  
     if(selected.id == this.appService.AppConstants.default_option) this.router.navigateByUrl('/');
-    else this.router.navigateByUrl(`/my_services/academy/${selected.id}`);
+    else this.router.navigateByUrl(`/academy/${selected.id}`);
   }
 }

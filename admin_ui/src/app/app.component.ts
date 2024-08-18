@@ -13,6 +13,12 @@ export class AppComponent {
 
   constructor(private router: Router, private service: AppService) {
 
+    // const hostname = window.location.hostname;
+    // if (hostname === 'admin.veryown.com') {
+    //   // Perform the redirection
+    //   window.location.href = 'http://overview.admin.veryown.com:4200';
+    // }
+
     window.addEventListener('navigate-to-container', (event: Event) => {
       const customEvent = event as CustomEvent;
       const path = customEvent.detail.path;

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ServiceTypesComponent {
 
+  createService(link:string){
+    window.location.href = link;
+  }
 }
