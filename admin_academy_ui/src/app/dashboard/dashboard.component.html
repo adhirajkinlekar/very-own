@@ -1,79 +1,72 @@
-<div class="row">
+<div class="container mt-5">
+  <div class="row">
     <!-- Profits Card -->
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Total Profits</h5>
-          <p class="card-text display-4">${{ 0 | number:'1.0-2' }}</p>
+    <div class="col-md-4 mb-4">
+      <div class="dashboard-card bg-primary">
+        <div class="card-icon">
+          <i class="fas fa-dollar-sign"></i>
         </div>
+        <div class="card-number">${{ 0 | number:'1.0-2' }}</div>
+        <div>Total Profits</div>
       </div>
     </div>
 
     <!-- Customers Card -->
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Total Customers</h5>
-          <p class="card-text display-4">0</p>
+    <div class="col-md-4 mb-4">
+      <div class="dashboard-card bg-success">
+        <div class="card-icon">
+          <i class="fas fa-users"></i>
         </div>
+        <div class="card-number">0</div>
+        <div>Total Customers</div>
       </div>
     </div>
 
     <!-- Courses Card -->
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Total Courses</h5>
-          <p class="card-text display-4">0</p>
+    <div class="col-md-4 mb-4">
+      <div class="dashboard-card bg-info">
+        <div class="card-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="card-number">0</div>
+        <div>Total Courses</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Example -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="chart-container">
+        <!-- Here you can include a chart library like Chart.js or ng2-charts -->
+        <div class="text-center text-muted-custom">
+          <p>Your graphs will be displayed here for analytics</p>
+          <!-- <canvas id="profitsChart"></canvas> -->
         </div>
       </div>
     </div>
   </div>
-    
-    <!-- Chart Example -->
-    <div class="row mt-4">
-        <div class="col-md-12">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Profits Trend</h5>
-              <!-- Here you can include a chart library like Chart.js or ng2-charts -->
-              <div>Your graphs will be displayed here for analytics</div>
-              <!-- <canvas id="profitsChart"></canvas> -->
-            </div>
-          </div>
+
+  <!-- Academies List -->
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4" *ngFor="let academy of academies">
+      <div class="academy-card">
+        <img src="{{ academy.imageUrl }}" class="card-img-top" alt="{{ academy.name }}" />
+        <div class="academy-card-body">
+          <h5 class="academy-card-title">{{ academy.name }}</h5>
+          <p class="text-muted-custom">{{ academy.description }}</p>
+          <button (click)="handleClick(academy.id)" class="btn btn-custom btn-primary">View</button>
         </div>
       </div>
+    </div>
 
-      <div class="col-12 pt-4">
-        <div class="row">
-            <div class="col-md-4" *ngFor="let academy of academies">
-              <div class="card mb-4 shadow-sm">
-                <img
-                  src="{{ academy.imageUrl }}"
-                  class="card-img-top"
-                  alt="{{ academy.name }}"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">{{ academy.name }}</h5>
-                  <p class="card-text">{{ academy.description }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button (click)="handleClick(academy.id)"  type="button" class="btn btn-sm btn-outline-secondary">
-                            View
-                          </button>
-                    </div>
-                    <!-- <small class="text-muted">9 mins</small> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                  <button (click)="CreateAcademy()" class="btn btn-primary p-2">Create Academy</button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="col-md-4 mb-4">
+      <div class="academy-card d-flex flex-column justify-content-center align-items-center h-100">
+        <div class="academy-card-body text-center">
+          <button (click)="CreateAcademy()" class="btn btn-primary btn-lg btn-custom">Create Academy</button>
+        </div>
       </div>
+    </div>
+    
+  </div>
+</div>

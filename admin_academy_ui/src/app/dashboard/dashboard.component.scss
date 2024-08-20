@@ -1,12 +1,54 @@
-  
-  .card-body {
-    text-align: center;
+.dashboard-card {
+  border-radius: 15px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
   }
-  .card-img-top {
-    width: 100%;  /* Make sure the image takes the full width of the card */
-    height: auto; /* Maintain the aspect ratio */
-    max-height: 200px; /* Limit the maximum height */
-    object-fit: cover; /* Crop the image to fit within the given dimensions */
-    border-radius: 0.25rem 0.25rem 0 0; /* Rounded corners for the top */
+
+  .card-number {
+    font-size: 2.5rem;
+    font-weight: bold;
   }
-  
+}
+
+.chart-container {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.academy-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+
+  img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .academy-card-body {
+    padding: 15px;
+  }
+
+  .academy-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+}
+
+.btn-custom {
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.text-muted-custom {
+  color: #6c757d;
+}
