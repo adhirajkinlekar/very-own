@@ -22,48 +22,48 @@ services:
     ports: 
       - 3001:3001
   
-  admin_ui: 
-    build: 
-      context: ./admin_ui
-      dockerfile: dockerfile.dev 
-    restart: always
-    volumes:
-      - /app/node_modules
-      - ./admin_ui:/app
-    ports: 
-      - 4200:4200
+  # admin_ui: 
+  #   build: 
+  #     context: ./admin_ui
+  #     dockerfile: dockerfile.dev 
+  #   restart: always
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./admin_ui:/app
+  #   ports: 
+  #     - 4200:4200
 
-  admin_academy_ui: 
-    build: 
-      context: ./admin_academy_ui
-      dockerfile: dockerfile.dev 
-    restart: always
-    volumes:
-      - /app/node_modules
-      - ./admin_academy_ui:/app
-    ports: 
-      - 4201:4201
+  # admin_academy_ui: 
+  #   build: 
+  #     context: ./admin_academy_ui
+  #     dockerfile: dockerfile.dev 
+  #   restart: always
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./admin_academy_ui:/app
+  #   ports: 
+  #     - 4201:4201
 
-  authservice: 
-    build: 
-      context: ./authservice
-      dockerfile: dockerfile.dev 
-    restart: always
-    volumes:
-      - /app/node_modules
-      - ./authservice:/app
-    ports: 
-      - 5000:5000
+  # authservice: 
+  #   build: 
+  #     context: ./authservice
+  #     dockerfile: dockerfile.dev 
+  #   restart: always
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./authservice:/app
+  #   ports: 
+  #     - 5000:5000
 
-  academyService: 
-    build: 
-      context: ./academyService
-      dockerfile: dockerfile.dev 
-    restart: always
-    volumes:
-      - /app/node_modules
-      - ./academyService:/app
-    ports: 
-      - 5001:5001
+  # academyService: 
+  #   build: 
+  #     context: ./academyService
+  #     dockerfile: dockerfile.dev 
+  #   restart: always
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./academyService:/app
+  #   ports: 
+  #     - 5001:5001
 
  

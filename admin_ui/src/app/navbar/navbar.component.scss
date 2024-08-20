@@ -12,4 +12,11 @@
     color: #333;
   }
   
-   
+  .sticky-navbar {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Adjust as needed */
+    background-color: #fff; /* Adjust as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}

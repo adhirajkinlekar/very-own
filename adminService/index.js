@@ -23,6 +23,12 @@ app.get('/admin/:adminId', (req, res) => {
   res.json(result);
 });
 
+app.get('/admin/:adminId', (req, res) => {
+  const { schoolId } = req.params;
+  const result = users.filter(user => user.schoolId == schoolId);
+  res.json(result);
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
