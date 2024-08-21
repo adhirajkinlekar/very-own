@@ -2,12 +2,27 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
+import { useEffect } from 'react';
 
 const SignInPage = () => {
-  const { tenantId_service } = useParams();  
+  const { publicId_service } = useParams();  
 
-  const tenantId = tenantId_service ? tenantId_service.split('_')[0] : null;
-  const service = tenantId_service ? tenantId_service.split('_')[1] : null;
+  const publicId = publicId_service ? publicId_service.split('_')[0] : null;
+  const service = publicId_service ? publicId_service.split('_')[1] : null;
+  const [serviceDetails, setServiceDetails] = useState(null)
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/auth/service/${publicId}`) // Replace with your API URL
+    .then((response) => {
+   
+      return response.json();
+    })
+    .then((serviceDetails) => { 
+      setServiceDetails(serviceDetails) 
+    })
+    .catch((error) => {
+
+    })}, [publicId, service]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -36,9 +51,9 @@ const SignInPage = () => {
 
       setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
 
-   //   navigate(`http://${tenantId}.${service}.veryown.com:3000/`);
+   //   navigate(`http://${publicId}.${service}.veryown.com:3000/`);
 
-      window.location.href = `http://${tenantId}.${service}.veryown.com:3000`;
+      window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
       
     } catch (error) {
       console.error('Error:', error);
@@ -53,7 +68,7 @@ const SignInPage = () => {
   };
  
   return (
-    <SignInForm handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
+    <SignInForm serviceDetails={serviceDetails}  handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
   );
 };
 
@@ -85,9 +100,8 @@ const App = () => {
       <div className="container mt-4">
         <Router>
           <Routes>
-            <Route path="/secure/:tenantId_service/signin" element={<SignInPage />} />
+            <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
             <Route path="/secure/signup" element={<SignUpPage />} />
-            <Route path="/:tenantId" element={<div>Tenant Specific Content</div>} /> {/* Example route for tenants */}
           </Routes>
         </Router>
       </div>

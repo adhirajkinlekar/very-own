@@ -10,7 +10,7 @@ const HomePage = () => {
     return (
         <div className='container-home col-9'>
             <div className="profile-card">
-                <div className="profile-description" dangerouslySetInnerHTML={{ __html: academy.about }}></div>
+                <div className="profile-description" dangerouslySetInnerHTML={{ __html: academy.description }}></div>
             </div>
             <h5 className="fancy-underline">Course list</h5>
             <CardList />

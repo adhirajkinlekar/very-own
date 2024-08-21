@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CourseDetails = () => {
     const navigate = useNavigate();
-    const { isAuthenticated, tenantId } = useContext(AppContext);
+    const { isAuthenticated, publicId, academyId } = useContext(AppContext);
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
@@ -16,7 +16,7 @@ const CourseDetails = () => {
         if (isAuthenticated) {
             navigate(`./learn`);
         } else {
-            window.location.href = `http://sso.veryown.com:3001/secure/${tenantId}_academy/signin`;
+            window.location.href = `http://sso.veryown.com:3001/secure/${publicId}_academy/signin`;
         }
     };
 
@@ -26,45 +26,20 @@ const CourseDetails = () => {
 
 
     useEffect(() => {
-        const courses = [
-            {
-                id: 1,
-                title: 'JavaScript Algorithms and Data Structures Masterclass',
-                description: 'The Missing Computer Science and Coding Interview Bootcamp',
-                imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
-                academyId: "coltsteele",
-                isActive: true
-            },
-            {
-                id: 2,
-                title: 'The Git & Github Bootcamp',
-                description: 'Master the essentials and the tricky bits: rebasing, squashing, stashing, reflogs, blobs, trees, & more!',
-                imageUrl: 'https://img-b.udemycdn.com/course/750x422/3792262_6b0c_2.jpg',
-                academyId: "coltsteele",
-                isActive: true
-            },
-            {
-                id: 3,
-                title: 'The Linux Command Line Bootcamp: Beginner To Power User',
-                description: 'Level Up Your Skills And Take Control Of Your Machine, w/ Dozens of Commands, Projects, and Challenges!',
-                imageUrl: 'https://img-c.udemycdn.com/course/750x422/1406344_1d65_3.jpg',
-                academyId: "coltsteele",
-                isActive: false
-            },
-            {
-                id: 4,
-                title: 'Code with Ethereum & Solidity: The Complete Developer Guide',
-                description: 'Intensive masterclass on ChatGPT, LangChain, and Python. Make production-ready apps focused on real-world AI integration',
-                imageUrl: 'https://img-b.udemycdn.com/course/750x422/1466612_bead_3.jpg',
-                academyId: "stepheng",
-                isActive: true
-            }
-        ];
-
-        const course = courses.find(x => x.id === parseInt(id) && tenantId === x.academyId && x.isActive) || null;
-        setCourse(course);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+        fetch(`http://localhost:5001/api/academy/${academyId}/courses/${id}`) // Replace with your API URL
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(({course}) => { 
+          console.log({course})
+          setCourse(course);
+        })
+        .catch((error) => {
+    
+        })}, [id]);
     // called after first render and everytime the ID value changes
     // [] - called after first render, never called again
     // no arguments - called after first render, never called again
@@ -76,33 +51,28 @@ const CourseDetails = () => {
                     <div className='course-content-wrapper'>
                         <div className='course-content'>
                             <header className="course-header">
-                                <h1>{course.title}</h1>
-                                <p className="course-description">{course.description}</p>
-                                <div className="course-stats">
+                                <h1>{course.courseName}</h1>
+                                <p className="course-description">{course.headline}</p>
+                                {/* <div className="course-stats">
                                     <span className="rating">4.4 ★★★★☆ (4,781 ratings)</span>
                                     <span className="students">41,273 students</span>
-                                </div>
-                                <p className="course-creator">Created by Mehmet Ozkaya</p>
-                                <div className="course-info">
+                                </div> */}
+                                {/* <p className="course-creator">Created by Mehmet Ozkaya</p> */}
+                                {/* <div className="course-info">
                                     <span>Last updated 4/2024</span>
                                     <span>English</span>
                                     <span>English, Arabic [Auto], 9 more</span>
-                                </div>
+                                </div> */}
                             </header>
-                            <section className="related-topics">
+                            {/* <section className="related-topics">
                                 <h2>Explore related topics</h2>
                                 <div className="topics">
                                     <button>Microservices</button>
                                     <button>Other IT & Software</button>
                                     <button>IT & Software</button>
                                 </div>
-                            </section>
-                            <section className="course-content">
-                                <h2>What you'll learn</h2>
-                                <ul>
-                                    <li>Design Microservices Architecture with using Design Patterns, Principles and the Best Practices</li>
-                                    <li>Learn how to handle millions of request with designing system for High Availability, High Scalability, low latency, and resilience to network failures</li>
-                                </ul>
+                            </section> */}
+                            <section className="course-content" dangerouslySetInnerHTML={{ __html: course.description }}>
                             </section>
                         </div>
                         <div className='preview-section'>

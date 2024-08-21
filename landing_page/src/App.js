@@ -32,7 +32,7 @@ function App() {
         </h2>
         <div className="bg-white shadow-lg rounded-lg p-8 text-gray-700">
           <p className="mb-6">
-            Veryown empowers you to create and manage diverse online services with ease. Whether you want to start an <strong>online store</strong>, set up an <strong>educational academy</strong>, or build a <strong>streaming service</strong>, we provide the tools to turn your ideas into reality.
+            <b>Veryown</b> empowers you to create and manage diverse online services with ease. Whether you want to start an <strong>online store</strong>, set up an <strong>educational academy</strong>, or build a <strong>streaming service</strong>, we provide the tools to turn your ideas into reality.
           </p>
           <p className="mb-6">
             Once your services are live, your customers can access them seamlessly through personalized URLs. For example, a service could be accessed via <code>store_name.store.veryown.com</code> or <code>academy_name.academy.veryown.com</code>. This structured URL format helps users quickly find and engage with the content they’re interested in.
@@ -42,6 +42,9 @@ function App() {
           </p>
           <p className="mb-6">
             Designed for flexibility and scalability, our platform supports a variety of service types and is built to grow with your needs. Whether you're launching a new venture or enhancing an existing one, we’ve got you covered with powerful features and reliable support.
+          </p>
+          <p className="mb-6">
+            For your convenience, we offer <strong>Single Sign-On (SSO)</strong> functionality. This means you can use a single set of credentials to access all your services and the admin dashboard. SSO simplifies the login process and enhances security by reducing the number of passwords you need to manage.
           </p>
         </div>
       </div>

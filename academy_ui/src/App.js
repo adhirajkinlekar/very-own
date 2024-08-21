@@ -13,34 +13,28 @@ import './App.css';
 const App = () => { 
   
   const url = window.location.hostname;
-  const [tenantId] = useState(url.split('.')[0]);
+  const [publicId] = useState(url.split('.')[0]);
   const [academy, setAcademy] = useState(null);
-  const [isAuthenticated, setAuthStatus] = useState(getCookie('isAuthenticated') === 'true');
+  const [courses, setCourses] = useState(null);
 
   useEffect(() => {
-    const academies = [
-      {
-        id: "coltsteele",
-        name: 'Colt Steele',
-        description: 'Developer and Bootcamp Instructor',
-        about: "<p> Hi! I'm Colt. I'm a developer with a serious love for teaching. I've spent the last few years teaching people to program at 2 different immersive bootcamps where I've helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square. </p> <b> Join me on this crazy adventure! </b>",
-        imageUrl: 'https://img-c.udemycdn.com/user/200_H/4466306_6fd8_3.jpg',
-        isActive: true
-      },
-      {
-        id: 'stepheng',
-        name: 'Stephen Grider',
-        description: 'Engineering Architect',
-        about: "<p> Stephen Grider has been building complex Javascript front ends for top corporations in the San Francisco Bay Area. With an innate ability to simplify complex topics, Stephen has been mentoring engineers beginning their careers in software development for years, and has now expanded that experience onto Udemy, authoring the highest rated React course. He teaches on Udemy to share the knowledge he has gained with other software engineers. Invest in yourself by learning from Stephen's published courses.</p>",
-        imageUrl: 'https://avatars.githubusercontent.com/u/5003903?v=4',
-        isActive: true
-      }
-    ];
+    fetch(`http://localhost:5001/api/academy/customer/${publicId}`) // Replace with your API URL
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(({academy, courses}) => {  
+        setAcademy(academy);
+        setCourses(courses);
+      })
+      .catch((error) => {
+  
+      });
+  },[publicId]);
 
-    const academy = academies.find(x => x.id === tenantId && x.isActive) || null;
-
-    setAcademy(academy);
-  }, [tenantId]);
+  const [isAuthenticated, setAuthStatus] = useState(getCookie('isAuthenticated') === 'true');
 
   const handleSignOut = () => {
 
@@ -51,7 +45,7 @@ const App = () => {
 
   return (
     <Router>
-      <AppContext.Provider value={{ isAuthenticated, tenantId, academy }}> 
+      <AppContext.Provider value={{ isAuthenticated, publicId,academyId:academy?._id, academy, courses }}> 
           {academy ? (
             <div className="app">
               <div className="profile-header p-3">
@@ -59,8 +53,8 @@ const App = () => {
                   <Link to={`/`} className="d-flex align-items-center">
                     <img src={academy.imageUrl} alt="Profile" className="avatar" />
                     <div className="profile-info ms-3">
-                      <h2>{academy.name}</h2>
-                      <p>{academy.description}</p>
+                      <h2>{academy.academyName}</h2>
+                      <p>{academy.title}</p>
                     </div>
                   </Link>
                 </div>
@@ -83,7 +77,7 @@ const App = () => {
                     </div> ) 
                     : (
                     <div className="d-flex">
-                      <a href={`http://sso.veryown.com:3001/secure/${tenantId}_academy/signin`} className="me-2">
+                      <a href={`http://sso.veryown.com:3001/secure/${publicId}_academy/signin`} className="me-2">
                         <button className="btn btn-light">Sign In</button>
                       </a>
                       <a href={`http://sso.academy.veryown.com:3001/auth/signup`}>

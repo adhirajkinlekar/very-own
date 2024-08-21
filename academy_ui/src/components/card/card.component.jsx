@@ -18,7 +18,6 @@ class Card extends Component {
     render() {
         const { id, title, imageURL, rating } = this.props; 
 
-
         return (
             <Link to={`/courses/${id}`}>
                 <div className="card card-custom mx-auto mt-4" style={{ width: '25rem' }}>

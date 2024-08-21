@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const dotenv = require('dotenv');
 const router = express.Router();
+const ServiceSSODetail = require('../models/ServiceSSO');
+
 
 dotenv.config();
 
@@ -58,7 +60,7 @@ router.post('/register-creator', async (req, res) => {
     // create this inside admin service
     const creator = {
       username : "Stephen Grider",
-      tenantId: "stepheng",
+      publicId: "stepheng",
       userId: user.id,
       role: "super-admin"
     }
@@ -122,5 +124,27 @@ const jwtSign = (payload, username) => {
     }
   );
 }
+
+
+router.get('/service/:servicePublicId', async (req, res) => {
+ 
+  try {
+
+    const { servicePublicId } = req.params;
+
+    const ServiceDetails = await ServiceSSODetail.findOne({servicePublicId});
+    console.log({ServiceDetails: ServiceDetails})
+
+    if (!ServiceDetails) {
+      return res.status(400).json({ msg: 'Invalid Service' });
+    }
+  
+    res.status(200).send(ServiceDetails);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;

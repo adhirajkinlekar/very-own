@@ -54,11 +54,46 @@ router.get('/:academyId', async (req, res) => {
     }
 });
 
+router.get('/customer/:publicId', async (req, res) => {
+    try {
+
+        const { publicId } = req.params;
+
+        const academy = await Academy.findOne({publicId});
+
+        if(!academy) return res.status(400).json({ error: 'Could not find academy' });
+
+        const courses = await Course.find({ academyId: academy._id });
+
+        res.json({academy, courses });
+
+    } catch (error) {
+        console.log({error})
+        res.status(500).json({ error: 'Failed to retrieve academy' });
+    }
+});
+
+router.get('/:academyId/courses/:courseId', async (req, res) => {
+    try {
+
+        const { courseId, academyId } = req.params;
+
+        const course = await Course.find({_id : new mongoose.Types.ObjectId(courseId), academyId});
+
+        if(!course) return res.status(400).json({ error: 'Could not find academy' });
+
+        res.json({ course: course[0]});
+
+    } catch (error) {
+        console.log({error})
+        res.status(500).json({ error: 'Failed to retrieve academy' });
+    }
+});
+
 router.post('/:academyId/course', async (req, res) => {
     try {
  
-        const course = req.body;
-        console.log({course})
+        const course = req.body; 
 
         const { academyId } = req.params;
 
@@ -67,7 +102,6 @@ router.post('/:academyId/course', async (req, res) => {
         const academy = await Academy.findById(objectId);
 
         if(!academy) return res.status(400).json({ error: 'Could not find academy' });
-
 
         const courseDetails = {
             courseName: course.title,
@@ -78,12 +112,9 @@ router.post('/:academyId/course', async (req, res) => {
             academyId: objectId
           };
 
-          console.log({courseDetails})
-
         const newCourse = new Course(courseDetails)
 
         const savedCourse = await newCourse.save();
-
 
         res.status(201).json(savedCourse);
     }
