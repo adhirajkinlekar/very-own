@@ -47,54 +47,58 @@ const App = () => {
     <Router>
       <AppContext.Provider value={{ isAuthenticated, publicId,academyId:academy?._id, academy, courses }}> 
           {academy ? (
-            <div className="app">
-              <div className="profile-header p-3">
-                <div className="d-flex align-items-center flex-grow-1">
-                  <Link to={`/`} className="d-flex align-items-center">
-                    <img src={academy.imageUrl} alt="Profile" className="avatar" />
-                    <div className="profile-info ms-3">
-                      <h2>{academy.academyName}</h2>
-                      <p>{academy.title}</p>
-                    </div>
-                  </Link>
+          <div className="app">
+          <div className="profile-header p-6 bg-white shadow-md flex justify-between items-center">
+            <div className="flex items-center flex-grow">
+              <Link to={`/`} className="flex items-center">
+                <img src={academy.imageUrl} alt="Profile" className="avatar w-16 h-16 rounded-full object-cover" />
+                <div className="profile-info ml-4">
+                  <h2 className="text-2xl font-bold text-gray-800">{academy.academyName}</h2>
+                  <p className="text-sm text-gray-500">{academy.title}</p>
                 </div>
-                <div className="text-end">
-                  {isAuthenticated ? (
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-light dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '35px', color: 'gray' }} />
-                      </button>
-                      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><button className="dropdown-item fw-bold">Hello, Adhiraj</button></li>
-                        <li><button className="dropdown-item">Profile</button></li>
-                        <li><button className="dropdown-item" onClick={handleSignOut}>Sign Out</button></li>
-                      </ul>
-                    </div> ) 
-                    : (
-                    <div className="d-flex">
-                      <a href={`http://sso.veryown.com:3001/secure/${publicId}_academy/signin`} className="me-2">
-                        <button className="btn btn-light">Sign In</button>
-                      </a>
-                      <a href={`http://sso.academy.veryown.com:3001/auth/signup`}>
-                        <button className="btn btn-light">Sign Up</button>
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="content">
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/courses/:id" element={<CourseDetails />} />
-                  <Route path="/courses/:id/learn" element={<CoursePage />} />
-                </Routes>
-              </div>
+              </Link>
             </div>
+            <div className="text-right">
+              {isAuthenticated ? (
+                <div className="relative">
+                  <button
+                    className="flex items-center text-gray-700 focus:outline-none"
+                    type="button"
+                    id="dropdownMenuButton"
+                    aria-expanded="false">
+                    <FontAwesomeIcon icon={faUserCircle} className="text-gray-400 text-3xl" />
+                  </button>
+                  <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                    <li className="py-2 px-4 font-bold text-gray-700">Hello, Adhiraj</li>
+                    <li>
+                      <button className="block w-full text-left py-2 px-4 hover:bg-gray-100">Profile</button>
+                    </li>
+                    <li>
+                      <button className="block w-full text-left py-2 px-4 hover:bg-gray-100" onClick={handleSignOut}>Sign Out</button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <div className="flex space-x-2">
+                  <a href={`http://sso.veryown.com:3001/secure/${publicId}_academy/signin`} className="inline-block">
+                    <button className="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none">Sign In</button>
+                  </a>
+                  <a href={`http://sso.academy.veryown.com:3001/auth/signup`} className="inline-block">
+                    <button className="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none">Sign Up</button>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="content mt-8">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/courses/:id" element={<CourseDetails />} />
+              <Route path="/courses/:id/learn" element={<CoursePage />} />
+            </Routes>
+          </div>
+        </div>
+        
           ) : (
             <div className="text-center">Academy could not be found or it no longer exists</div>
           )} 

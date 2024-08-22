@@ -47,40 +47,36 @@ const CourseDetails = () => {
     return (
         <div className="container">
             {course ? (
-                <div className="course-page">
-                    <div className='course-content-wrapper'>
-                        <div className='course-content'>
-                            <header className="course-header">
-                                <h1>{course.courseName}</h1>
-                                <p className="course-description">{course.headline}</p>
-                                {/* <div className="course-stats">
-                                    <span className="rating">4.4 ★★★★☆ (4,781 ratings)</span>
-                                    <span className="students">41,273 students</span>
-                                </div> */}
-                                {/* <p className="course-creator">Created by Mehmet Ozkaya</p> */}
-                                {/* <div className="course-info">
-                                    <span>Last updated 4/2024</span>
-                                    <span>English</span>
-                                    <span>English, Arabic [Auto], 9 more</span>
-                                </div> */}
-                            </header>
-                            {/* <section className="related-topics">
-                                <h2>Explore related topics</h2>
-                                <div className="topics">
-                                    <button>Microservices</button>
-                                    <button>Other IT & Software</button>
-                                    <button>IT & Software</button>
-                                </div>
-                            </section> */}
-                            <section className="course-content" dangerouslySetInnerHTML={{ __html: course.description }}>
-                            </section>
-                        </div>
-                        <div className='preview-section'>
-                            <img src={course.imageUrl} alt={course.title} />
-                            <button onClick={handleButtonClick} className="preview-button">{isAuthenticated ? 'Go to course' : 'Login to view'}</button>
-                        </div>
-                    </div>
-                </div>
+               <div className="course-page mx-auto max-w-5xl py-8">
+               <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
+                 <div className="course-content flex-1">
+                   <header className="mb-6">
+                     <h1 className="text-4xl font-bold text-gray-800">{course.courseName}</h1>
+                     <p className="mt-2 text-lg text-gray-600">{course.headline}</p>
+                   </header>
+             
+                   <section
+                     className="course-description text-gray-700 leading-relaxed"
+                     dangerouslySetInnerHTML={{ __html: course.description }}
+                   ></section>
+                 </div>
+             
+                 <div className="preview-section flex flex-col items-center space-y-4 lg:w-1/3">
+                   <img
+                     src={course.imageUrl}
+                     alt={course.title}
+                     className="w-full h-64 object-cover rounded-lg shadow-md"
+                   />
+                   <button
+                     onClick={handleButtonClick}
+                     className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-300"
+                   >
+                     {isAuthenticated ? 'Go to course' : 'Login to view'}
+                   </button>
+                 </div>
+               </div>
+             </div>
+             
             ) : (
                 <div style={{ textAlign: 'center' }}>Course is not available or has been archived</div>
             )}

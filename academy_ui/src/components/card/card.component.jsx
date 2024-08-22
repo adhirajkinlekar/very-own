@@ -20,26 +20,29 @@ class Card extends Component {
 
         return (
             <Link to={`/courses/${id}`}>
-                <div className="card card-custom mx-auto mt-4" style={{ width: '25rem' }}>
-                    <img
-                        src={imageURL} // Use curly braces without quotes for JSX expressions
-                        className="card-img-top card-img-top-custom"
-                        alt="Card cap"
-                    />
-                    <div className="card-body">
-                        <h5 className="card-title">{title.length > 25 ? (title.slice(0, 25) + '...') : title}</h5>
-                        <div className='rating_container'>
-                            <div>{rating} / 5</div> {/* Display rating value */}
-                            <div className="rating">
-                                {[...Array(5)].map((_, index) => (
-                                    <span key={index} className={index < rating ? 'star filled' : 'star'}>
-                                        &#9733;
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <div className="max-w-sm mx-auto mt-6 bg-white rounded-lg shadow-md overflow-hidden">
+  <img
+    src={imageURL}
+    className="w-full h-48 object-cover"
+    alt="Card cap"
+  />
+  <div className="p-4">
+    <h5 className="text-xl font-semibold text-gray-800">
+      {title.length > 25 ? `${title.slice(0, 25)}...` : title}
+    </h5>
+    <div className="flex items-center justify-between mt-4">
+      <div className="text-sm text-gray-600">{4.5} / 5</div>
+      <div className="flex space-x-1">
+        {[...Array(5)].map((_, index) => (
+          <span key={index} className={index < 4.5 ? 'text-yellow-500' : 'text-gray-300'}>
+            &#9733;
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
             </Link>
         )
     }

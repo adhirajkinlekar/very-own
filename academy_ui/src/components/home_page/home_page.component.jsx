@@ -8,13 +8,29 @@ const HomePage = () => {
     const { academy } = useContext(AppContext); 
 
     return (
-        <div className='container-home col-9'>
-            <div className="profile-card">
-                <div className="profile-description" dangerouslySetInnerHTML={{ __html: academy.description }}></div>
-            </div>
-            <h5 className="fancy-underline">Course list</h5>
-            <CardList />
-        </div>
+        <div className="container mx-auto px-6 py-4">
+  {/* Profile Card */}
+  <div className="bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden">
+    <div className="p-6">
+      <div
+        className="text-gray-700"
+        dangerouslySetInnerHTML={{ __html: academy.description }}
+      ></div>
+    </div>
+  </div>
+ 
+  <div className="mt-8">
+    <h5 className="text-2xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">
+      Course List
+    </h5>
+  </div>
+ 
+  <div className="mt-4">
+    <CardList />
+  </div>
+</div>
+
+      
     );
 };
 

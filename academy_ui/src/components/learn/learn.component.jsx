@@ -58,36 +58,52 @@ const CoursePage = () => {
     };
 
     return (
-        <div className="course-container col-12">
-            <aside className="course-sidebar">
-                <input type="text" className="search-input" placeholder="Search feature is not yet implemented" />
-                {lectures.map((section, i) => (
-                    <div key={i} className="course-section">
-                        <div className="section-title">{section.title}</div>
-                        {section.items.map((item, j) => (
-                            <div key={j} className="lesson-details" onClick={() => selectLecture(i, j)}>
-                                <div className="lesson-item">{j + 1}. {item.title}</div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </aside>
-            <main className="course-content">
-                <div className="content-header">{selectedLecture.title}</div>
-                {selectedLecture.type === 'video' ? (
-                    <div className="video-container" >
-                        <video controls width={1250}>
-                            <source src={selectedLecture.content} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                ) : (
-                    <div className="text-container">
-                        <div className='m-3' dangerouslySetInnerHTML={{ __html: selectedLecture.content }}></div>
-                    </div>
-                )}
-            </main>
-        </div>
+        <div className="flex flex-col md:flex-row w-full min-h-screen bg-gray-50">
+  <aside className="w-full md:w-1/4 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+    <input
+      type="text"
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      placeholder="Search feature is not yet implemented"
+    />
+    {lectures.map((section, i) => (
+      <div key={i} className="mb-6">
+        <h3 className="text-xl font-semibold mb-2 text-gray-900">{section.title}</h3>
+        {section.items.map((item, j) => (
+          <div
+            key={j}
+            className="cursor-pointer p-3 rounded-lg hover:bg-indigo-100 transition-colors duration-300 flex items-center"
+            onClick={() => selectLecture(i, j)}
+          >
+            <div className="text-gray-800">
+              {j + 1}. {item.title}
+            </div>
+          </div>
+        ))}
+      </div>
+    ))}
+  </aside>
+  <main className="w-full md:w-3/4 p-6 bg-white shadow-lg rounded-lg ml-0 md:ml-4">
+    <h2 className="text-3xl font-extrabold mb-4 text-gray-900">{selectedLecture.title}</h2>
+    {selectedLecture.type === 'video' ? (
+      <div className="video-container mb-6">
+        <video controls className="w-full rounded-lg shadow-md">
+          <source src={selectedLecture.content} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    ) : (
+      <div className="text-container bg-gray-100 p-6 rounded-lg shadow-md">
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: selectedLecture.content }}
+        ></div>
+      </div>
+    )}
+  </main>
+</div>
+
+
+
     );
 };
 

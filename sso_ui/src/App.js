@@ -117,16 +117,14 @@ const SignUpPage = () => {
 
 const App = () => {
   return (
-    <div>
-      <div className="container mt-4">
+    <div> 
         <Router>
           <Routes>
             <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
             <Route path="/secure/signup" element={<SignUpPage />} />
           </Routes>
         </Router>
-      </div>
-    </div>
+      </div> 
   );
 };
 
