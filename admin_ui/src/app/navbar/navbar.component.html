@@ -1,33 +1,39 @@
+<nav class="bg-white shadow-md py-4 px-6"> <!-- Increased navbar height -->
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo and Brand Link -->
+    <a class="flex items-center" [routerLink]="['/']">
+      <i class="fas fa-user-shield text-4xl text-blue-600"></i> <!-- Increased icon size and changed color -->
+    </a>
 
+    <!-- Toggler Button for Mobile View -->
+    <button class="lg:hidden px-3 py-2 border border-gray-300 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" type="button" (click)="toggleNavbar()">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 10px;">
-    <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['/']">
-        <img src="assets/veryown-admin.png" alt="Logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div *ngIf="appService.isLoggedIn$.getValue()" class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="assets/dummy_profile.jpeg" alt="User" class="rounded-circle" width="40" height="40">
-            <span class="p-1">Username</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/profile']">Visit Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" >Logout</a></li>
+    <div *ngIf="appService.isLoggedIn$.getValue()" class="hidden lg:flex items-center space-x-4">
+      <!-- User Dropdown -->
+      <div class="relative">
+        <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none" id="userDropdown" type="button" (click)="toggleDropdown()">
+          <i class="fas fa-user-circle text-gray-500 text-3xl"></i> <!-- Updated icon to fa-user-circle -->
+          <span class="hidden md:inline">Adhirajk</span>
+        </button>
+        <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <ul class="py-1">
+            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" [routerLink]="['/profile']">Visit Profile</a></li>
+            <li><hr class="border-t border-gray-200"></li>
+            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Logout</a></li>
           </ul>
         </div>
       </div>
-      <div *ngIf="!appService.isLoggedIn$.getValue()"  className="d-flex">
-        <a href="http://sso.veryown.com:3001/secure/admin/signin" className="me-2">
-          <button className="btn btn-light">Sign In</button>
-        </a>
-      </div>
     </div>
-  </nav>
-  
+    
+
+    <div *ngIf="!appService.isLoggedIn$.getValue()" class="hidden lg:flex">
+      <a href="http://sso.veryown.com:3001/secure/admin/signin" class="inline-flex items-center px-4 py-2 text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600"> <!-- Custom color for Sign In button -->
+        Sign In
+      </a>
+    </div>
+  </div>
+</nav>

@@ -40,11 +40,10 @@
 						],
 						"styles": [
 							"src/styles.scss",
-							"node_modules/bootstrap/scss/bootstrap.scss",
+							"src/tailwind.css",
 							"node_modules/@ng-select/ng-select/scss/default.theme.scss"
 						],
 						"scripts": [
-							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 						],
 						"main": "src/main.ts",
 						"extraWebpackConfig": "webpack.config.js",
