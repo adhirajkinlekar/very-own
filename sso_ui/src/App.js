@@ -5,24 +5,28 @@ import SignUpForm from './components/auth/sign_up.component';
 import { useEffect } from 'react';
 
 const SignInPage = () => {
-  const { publicId_service } = useParams();  
+  const { publicId_service } = useParams();
 
-  const publicId = publicId_service ? publicId_service.split('_')[0] : null;
-  const service = publicId_service ? publicId_service.split('_')[1] : null;
+  const publicId = publicId_service != "admin" ? publicId_service.split('_')[0] : null;
+  const service = publicId_service != "admin" ? publicId_service.split('_')[1] : null;
   const [serviceDetails, setServiceDetails] = useState(null)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/auth/service/${publicId}`) // Replace with your API URL
-    .then((response) => {
-   
-      return response.json();
-    })
-    .then((serviceDetails) => { 
-      setServiceDetails(serviceDetails) 
-    })
-    .catch((error) => {
+    if (publicId_service != "admin") {
+      fetch(`http://localhost:5000/api/auth/service/${publicId}`) // Replace with your API URL
+        .then((response) => {
 
-    })}, [publicId, service]);
+          return response.json();
+        })
+        .then((serviceDetails) => {
+          setServiceDetails(serviceDetails)
+        })
+        .catch((error) => {
+
+        })
+    }
+
+  }, [publicId, service]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -46,15 +50,32 @@ const SignInPage = () => {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
- 
+      if (response.ok) {
 
-      setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
+        const result = await response.json();
 
-   //   navigate(`http://${publicId}.${service}.veryown.com:3000/`);
+        localStorage.setItem('JWT_TOKEN', result.token);
 
-      window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
-      
+        setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
+
+        //   navigate(`http://${publicId}.${service}.veryown.com:3000/`);
+
+        if(publicId_service == "admin") {
+          window.location.href = `http://admin.veryown.com:4200/`;
+
+        }
+        else{
+          window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
+
+        }
+      }
+
+      else {
+        console.log("an erro occured");
+
+      }
+
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -66,9 +87,9 @@ const SignInPage = () => {
     const expires = `expires=${d.toUTCString()}`;
     document.cookie = `${name}=${value};${expires};path=/;domain=.veryown.com`; // Note the leading dot in domain
   };
- 
+
   return (
-    <SignInForm serviceDetails={serviceDetails}  handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
+    <SignInForm isAdmin={publicId_service == "admin"} serviceDetails={serviceDetails} handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
   );
 };
 

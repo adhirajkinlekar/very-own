@@ -18,7 +18,7 @@ const createUser = async ( username, email, password ) => {
     return res.status(400).json({ msg: 'User already exists' });
   }
 
- user = new User({ username, email, password });
+  user = new User({ username, email, password });
 
   const salt = await bcrypt.genSalt(10);
 
@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
       },
     };
 
-    jwtSign(payload, username);
+    jwtSign(res, payload, username);
 
   } catch (err) {
      
@@ -71,7 +71,7 @@ router.post('/register-creator', async (req, res) => {
       },
     };
 
-    jwtSign(payload, username);
+    jwtSign(res, payload, username);
 
   } catch (err) {
      
@@ -83,10 +83,12 @@ router.post('/register-creator', async (req, res) => {
 // @desc    Authenticate user & get token
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-
+console.log({body: req.body})
   try {
     
     let user = await User.findOne({ email });
+
+    console.log({user})
 
     if (!user) {
       return res.status(400).json({ msg: 'Invalid Credentials' });
@@ -103,8 +105,8 @@ router.post('/login', async (req, res) => {
         id: user.id,
       },
     };
-
-    jwtSign(payload, user.username);
+ 
+    jwtSign(res, payload, user.username);
  
   } catch (err) {
     console.error(err.message);
@@ -113,14 +115,18 @@ router.post('/login', async (req, res) => {
 });
 
 
-const jwtSign = (payload, username) => {
+const jwtSign = (res, payload, username) => {
   jwt.sign(
     payload,
     process.env.JWT_SECRET,
     { expiresIn: '1h' },
     (err, token) => {
-      if (err) throw err;
-      res.json({ token, username });
+      if (err) {
+
+        throw err;
+      }
+
+      return res.status(200).send({ token, username });
     }
   );
 }
@@ -129,10 +135,11 @@ const jwtSign = (payload, username) => {
 router.get('/service/:servicePublicId', async (req, res) => {
  
   try {
-
+ 
     const { servicePublicId } = req.params;
 
     const ServiceDetails = await ServiceSSODetail.findOne({servicePublicId});
+
     console.log({ServiceDetails: ServiceDetails})
 
     if (!ServiceDetails) {

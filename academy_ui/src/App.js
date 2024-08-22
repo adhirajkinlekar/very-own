@@ -34,7 +34,7 @@ const App = () => {
       });
   },[publicId]);
 
-  const [isAuthenticated, setAuthStatus] = useState(getCookie('isAuthenticated') === 'true');
+  const [isAuthenticated, setAuthStatus] = useState(localStorage.getItem('JWT_TOKEN'));
 
   const handleSignOut = () => {
 

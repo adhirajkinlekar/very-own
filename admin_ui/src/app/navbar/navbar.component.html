@@ -1,20 +1,33 @@
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 10px;">
-    <div class="col-12 p-3" style="display: flex; justify-content: space-between;">
-        <div class="col-12" style="display: flex;  justify-content: space-between;">
-            <div >
-                <a  [routerLink]="['/']"><img class="navbar-brand" src="assets/veryown-admin.png" ></a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="assets/veryown-admin.png" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div *ngIf="appService.isLoggedIn$.getValue()" class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="assets/dummy_profile.jpeg" alt="User" class="rounded-circle" width="40" height="40">
+            <span class="p-1">Username</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" [routerLink]="['/profile']">Visit Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" >Logout</a></li>
+          </ul>
         </div>
-        <!-- <div class="col-2" style="display: flex; align-items: center;justify-content: center;"> 
-
-            <ng-select [clearable]="false" [items]="appService.options" bindLabel="name" bindValue="id"
-                [(ngModel)]="appService.selectedOption" (change)="onChange($event)" placeholder="Select a service">
-            </ng-select>
-        </div> -->
+      </div>
+      <div *ngIf="!appService.isLoggedIn$.getValue()"  className="d-flex">
+        <a href="http://sso.veryown.com:3001/secure/admin/signin" className="me-2">
+          <button className="btn btn-light">Sign In</button>
+        </a>
+      </div>
     </div>
-</nav>
+  </nav>
+  
