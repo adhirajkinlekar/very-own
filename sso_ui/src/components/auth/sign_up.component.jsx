@@ -1,17 +1,16 @@
 // SignUpForm.jsx
 import React from 'react';
-import logo from '../../assets/academy_logo.jpg';
-
+ 
 const SignUpForm = ({ handleSubmit, handleChange, formData }) => (
   <div className="d-flex justify-content-center align-items-center vh-100">
     <div className="col-12 col-md-6 col-lg-4 p-4 shadow rounded">
       <div className="d-flex justify-content-center mb-4">
-        <img
+        {/* <img
           src={logo}
           alt="Header Image"
           className="img-fluid"
           style={{ borderRadius: '10px' }}
-        />
+        /> */}
       </div>
       <h2 className="text-center mb-4">Sign Up</h2>
 

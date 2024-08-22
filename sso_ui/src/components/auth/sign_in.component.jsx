@@ -3,13 +3,14 @@ import logo from './../../assets/veryown-admin.png'
 const SignInForm = ({isAdmin, serviceDetails, handleSubmit, handleChange, formData }) => (
   <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-indigo-600">
   <div className="w-full max-w-md p-8 bg-white shadow-xl rounded-lg transform transition-all hover:scale-105 duration-300">
-    <div className="flex justify-center mb-6">
-      <img
-        src={isAdmin ? logo : serviceDetails?.serviceImageURL}
-        alt="Header Image"
-        className="w-32 h-32 object-cover rounded-full shadow-md"
-      />
-    </div>
+  <div className="flex justify-center mb-6">
+  <img
+    src={isAdmin ? logo : serviceDetails?.serviceImageURL}
+    alt="Header Image"
+    className="w-32 h-32 object-cover rounded-full shadow-lg border-4 border-gray-200"
+  />
+</div>
+
     <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign In</h2>
 
     <form onSubmit={handleSubmit} className="space-y-6">
