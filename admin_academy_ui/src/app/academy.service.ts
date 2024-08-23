@@ -10,6 +10,10 @@ export class AcademyService {
 
   constructor(private http: HttpClient) { }
 
+  getDashboard(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/academy/dashboard`);
+  }
+
   getAcademy(id:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/academy/${id}`);
   }

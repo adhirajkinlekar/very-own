@@ -4,7 +4,7 @@
     <!-- Card 1: Services Enrolled -->
     <div class="bg-blue-100 text-blue-900 p-6 rounded-lg shadow-md">
       <h5 class="text-2xl font-semibold mb-2">Services Enrolled</h5>
-      <p class="text-5xl font-bold">{{ enrolledServices }}</p>
+      <p class="text-5xl font-bold">{{ enrolledServices.length }}</p>
     </div>
 
     <!-- Card 2: Total Revenue -->
@@ -24,4 +24,36 @@
     </div>
 
   </div>
+
+  <div class="bg-gray-50 shadow-lg rounded-lg p-6 max-w-3xl mx-auto mt-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2 border-gray-200">Enrolled Services</h2>
+  
+    <div *ngIf="enrolledServices.length > 0; else noServices">
+      <ul class="divide-y divide-gray-200">
+        <li *ngFor="let service of enrolledServices" class="flex justify-between items-center py-4 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-lg font-semibold">
+              {{ service.name.charAt(0) }}
+            </div>
+            <span class="text-lg font-medium text-gray-800">{{ service.name }}</span>
+          </div>
+          <a
+            href="http://academy.admin.veryown.com:4200/dashboard"
+            (click)="visitService(service)"
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          >
+            Visit
+          </a>
+        </li>
+      </ul>
+    </div>
+  
+    <ng-template #noServices>
+      <div class="text-gray-600 text-center mt-6">
+        <p class="text-lg">You are not enrolled in any services at the moment.</p>
+      </div>
+    </ng-template>
+  </div>
+  
+  
 </div>

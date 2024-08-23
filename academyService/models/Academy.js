@@ -9,9 +9,25 @@ const academySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    instructorTitle: {
+        type: String,
+        required: true,
+    },
+    headline :{
+        type: String,
+        required: true,
+    },
     imageUrl: {
         type: String,
         default: null,
+    },
+    publicId: {
+        type: String,
+        required: true,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 });
 
