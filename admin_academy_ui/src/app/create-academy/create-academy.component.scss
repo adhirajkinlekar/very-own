@@ -1,12 +1,96 @@
+/* Container Styles */
 .container {
-    max-width: 600px;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 15px;
   }
   
-  input.form-control, textarea.form-control {
+  /* Header Styles */
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .subheading {
+    font-size: 1.25rem;
+    color: #6c757d;
+  }
+  
+  .divider {
+    border: 0;
+    border-top: 1px solid #e9ecef;
+    margin: 1.5rem 0;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+  }
+  
+  .error-message {
+    color: #dc3545;
+  }
+  
+  .success-message {
+    color: #28a745;
+  }
+  
+  .image-preview {
+    text-align: center;
+  }
+  
+  .image-thumbnail {
+    border: 1px solid #dee2e6;
     border-radius: 0.25rem;
   }
   
-  .btn-primary {
+  .btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-submit:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* Margin Utilities */
+  .mt-5 {
+    margin-top: 3rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mt-1 {
+    margin-top: 0.25rem;
   }
   

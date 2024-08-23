@@ -1,72 +1,55 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="dashboard-container">
+ 
+
+  <div class="dashboard-cards">
     <!-- Profits Card -->
-    <div class="col-md-4 mb-4">
-      <div class="dashboard-card bg-primary">
-        <div class="card-icon">
-          <i class="fas fa-dollar-sign"></i>
-        </div>
+    <div class="card card-primary">
+      <div class="card-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="card-content">
         <div class="card-number">${{ 0 | number:'1.0-2' }}</div>
-        <div>Total Profits</div>
+        <div class="card-label">Total Profits</div>
       </div>
     </div>
 
     <!-- Customers Card -->
-    <div class="col-md-4 mb-4">
-      <div class="dashboard-card bg-success">
-        <div class="card-icon">
-          <i class="fas fa-users"></i>
-        </div>
+    <div class="card card-success">
+      <div class="card-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="card-content">
         <div class="card-number">0</div>
-        <div>Total Customers</div>
+        <div class="card-label">Total Customers</div>
       </div>
     </div>
 
     <!-- Courses Card -->
-    <div class="col-md-4 mb-4">
-      <div class="dashboard-card bg-info">
-        <div class="card-icon">
-          <i class="fas fa-book"></i>
-        </div>
+    <div class="card card-info">
+      <div class="card-icon">
+        <i class="fas fa-book"></i>
+      </div>
+      <div class="card-content">
         <div class="card-number">0</div>
-        <div>Total Courses</div>
+        <div class="card-label">Total Courses</div>
       </div>
     </div>
   </div>
 
-  <!-- Chart Example -->
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <div class="chart-container">
-        <!-- Here you can include a chart library like Chart.js or ng2-charts -->
-        <div class="text-center text-muted-custom">
-          <p>Your graphs will be displayed here for analytics</p>
-          <!-- <canvas id="profitsChart"></canvas> -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Academies List -->
-  <div class="row mt-4">
-    <div class="col-md-4 mb-4" *ngFor="let academy of academies">
-      <div class="academy-card">
-        <img src="{{ academy.imageUrl }}" class="card-img-top" alt="{{ academy.name }}" />
-        <div class="academy-card-body">
-          <h5 class="academy-card-title">{{ academy.name }}</h5>
-          <p class="text-muted-custom">{{ academy.description }}</p>
-          <button (click)="handleClick(academy.id)" class="btn btn-custom btn-primary">View</button>
-        </div>
+  <div class="academy-list">
+    <div class="academy-card" *ngFor="let academy of academies">
+      <img src="{{ academy.imageUrl }}" alt="{{ academy.name }}" class="academy-image"/>
+      <div class="academy-details">
+        <h3 class="academy-title">{{ academy.name }}</h3>
+        <p class="academy-description">{{ academy.description }}</p>
+        <button (click)="handleClick(academy.id)" class="btn btn-view">View</button>
       </div>
     </div>
 
-    <div class="col-md-4 mb-4">
-      <div class="academy-card d-flex flex-column justify-content-center align-items-center h-100">
-        <div class="academy-card-body text-center">
-          <button (click)="CreateAcademy()" class="btn btn-primary btn-lg btn-custom">Create Academy</button>
-        </div>
+    <div class="academy-card create-academy">
+      <div class="create-academy-content">
+        <button (click)="CreateAcademy()" class="btn btn-create">Create Academy</button>
       </div>
     </div>
-    
   </div>
 </div>

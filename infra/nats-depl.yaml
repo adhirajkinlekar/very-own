@@ -1,4 +1,6 @@
-NATS Streaming stores all events in memory (by default), in flat files or in MySQL/PostgresDB
+# NATS Streaming stores all events in memory (by default), in flat files or in MySQL/PostgresDB
+# Port forwarding is a way to expose a specific port on a pod to your local machine, allowing you to access the service running inside the pod without exposing it externally or creating a service or ingress resource. This can be useful for debugging, development, or accessing internal services directly from your local environment.
+# kubectl port-forward pod/my-pod-name 9090:8080
 
 apiVersion: apps/v1
 kind: Deployment

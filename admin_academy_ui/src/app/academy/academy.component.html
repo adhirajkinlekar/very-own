@@ -1,35 +1,26 @@
 <div class="container mt-4">
-  <div class="container-fluid  py-4">
-    <div class="container card">
-      <h1 class="display-4 text-center p-3">{{academyName}}</h1>
+  <div class="card-container">
+    <div class="card-header">
+      <h1 class="title">{{academyName}}</h1>
     </div>
   </div>
-  <div class="d-flex justify-content-end p-2">
-    <button (click)="handleClick()" type="button" class="btn academy_color_secondary text-right">create new
-      course</button>
 
+  <div class="button-container">
+    <button (click)="handleClick()" type="button" class="btn-create-course">Create New Course</button>
   </div>
 
-  <div class="container mt-3">
-    
-    <div class="row">
-      <div class="col-12">
-        <div class="row">
-          <div class="col-md-4" *ngFor="let course of courses">
-            <div class="card mb-4">
-              <img [src]="course.imageUrl" class="card-img-top" alt="Course image">
-              <div class="card-body text-center">
-                <h5 class="card-title">{{ course.courseName }}</h5>
-                <p class="card-text">{{ truncateText(course.headline, 50) }}</p>
-                <a href="#" class="btn btn-success">View course</a>
-              </div>
-            </div>
+  <div class="course-container mt-3">
+    <div class="course-grid">
+      <div class="course-item" *ngFor="let course of courses">
+        <div class="course-card">
+          <img [src]="course.imageUrl" class="course-img" alt="Course image">
+          <div class="course-body text-center">
+            <h5 class="course-title">{{ course.courseName }}</h5>
+            <p class="course-text">{{ truncateText(course.headline, 50) }}</p>
+            <a href="#" class="btn-view-course">View Course</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </div>

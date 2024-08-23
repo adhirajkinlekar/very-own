@@ -13,13 +13,13 @@ export class DashboardComponent {
       name: 'Tech Academy',
       description: 'Learn cutting-edge skills in technology today.',
       id: "66c1a81a10ce243407a495ea",
-      imageUrl: 'https://cdn.dribbble.com/users/8065509/screenshots/16031359/artboard_3_4x.png'
+      imageUrl: 'https://i1.rgstatic.net/ii/profile.image/302688879742978-1449178060484_Q512/Stephen-Grider.jpg'
     },
     {
       name: 'Business Academy',
       description: 'Master business administration and management.',
       id: "66c1e4c2ea0b556b4c828aa3",
-      imageUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*W1Uso3Kb8sTxVuUEn82JRA.jpeg'
+      imageUrl: 'https://avatars.githubusercontent.com/u/5003903?v=4'
     } 
   ];
   constructor(){

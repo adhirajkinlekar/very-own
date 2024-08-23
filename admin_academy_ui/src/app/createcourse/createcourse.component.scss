@@ -1,9 +1,134 @@
-.academy_color_secondary{
-  color: white;
-  background:rgb(86, 171, 255);
+ /* Container */
+.create-course-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 800px;
 }
 
-.academy_color_other{
-  color: white;
-  background:indianred;
+/* Title */
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Sections Title */
+.sections-title {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+/* Section Card */
+.section-card {
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.section-header {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn-remove-section,
+.btn-add-section,
+.btn-add-lecture,
+.btn-submit {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-remove-section {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-remove-section:hover {
+  background-color: #c82333;
+}
+
+.btn-add-section,
+.btn-add-lecture {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-add-section:hover,
+.btn-add-lecture:hover {
+  background-color: #0056b3;
+}
+
+.btn-submit {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background-color: #218838;
+}
+
+/* Lecture Card */
+.lecture-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.lecture-title {
+  margin-bottom: 0.5rem;
+}
+
+.lecture-url {
+  margin-bottom: 0.5rem;
+}
+
+.btn-remove-lecture {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-remove-lecture:hover {
+  background-color: #c82333;
+}
+
+/* Submit Container */
+.submit-container {
+  text-align: center;
+  margin-top: 2rem;
 }
