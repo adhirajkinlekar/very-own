@@ -2,6 +2,7 @@ const express = require('express');
 const Academy = require('../models/Academy');
 const Course = require('../models/Course');
 const mongoose = require('mongoose');
+const client = require('./../nats');
 
 const router = express.Router();
 
@@ -21,6 +22,13 @@ router.post('/', async (req, res) => {
         });
 
         const savedAcademy = await newAcademy.save();
+
+        client.publish('academy.created', JSON.stringify(savedAcademy), (err, guid) => {
+            // if (err) {
+            //   return res.status(500).send('Publish failed: ' + err);
+            // }
+            // res.send('Login event published with guid: ' + guid);
+          });
 
         // create a child document in admin services, admin document  
 
