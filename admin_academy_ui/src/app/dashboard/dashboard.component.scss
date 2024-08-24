@@ -1,175 +1,174 @@
-/* Container */
+/* Dashboard Container Styling */
 .dashboard-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px; 
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.dashboard-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #4a4a4a; /* Darker gray for a softer look */
-}
-
-.dashboard-subtitle {
-  font-size: 1.25rem;
-  color: #7d7d7d; /* Medium gray */
-}
-
-/* Cards */
+/* Dashboard Cards - Horizontal Flexbox Layout */
 .dashboard-cards {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Align cards evenly */
+  gap: 30px;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
 
+/* Dashboard Card Styling */
 .card {
-  background: #f9f9f9; /* Light gray background */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 1;
-  min-width: 250px;
+  background-color: #f8f9fa;
+  border-radius: 16px;
   padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content horizontally */
-}
-
-.card-icon {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.card-content {
-  color: #4a4a4a; /* Darker gray for text */
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #3498DB;
+}
+
+.card-content {
+  text-align: center;
 }
 
 .card-number {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 600;
+  color: #2C3E50;
   margin-bottom: 10px;
 }
 
 .card-label {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  color: #7F8C8D;
 }
 
-/* Card Colors */
+/* Card Color Modifiers */
 .card-primary {
-  background-color: #b3c7e6; /* Light blue */
+  background-color: #E3F2FD;
+  border-bottom: 5px solid #3498DB;
 }
 
 .card-success {
-  background-color: #c3e6c4; /* Light green */
+  background-color: #E8F5E9;
+  border-bottom: 5px solid #2ECC71;
 }
 
 .card-info {
-  background-color: #b3e5e5; /* Light teal */
+  background-color: #E0F7FA;
+  border-bottom: 5px solid #00ACC1;
 }
 
-/* Chart Section */
-.chart-section {
-  margin-top: 30px;
-}
-
-.chart-container {
-  background: #f9f9f9; /* Light gray background */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  min-height: 200px; /* Add minimum height */
-}
-
-.chart-placeholder {
-  color: #7d7d7d; /* Medium gray */
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-/* Academy List */
+/* Academy List - Horizontal Flexbox Layout */
 .academy-list {
-  margin-top: 30px;
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 30px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scroll-behavior: smooth;
 }
 
 .academy-card {
-  background: #f9f9f9; /* Light gray background */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  min-width: 250px;
+  flex: 0 0 300px; /* Fixed width for each academy card */
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  transition: transform 0.4s ease;
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+.academy-card:hover {
+  transform: translateY(-8px);
 }
 
 .academy-image {
   width: 100%;
-  height: 200px; /* Fixed height for consistency */
-  object-fit: cover; /* Ensure image covers the area */
+  height: 200px;
+  object-fit: cover;
 }
 
 .academy-details {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  padding: 20px;
 }
 
 .academy-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0 0 10px;
-  color: #4a4a4a; /* Darker gray */
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #34495E;
+  margin-bottom: 10px;
 }
 
 .academy-description {
-  color: #7d7d7d; /* Medium gray */
-  margin: 0 0 15px;
-  flex: 1;
-}
-
-.btn {
-  background-color: #8a9abf; /* Slightly darker blue-gray */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
   font-size: 1rem;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
+  color: #7F8C8D;
+  margin-bottom: 20px;
 }
 
 .btn-view {
-  background-color: #aab7c4; /* Subtle blue-gray */
+  background-color: #3498DB;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.btn-create {
-  background-color: #c3e6c4; /* Light green */
-  font-size: 1.25rem;
-  padding: 15px 30px;
+.btn-view:hover {
+  background-color: #2980B9;
 }
 
- 
-
+/* Create Academy Card Styling */
 .create-academy {
+  background-color: #E0F7FA;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; /* Add margin to separate from other cards */
+}
+
+.create-academy-content {
+  text-align: center;
+}
+
+.btn-create {
+  background-color: #1ABC9C;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 12px rgba(26, 188, 156, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-create:hover {
+  background-color: #16a085;
+}
+
+/* Optional scrollbar styling for academy list */
+.academy-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.academy-list::-webkit-scrollbar-thumb {
+  background-color: #3498DB;
+  border-radius: 8px;
 }

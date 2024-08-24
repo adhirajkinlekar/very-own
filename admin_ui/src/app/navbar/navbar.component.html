@@ -12,7 +12,7 @@
       </svg>
     </button>
 
-    <div *ngIf="!appService.isLoggedIn$.getValue()" class="hidden lg:flex items-center space-x-4">
+    <div *ngIf="appService.isLoggedIn$.getValue()" class="hidden lg:flex items-center space-x-4">
       <!-- User Dropdown -->
       <div class="relative">
         <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none" id="userDropdown" type="button" (click)="toggleDropdown()">
@@ -33,7 +33,7 @@
     </div>
     
 
-    <div *ngIf="appService.isLoggedIn$.getValue()" class="hidden lg:flex">
+    <div *ngIf="!appService.isLoggedIn$.getValue()" class="hidden lg:flex">
       <a href="http://sso.veryown.com:3001/secure/admin/signin" class="inline-flex items-center px-4 py-2 text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600"> <!-- Custom color for Sign In button -->
         Sign In
       </a>

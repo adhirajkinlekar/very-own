@@ -11,42 +11,34 @@
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <!-- Academy Name -->
     <div class="form-group">
-      <label for="name" class="form-label">Academy Name</label>
-      <input
-        id="name"
-        formControlName="name"
-        class="form-control"
-        placeholder="Enter Academy name"
-      />
-      <div
-        *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched"
-        class="error-message mt-1"
-      >
+      <label for="academyName" class="form-label">Academy Name</label>
+      <input id="academyName" formControlName="academyName" class="form-control" placeholder="Enter Academy name" />
+      <div *ngIf="myForm.get('academyName')?.invalid && myForm.get('academyName')?.touched" class="error-message mt-1">
         Academy name is required.
       </div>
-      <div *ngIf="myForm.get('name')?.value" class="success-message mt-1">
+      <div *ngIf="myForm.get('academyName')?.value" class="success-message mt-1">
         Academy will be accessible at :
-        <strong>{{validateName(myForm.get('name')?.value)}}.academy.veryown.com</strong>
+        <strong>{{validateName(myForm.get('academyName')?.value)}}.academy.veryown.com</strong>
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="headline" class="form-label">Headline</label>
+      <input id="headline" formControlName="headline" class="form-control" placeholder="Enter Academy name" />
+      <div *ngIf="myForm.get('headline')?.invalid && myForm.get('headline')?.touched" class="error-message mt-1">
+        Headline is required.
+      </div>
+    </div>
+ 
     <!-- Description -->
     <div class="form-group mt-4">
       <label for="description" class="form-label">Description</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        class="form-control"
-        rows="3"
-        placeholder="Enter description"
-      ></textarea>
-      <div
-        *ngIf="
+      <textarea id="description" formControlName="description" class="form-control" rows="3"
+        placeholder="Enter description"></textarea>
+      <div *ngIf="
           myForm.get('description')?.invalid &&
           myForm.get('description')?.touched
-        "
-        class="error-message mt-1"
-      >
+        " class="error-message mt-1">
         Description is required.
       </div>
     </div>
@@ -54,25 +46,15 @@
     <!-- User Image Upload -->
     <div class="form-group mt-4">
       <label for="image" class="form-label">Upload Academy Image</label>
-      <input
-        type="file"
-        id="image"
-        (change)="onImageSelected($event)"
-        class="form-control"
-        accept="image/*"
-      />
+      <input type="file" id="image" (change)="onImageSelected($event)" class="form-control" accept="image/*" />
       <div *ngIf="imagePreview" class="image-preview mt-3">
         <p>Preview:</p>
-        <img [src]="imagePreview" alt="Image Preview" class="image-thumbnail" width="200"/>
+        <img [src]="imagePreview" alt="Image Preview" class="image-thumbnail" width="200" />
       </div>
     </div>
 
     <!-- Submit Button -->
-    <button
-      type="submit"
-      class="btn-submit mt-4"
-      [disabled]="myForm.invalid"
-    >
+    <button type="submit" class="btn-submit mt-4" [disabled]="myForm.invalid">
       Submit
     </button>
   </form>

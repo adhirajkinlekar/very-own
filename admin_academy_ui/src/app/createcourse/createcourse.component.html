@@ -25,14 +25,14 @@
       <button class="btn-remove-section" (click)="removeSection(i)">Remove Section</button>
     </div>
 
-    <input class="form-input section-title" [(ngModel)]="section.title" placeholder="Section Title" required>
+    <input style="margin-top: 20px;" class="form-input section-title" [(ngModel)]="section.title" placeholder="Section Title" required>
 
-    <h5 class="lectures-title">Lectures</h5>
+    <h5  style="margin-top: 20px;" class="lectures-title">Lectures</h5>
 
-    <div *ngFor="let lecture of section.lectures; let j = index" class="lecture-card">
+    <div style="margin-top: 20px;" *ngFor="let lecture of section.lectures; let j = index" class="lecture-card">
       <input class="form-input lecture-title" [(ngModel)]="lecture.title" placeholder="Lecture Title" required>
-      <input type="file" class="form-input lecture-url" [(ngModel)]="lecture.url" placeholder="Lecture URL" required>
-      <button class="btn-remove-lecture" (click)="removeLecture(i, j)">Remove Lecture</button>
+      <input style="margin-top: 20px;" type="file" class="form-input lecture-url" [(ngModel)]="lecture.url" placeholder="Lecture URL" required>
+      <button style="margin-top: 20px;" class="btn-remove-lecture" (click)="removeLecture(i, j)">Remove Lecture</button>
     </div>
 
     <button class="btn-add-lecture" (click)="addLecture(i)">Add Lecture</button>

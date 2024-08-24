@@ -5,6 +5,7 @@ const authRoutes = require('./routes/auth');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const stan = require('node-nats-streaming');
+const ServiceSSODetail = require('./models/ServiceSSO');
 
 dotenv.config();
 
@@ -42,9 +43,24 @@ client.on('connect', () => {
   // Subscribe to the subject
   const subscription = client.subscribe('academy.created');
 
-  subscription.on('message', (msg) => {
-    const data = msg.getData();
-    console.log('Received a message:', JSON.parse(data));
+  // Use async in the message callback
+  subscription.on('message', async (msg) => {
+    try {
+      const data = msg.getData();
+
+      // Parse the received data if necessary
+      const parsedData = JSON.parse(data);
+      console.log({ parsedData });
+
+      // Create a new instance of ServiceSSODetail and save it
+      const newssoDetails = new ServiceSSODetail(parsedData);
+
+      await newssoDetails.save();
+
+      console.log('Received a message and saved to the database:', parsedData);
+    } catch (error) {
+      console.error('Error processing message:', error);
+    }
   });
 });
 

@@ -8,33 +8,49 @@ const router = express.Router();
 
 // Create academy endpoint
 router.post('/', async (req, res) => {
-    const { academyName, description, imageUrl } = req.body;
-
-    if (!academyName || !description) {
-        return res.status(400).json({ error: 'Academy name and description are required' });
-    }
 
     try {
+
+        const { academyName, description, headline, imageUrl, publicId } = req.body;
+
+        if (!academyName || !description || !headline || !imageUrl || !publicId  ) {
+            return res.status(400).json({ error: 'Please fill in all the details' });
+        }
+
         const newAcademy = new Academy({
+            userId: new mongoose.Types.ObjectId('66be1b70102007e90902da0e'),
             academyName,
             description,
-            imageUrl
+            imageUrl,
+            headline,
+            publicId
         });
 
         const savedAcademy = await newAcademy.save();
 
-        client.publish('academy.created', JSON.stringify(savedAcademy), (err, guid) => {
+        client.publish('academy.created', JSON.stringify({serviceImageURL: imageUrl,servicePublicId: publicId,serviceId: savedAcademy._id}), (err, guid) => {
             // if (err) {
             //   return res.status(500).send('Publish failed: ' + err);
             // }
             // res.send('Login event published with guid: ' + guid);
         });
 
-        // create a child document in admin services, admin document  
 
+        // if you need to ensure that the publish action completes successfully before sending the response back to the client, convert client.publish to a Promise
+        // await new Promise((resolve, reject) => {
+        //     client.publish('academy.created', JSON.stringify(savedAcademy), (err, guid) => {
+        //         if (err) {
+        //             return reject(err);
+        //         }
+        //         resolve(guid);
+        //     });
+        // });
+
+ 
         res.status(201).json({ academyId: savedAcademy.id });
 
     } catch (error) {
+        console.log({error})
         res.status(500).json({ error: 'Failed to create academy' });
     }
 });

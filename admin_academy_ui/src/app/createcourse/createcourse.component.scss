@@ -1,134 +1,158 @@
- /* Container */
+/* Create Course Container */
 .create-course-container {
-  margin: 2rem auto;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
   max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
 .title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2C3E50;
   text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  color: #333;
+  margin-bottom: 30px;
 }
 
-/* Form Group */
+/* Form Group Styling */
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.form-group label {
+label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #34495E;
+  margin-bottom: 8px;
 }
 
 .form-input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-/* Sections Title */
-.sections-title {
-  margin-top: 2rem;
-  font-size: 1.25rem;
-  color: #333;
-}
-
-/* Section Card */
-.section-card {
-  border: 1px solid #ddd;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 12px 16px;
   border-radius: 8px;
-  background-color: #fff;
+  border: 1px solid #D1D5DB;
+  font-size: 1rem;
+  color: #2C3E50;
+  background-color: #F8F9FA;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #3498DB;
+  outline: none;
+}
+
+textarea.form-input {
+  resize: none;
+}
+
+/* Sections and Lectures Styling */
+.sections-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2C3E50;
+  margin: 30px 0 20px;
+}
+
+.section-card {
+  padding: 20px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background-color: #F8F9FA;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
 
 .section-header {
-  margin-bottom: 1rem;
-  font-size: 1.125rem;
-  font-weight: bold;
-}
-
-/* Buttons */
-.btn-remove-section,
-.btn-add-section,
-.btn-add-lecture,
-.btn-submit {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #34495E;
+  margin-bottom: 15px;
   text-align: center;
 }
 
-.btn-remove-section {
-  background-color: #dc3545;
-  color: #fff;
+.lecture-card {
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.btn-remove-section:hover {
-  background-color: #c82333;
+/* Buttons Styling */
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  font-weight: 500;
 }
 
-.btn-add-section,
-.btn-add-lecture {
-  background-color: #007bff;
-  color: #fff;
+.btn-remove-section, .btn-remove-lecture {
+  background-color: #E74C3C;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 10px;
 }
 
-.btn-add-section:hover,
-.btn-add-lecture:hover {
-  background-color: #0056b3;
+.btn-remove-section:hover, .btn-remove-lecture:hover {
+  background-color: #C0392B;
+  transform: translateY(-2px);
+}
+
+.btn-add-section, .btn-add-lecture {
+  background-color: #3498DB;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  margin-top: 15px;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-add-section:hover, .btn-add-lecture:hover {
+  background-color: #2980B9;
+  transform: translateY(-3px);
+}
+
+/* Submit Button */
+.submit-container {
+  text-align: center;
+  margin-top: 40px;
 }
 
 .btn-submit {
-  background-color: #28a745;
-  color: #fff;
+  width: 100%;
+  background-color: #1ABC9C;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 12px rgba(26, 188, 156, 0.2);
 }
 
 .btn-submit:hover {
-  background-color: #218838;
+  background-color: #16a085;
+  transform: translateY(-3px);
 }
 
-/* Lecture Card */
-.lecture-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  background-color: #fff;
+.btn-submit:disabled {
+  background-color: #BDC3C7;
+  cursor: not-allowed;
 }
 
-.lecture-title {
-  margin-bottom: 0.5rem;
-}
-
-.lecture-url {
-  margin-bottom: 0.5rem;
-}
-
-.btn-remove-lecture {
-  background-color: #dc3545;
-  color: #fff;
-  padding: 0.25rem 0.5rem;
-}
-
-.btn-remove-lecture:hover {
-  background-color: #c82333;
-}
-
-/* Submit Container */
-.submit-container {
-  text-align: center;
-  margin-top: 2rem;
+/* Optional transitions */
+.form-input, textarea.form-input, button {
+  transition: all 0.3s ease;
 }

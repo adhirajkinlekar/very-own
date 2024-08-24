@@ -13,7 +13,7 @@ export class DashboardComponent {
   ngOnInit(): void {
     // Example data. Replace this with an actual API call to fetch user services
     this.enrolledServices = [
-      { name: 'Auth Service', status: 'Active' }, 
+      { name: 'Academy Service', status: 'Active' }, 
     ];
   }
 

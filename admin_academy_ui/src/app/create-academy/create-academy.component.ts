@@ -18,9 +18,13 @@ export class CreateAcademyComponent {
 
     // Initialize the form group here
     this.myForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
+      academyName: ['', Validators.required],
+      description: ['', Validators.required],
+      imageUrl: [''],
+      headline: ['', Validators.required],
+     // publicId: ['', Validators.required]
     });
+    // instructorTitle should be part of Admin
   }
 
   ngOnInit(): void {
@@ -40,7 +44,14 @@ export class CreateAcademyComponent {
 
   onSubmit(): void {
 
-    this.academyService.createAcademy({academyName: this.myForm.value.name, description: this.myForm.value. description}).subscribe((data)=>{
+    this.academyService.createAcademy(
+      {
+        academyName: this.myForm.value.academyName, 
+        publicId: this.validateName(this.myForm.value.academyName),
+        description: this.myForm.value.description,
+        headline: this.myForm.value.headline,
+        imageUrl: 'this.myForm.value.imageUrl',
+      }).subscribe((data)=>{
 
       const navigateEvent = new CustomEvent('navigate-to-container', {
         detail: { path: `my_services/academy/${data._id}` }

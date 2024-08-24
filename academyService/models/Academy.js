@@ -8,11 +8,7 @@ const academySchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-    },
-    instructorTitle: {
-        type: String,
-        required: true,
-    },
+    }, 
     headline :{
         type: String,
         required: true,

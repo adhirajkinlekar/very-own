@@ -21,6 +21,16 @@
           </div>
         </div>
       </div>
+      <div class="course-item" *ngFor="let course of courses">
+        <div class="course-card">
+          <img [src]="course.imageUrl" class="course-img" alt="Course image">
+          <div class="course-body text-center">
+            <h5 class="course-title">{{ course.courseName }}</h5>
+            <p class="course-text">{{ truncateText(course.headline, 50) }}</p>
+            <a href="#" class="btn-view-course">View Course</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

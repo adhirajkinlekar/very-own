@@ -140,8 +140,6 @@ router.get('/service/:servicePublicId', async (req, res) => {
 
     const ServiceDetails = await ServiceSSODetail.findOne({servicePublicId});
 
-    console.log({ServiceDetails: ServiceDetails})
-
     if (!ServiceDetails) {
       return res.status(400).json({ msg: 'Invalid Service' });
     }
