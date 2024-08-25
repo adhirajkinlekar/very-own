@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4" style="margin-top: 60px;">
   <div class="card-container">
     <div class="card-header">
       <h1 class="title">{{academyName}}</h1>
@@ -11,16 +11,6 @@
 
   <div class="course-container mt-3">
     <div class="course-grid">
-      <div class="course-item" *ngFor="let course of courses">
-        <div class="course-card">
-          <img [src]="course.imageUrl" class="course-img" alt="Course image">
-          <div class="course-body text-center">
-            <h5 class="course-title">{{ course.courseName }}</h5>
-            <p class="course-text">{{ truncateText(course.headline, 50) }}</p>
-            <a href="#" class="btn-view-course">View Course</a>
-          </div>
-        </div>
-      </div>
       <div class="course-item" *ngFor="let course of courses">
         <div class="course-card">
           <img [src]="course.imageUrl" class="course-img" alt="Course image">
