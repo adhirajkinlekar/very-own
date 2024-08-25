@@ -9,11 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AcademyComponent {
   academyId: string | null = null;
-
   profits: number = 0;
   customers: number = 0;
   courses: any =  [];
   academyName: string = '';
+  publicId: string = '';
+  
   constructor(private academyService: AcademyService, private route: ActivatedRoute, private router:Router){
   
     this.route.paramMap.subscribe((params: any) => {
@@ -27,6 +28,7 @@ export class AcademyComponent {
     this.academyService.getAcademy(this.academyId).subscribe((data)=>{
 
       this.academyName = data.academy.academyName;
+      this.publicId = data.academy.publicId;
       this.courses = data.courses;
     },err=>{ 
     })

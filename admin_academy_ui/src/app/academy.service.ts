@@ -25,4 +25,8 @@ export class AcademyService {
   createCourse(formValue :any, academyId: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/api/academy/${academyId}/course`, formValue);
   }
+
+  uploadFile(formData: any){
+    return this.http.post<any>('http://localhost:3004/upload', formData)
+  }
 }

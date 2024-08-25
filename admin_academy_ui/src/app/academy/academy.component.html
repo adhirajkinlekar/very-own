@@ -2,11 +2,11 @@
   <div class="card-container">
     <div class="card-header">
       <h1 class="title">{{academyName}}</h1>
+      <div class="button-wrapper">
+        <button (click)="handleClick()" type="button" class="btn-create-course">Create New Course</button>
+        <a [href]="'http://' + publicId + '.academy.veryown.com:3000/'" class="btn-view-course">Go to public view</a>
+      </div>
     </div>
-  </div>
-
-  <div class="button-container">
-    <button (click)="handleClick()" type="button" class="btn-create-course">Create New Course</button>
   </div>
 
   <div class="course-container mt-3">
@@ -17,7 +17,7 @@
           <div class="course-body text-center">
             <h5 class="course-title">{{ course.courseName }}</h5>
             <p class="course-text">{{ truncateText(course.headline, 50) }}</p>
-            <a href="#" class="btn-view-course">View Course</a>
+            <button [disabled]="true" style="pointer-events: none;" class="btn-view-course">Edit Course</button>
           </div>
         </div>
       </div>

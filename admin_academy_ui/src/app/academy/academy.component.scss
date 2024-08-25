@@ -6,12 +6,14 @@
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  position: relative; /* Ensure the button wrapper can be positioned absolutely within this container */
 }
 
 /* Card Header Styling */
 .card-header {
   text-align: center;
   margin-bottom: 40px;
+  position: relative; /* Ensure the button wrapper can be positioned absolutely within this header */
 }
 
 .title {
@@ -20,12 +22,16 @@
   color: #2C3E50;
 }
 
-/* Button Styling */
-.button-container {
-  text-align: center;
-  margin-bottom: 40px;
+/* Button Wrapper */
+.button-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px; /* Space between buttons */
 }
 
+/* Button Styling */
 .btn-create-course {
   background-color: #1ABC9C;
   color: #ffffff;
@@ -45,6 +51,21 @@
   box-shadow: 0 10px 20px rgba(26, 188, 156, 0.3);
 }
 
+.btn-view-course {
+  display: inline-block;
+  background-color: #3498DB;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-view-course:hover {
+  background-color: #2980B9;
+}
+
 /* Course Container Styling */
 .course-container {
   display: flex;
@@ -60,7 +81,7 @@
 }
 
 .course-card {
-  flex: 0 0 300px; /* Flexbox: Fixed width for each card */
+  flex: 0 0 300px; /* Fixed width for each card */
   background-color: #f8f9fa;
   border-radius: 16px;
   overflow: hidden;
@@ -95,21 +116,6 @@
   font-size: 1rem;
   color: #7F8C8D;
   margin-bottom: 20px;
-}
-
-.btn-view-course {
-  display: inline-block;
-  background-color: #3498DB;
-  color: #ffffff;
-  padding: 12px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.btn-view-course:hover {
-  background-color: #2980B9;
 }
 
 /* Optional scrollbar styling for course grid */

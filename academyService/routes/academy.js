@@ -162,7 +162,7 @@ router.post('/:academyId/course', async (req, res) => {
         const courseDetails = {
             courseName: course.title,
             headline: course.headline,
-            imageUrl: "",
+            imageUrl: course.imageUrl,
             description: course.description,
             sections: course.sections,
             academyId: objectId

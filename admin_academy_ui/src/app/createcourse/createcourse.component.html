@@ -16,6 +16,16 @@
     <textarea id="courseDescription" class="form-input" rows="3" [(ngModel)]="course.description" required></textarea>
   </div>
 
+  <!-- Course Image Upload -->
+  <div class="form-group">
+    <label for="courseImage">Upload Course Image:</label>
+    <input type="file" id="courseImage" (change)="onImageSelected($event)" class="form-input" accept="image/*">
+    <div *ngIf="courseImagePreview" class="image-preview mt-3">
+      <p>Image Preview:</p>
+      <img [src]="courseImagePreview" alt="Course Image Preview" class="image-thumbnail" width="200">
+    </div>
+  </div>
+
   <h3 class="sections-title">Sections</h3>
 
   <div *ngFor="let section of course.sections; let i = index" class="section-card">
@@ -27,11 +37,11 @@
 
     <input style="margin-top: 20px;" class="form-input section-title" [(ngModel)]="section.title" placeholder="Section Title" required>
 
-    <h5  style="margin-top: 20px;" class="lectures-title">Lectures</h5>
+    <h5 style="margin-top: 20px;" class="lectures-title">Lectures</h5>
 
     <div style="margin-top: 20px;" *ngFor="let lecture of section.lectures; let j = index" class="lecture-card">
       <input class="form-input lecture-title" [(ngModel)]="lecture.title" placeholder="Lecture Title" required>
-      <input style="margin-top: 20px;" type="file" class="form-input lecture-url" [(ngModel)]="lecture.url" placeholder="Lecture URL" required>
+      <input style="margin-top: 20px;" type="file" (change)="onFileSelected($event, i, j)" class="form-input lecture-url" placeholder="Lecture URL" required>
       <button style="margin-top: 20px;" class="btn-remove-lecture" (click)="removeLecture(i, j)">Remove Lecture</button>
     </div>
 

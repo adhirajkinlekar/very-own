@@ -4,9 +4,12 @@ const multer = require('multer');
 const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 const { format } = require('util');
+const cors = require('cors');
 
 // Initialize express app
 const app = express();
+app.use(cors());
+
 const PORT = process.env.PORT || 3004;
 
 const keyFile = path.join(__dirname, 'veryown-c553acc3324b.json');
@@ -59,6 +62,26 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
+});
+
+
+// Route to stream media files
+app.get('/stream/:fileName', async (req, res) => {
+  const fileName = req.params.fileName;
+  const bucket = storage.bucket(bucketName);
+  const file = bucket.file(fileName);
+
+  // Stream the file directly to the response
+  file.createReadStream()
+    .on('error', (err) => {
+      console.error('Error streaming file:', err);
+      res.status(500).send('Error streaming file');
+    })
+    .on('response', (response) => {
+      // Set the correct MIME type for video
+      res.set('Content-Type', 'video/mp4');
+    })
+    .pipe(res);
 });
 
 // Error handling middleware

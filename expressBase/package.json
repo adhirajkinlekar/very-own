@@ -1,0 +1,19 @@
+{
+  "name": "express-base",
+  "version": "1.0.0",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "npm run clean && tsc"
+  },
+  "files": [
+    "build/**/*"
+  ],
+  "author": "Adhiraj Kinlekar",
+  "license": "ISC",
+  "devDependencies": {
+    "del-cli": "^5.1.0",
+    "typescript": "^5.5.4"
+  }
+}
