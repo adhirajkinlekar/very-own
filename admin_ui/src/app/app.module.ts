@@ -8,6 +8,8 @@ import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectModule } f
 import { FormsModule } from '@angular/forms';
 import { ServiceTypesComponent } from './service-types/service-types.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NgOptionTemplateDirective,
     NgLabelTemplateDirective
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

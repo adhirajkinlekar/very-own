@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
 import HomePage from './components/home_page/home_page.component';
 import AppContext from './context/app_context';
@@ -7,30 +7,30 @@ import CoursePage from './components/learn/learn.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
+import axiosInstance from './util/axiosInterceptor';
 
 const App = () => {
   const url = window.location.hostname;
   const [publicId] = useState(url.split('.')[0]);
   const [academy, setAcademy] = useState(null);
   const [courses, setCourses] = useState(null);
-
-  console.log({token: getCookie('VERY_OWN_JWT_TOKEN')})
   const [isAuthenticated, setAuthStatus] = useState(!!getCookie('VERY_OWN_JWT_TOKEN'));
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(true); // Added loading state
   const dropdownRef = useRef(null);
- 
+
   useEffect(() => {
     const fetchAcademyData = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/academy/customer/${publicId}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
+        const response = await axiosInstance.get(`http://localhost:5001/api/academy/customer/${publicId}`);
+        const data = response.data;
+
         setAcademy(data.academy);
         setCourses(data.courses);
       } catch (error) {
         console.error('Error fetching academy data:', error);
+      } finally {
+        setLoading(false); // Set loading to false when the request completes
       }
     };
 
@@ -52,14 +52,20 @@ const App = () => {
     deleteCookie('VERY_OWN_JWT_TOKEN');
     setAuthStatus(false);
     if (window.location.pathname !== '/') {
-
-
       window.location.assign('/'); // Redirect to '/'
-
     }
   };
 
-  return ( 
+  if (loading) {
+    // Display a loading spinner or message while data is being fetched
+    return (
+      <div className="text-center mt-10">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return (
     <Router>
       <AppContext.Provider value={{ isAuthenticated, publicId, academyId: academy?._id, academy, courses }}>
         {academy ? (
@@ -87,9 +93,9 @@ const App = () => {
                     </button>
                     {dropdownOpen && (
                       <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                        <li className="py-2 px-4 font-bold text-gray-700">Hello, User</li>
+                        <li className="text-left py-2 px-4 font-bold text-gray-700">Hello, User</li>
                         <li>
-                          <Link to="/profile">
+                          <Link>
                             <button className="block w-full text-left py-2 px-4 hover:bg-gray-100">Profile</button>
                           </Link>
                         </li>
@@ -106,7 +112,7 @@ const App = () => {
                         Sign In
                       </button>
                     </a>
-                    <a href={`http://sso.veryown.com:3001/auth/signup`} className="inline-block">
+                    <a href={`http://sso.veryown.com:3001/secure/${publicId}_academy/signup`} className="inline-block">
                       <button className="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
                         Sign Up
                       </button>
@@ -127,8 +133,8 @@ const App = () => {
         ) : (
           <div className="text-center">Academy could not be found or it no longer exists</div>
         )}
-      </AppContext.Provider> 
-      </Router>
+      </AppContext.Provider>
+    </Router>
   );
 };
 
@@ -139,9 +145,7 @@ function getCookie(name) {
 }
 
 const deleteCookie = (name) => {
-  document.cookie = `${name}=; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
-
-  // document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+  document.cookie = `${name}=; path=/; domain=.veryown.com; samesite=strict`;
 };
 
 export default App;

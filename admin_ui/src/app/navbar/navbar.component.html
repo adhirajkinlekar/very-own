@@ -26,17 +26,17 @@
             <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="http://admin.veryown.com:4200">Admin overview</a></li>
             <li><hr class="border-t border-gray-200"></li>
 
-            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Logout</a></li>
+            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" (click)="logOut()">Logout</a></li>
           </ul>
         </div>
       </div>
     </div>
     
-
+<!-- 
     <div *ngIf="!appService.isLoggedIn$.getValue()" class="hidden lg:flex">
       <a href="http://sso.veryown.com:3001/secure/admin/signin" class="inline-flex items-center px-4 py-2 text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600"> <!-- Custom color for Sign In button -->
-        Sign In
-      </a>
-    </div>
+        <!-- Sign In -->
+      <!-- </a>
+    </div> -->
   </div>
 </nav>

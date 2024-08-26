@@ -28,7 +28,7 @@ const getCurrentUser = (req,res,next) =>{
  }
 
 // Create academy endpoint
-router.post('/', async (req, res) => {
+router.post('/', getCurrentUser, async (req, res) => {
 
     try {
 
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         }
 
         const newAcademy = new Academy({
-            userId: new mongoose.Types.ObjectId('66be1b70102007e90902da0e'),
+            userId: new mongoose.Types.ObjectId(req.currentUser.id),
             academyName,
             description,
             imageUrl,
@@ -156,7 +156,7 @@ router.get('/:academyId/courses/:courseId', async (req, res) => {
 
         if (!course) return res.status(400).json({ error: 'Could not find academy' });
 
-        res.json({ course: {academyId: course[0].academyId, description:course[0].description, imageUrl:course[0].imageUrl} });
+        res.json({ course: {academyId: course[0].academyId,courseName: course[0].courseName, description:course[0].description, imageUrl:course[0].imageUrl} });
 
     } catch (error) {
         console.log({ error })
@@ -185,18 +185,20 @@ router.get('/:academyId/courses/:courseId/learn', getCurrentUser, async (req, re
 });
 
 
-router.post('/:academyId/course', async (req, res) => {
+router.post('/:academyId/course',getCurrentUser, async (req, res) => {
     try {
 
         const course = req.body;
 
         const { academyId } = req.params;
 
-        const objectId = new mongoose.Types.ObjectId(academyId);
+        const academyObjectId = new mongoose.Types.ObjectId(academyId);
 
-        const academy = await Academy.findById(objectId);
+        const academy = await Academy.findById(academyObjectId);
 
         if (!academy) return res.status(400).json({ error: 'Could not find academy' });
+
+        if(academy.userId != req.currentUser.id) return res.status(403).json({ error: 'Forbidden' });
 
         const courseDetails = {
             courseName: course.title,
@@ -204,7 +206,7 @@ router.post('/:academyId/course', async (req, res) => {
             imageUrl: course.imageUrl,
             description: course.description,
             sections: course.sections,
-            academyId: objectId
+            academyId: academyObjectId
         };
 
         const newCourse = new Course(courseDetails)
@@ -214,6 +216,7 @@ router.post('/:academyId/course', async (req, res) => {
         res.status(201).json(savedCourse);
     }
     catch (error) {
+        console.log({error})
         res.status(500).json({ error: 'Failed to Create the course' });
     }
 });

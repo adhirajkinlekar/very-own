@@ -1,4 +1,4 @@
- 
+
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,93 +9,103 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 export class AppService implements OnDestroy {
 
   AppConstants = {
-    route_my_services : "my_services",
+    route_my_services: "my_services",
     service_type_academy: "academy",
     default_option: '0'
   };
 
   options = [
     { id: this.AppConstants.default_option, name: 'All', type: 'default' },
-    { id: '66c1a81a10ce243407a495ea', name: 'Stephen Teaches Tech', type: this.AppConstants.service_type_academy},
- // { id: 2, name: 'my_streaming' }
+    { id: '66c1a81a10ce243407a495ea', name: 'Stephen Teaches Tech', type: this.AppConstants.service_type_academy },
+    // { id: 2, name: 'my_streaming' }
   ];
 
   selectedOption: string = this.AppConstants.default_option;
 
   private authStatusSubscription!: Subscription
   public readonly isLoggedIn$ = new BehaviorSubject<boolean | null>(null); // value of this BehaviorSubject should never be set to null after initial initialization
-  public authStatusText = 'Sign In';
 
   constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {
 
-  this.checkLoggedIn(document.defaultView?.localStorage); 
+    this.checkLoggedIn();
 
-  this.subscribeToAuthStatus();
- }
-
- private checkLoggedIn(localStorage: Storage | undefined): void {
-
-   if (localStorage) {
-
-     const token = localStorage.getItem('JWT_TOKEN');
-
-     if (token) this.toggleloggedInObservable(true);
-
-     else this.toggleloggedInObservable(false);
+    this.subscribeToAuthStatus();
   }
 
-  else this.toggleloggedInObservable(false);
- }
+  private checkLoggedIn(): void {
+
+    const token = this.getCookie('VERY_OWN_JWT_TOKEN')
+
+    console.log({ token })
+
+    if (token) this.toggleloggedInObservable(true);
+
+    else this.toggleloggedInObservable(false);
+
+  }
 
   private subscribeToAuthStatus(): void {
 
-   this.authStatusSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
+    this.authStatusSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
+      if (!isLoggedIn) window.location.href = `http://sso.veryown.com:3001/secure/admin/signin`;
 
-     this.authStatusText = isLoggedIn ? 'Sign Out' : 'Sign In';
-   });
- }
 
- public handleAuthStatus() {
+    });
+  }
 
-   const isLoggedIn = this.isLoggedIn$.getValue();
- 
-   if (isLoggedIn) {
+  public handleAuthStatus() {
 
-     localStorage.removeItem('JWT_TOKEN');
+    const isLoggedIn = this.isLoggedIn$.getValue();
 
-     this.toggleloggedInObservable(false);
-   }
+    if (isLoggedIn) {
 
-   const redirectTo = isLoggedIn ? '/' : '/sign_in';
-   
-   this.router.navigate([redirectTo]);
- }
+      localStorage.removeItem('JWT_TOKEN');
 
- public ngOnDestroy(): void {
+      this.toggleloggedInObservable(false);
+    }
 
-   if (this.authStatusSubscription) this.authStatusSubscription.unsubscribe();
-   
- }
+    const redirectTo = isLoggedIn ? '/' : '/sign_in';
 
- public toggleloggedInObservable(value: boolean){
+    this.router.navigate([redirectTo]);
+  }
 
-   this.isLoggedIn$.next(value)
- }
-  
+  public ngOnDestroy(): void {
+
+    if (this.authStatusSubscription) this.authStatusSubscription.unsubscribe();
+
+  }
+
+  public toggleloggedInObservable(value: boolean) {
+
+    this.isLoggedIn$.next(value)
+  }
+
 
   extractParts(url: string): [string, string] {
     // Split the URL by the '/' character and filter out empty strings and the 'my_services' segment
     const [serviceType = '', serviceId = ''] = url
       .split('/')
       .filter(part => part && part !== this.AppConstants.route_my_services);
-  
+
     // Return the parts as a tuple
     return [serviceType, serviceId];
   }
-  
+
+
+  getCookie(name: string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts?.pop()?.split(';').shift();
+    return null;
+  }
+
+  deleteCookie(name: string) {
+    document.cookie = `${name}=; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
+    this.toggleloggedInObservable(false);
+    // document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+  };
 
 }
 
 
 
- 

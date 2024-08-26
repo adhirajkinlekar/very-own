@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './course_detail.styles.css';
 import AppContext from '../../context/app_context';
-import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../util/axiosInterceptor';
 
 const CourseDetails = () => {
     const navigate = useNavigate();
     const { isAuthenticated, publicId, academyId } = useContext(AppContext);
     const { id } = useParams();
     const [course, setCourse] = useState(null);
+    const [loading, setLoading] = useState(true); // Added loading state
 
     const handleButtonClick = () => {
         if (isAuthenticated) {
@@ -19,23 +20,31 @@ const CourseDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/academy/${academyId}/courses/${id}`) // Replace with your API URL
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(({course}) => { 
-          setCourse(course);
-        })
-        .catch((error) => {
-          console.error('Fetch error:', error); // Added error logging
-        });
-    }, [id]);
+        const fetchCourseData = async () => {
+            try {
+                const response = await axiosInstance.get(`http://localhost:5001/api/academy/${academyId}/courses/${id}`);
+                setCourse(response.data.course);
+            } catch (error) {
+                console.error('Fetch error:', error); // Added error logging
+            } finally {
+                setLoading(false); // Set loading to false when the request completes
+            }
+        };
+
+        fetchCourseData();
+    }, [id, academyId]);
+
+    if (loading) {
+        // Display a loading spinner or message while data is being fetched
+        return (
+            <div className="text-center mt-10">
+                <p>Loading...</p>
+            </div>
+        );
+    }
 
     return (
-        <div className=" mx-auto px-4 py-8">
+        <div className="mx-auto px-4 py-8">
             {course ? (
                 <div className="course-page max-w-7xl mx-auto p-6 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 rounded-lg shadow-lg">
                     <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-8">

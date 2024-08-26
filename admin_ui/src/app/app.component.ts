@@ -11,7 +11,7 @@ import { AppService } from './app.service';
 export class AppComponent {
   title = 'admin_ui'; 
 
-  constructor(private router: Router, private service: AppService) {
+  constructor(private router: Router, public service: AppService) {
 
     // const hostname = window.location.hostname;
     // if (hostname === 'admin.veryown.com') {

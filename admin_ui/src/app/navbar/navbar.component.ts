@@ -27,4 +27,9 @@ export class NavbarComponent {
     if(selected.id == this.appService.AppConstants.default_option) this.router.navigateByUrl('/');
     else this.router.navigateByUrl(`/academy/${selected.id}`);
   }
+
+  logOut(){
+
+  this.appService.deleteCookie('VERY_OWN_JWT_TOKEN');
+ }
 }

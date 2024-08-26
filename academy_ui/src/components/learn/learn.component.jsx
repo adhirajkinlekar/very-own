@@ -2,46 +2,32 @@ import React, { useContext, useEffect, useState } from 'react';
 import './learn.styles.css'; // Custom styles if needed
 import { useParams } from 'react-router-dom';
 import AppContext from '../../context/app_context';
+import axiosInstance from '../../util/axiosInterceptor';
 
 const CoursePage = () => {
   const [lectures, setLectures] = useState([]);
   const [selectedLecture, setSelectedLecture] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
   const { academyId } = useContext(AppContext);
   const { id } = useParams();
 
-  
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
-
   useEffect(() => {
-
-
-    const jwtToken = getCookie('VERY_OWN_JWT_TOKEN');
-    
-    fetch(`http://localhost:5001/api/academy/${academyId}/courses/${id}/learn`,{
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${jwtToken}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(({ course }) => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axiosInstance.get(`http://localhost:5001/api/academy/${academyId}/courses/${id}/learn`);
+        const { course } = response.data;
         setLectures(course.sections);
         if (course.sections.length > 0 && course.sections[0].lectures.length > 0) {
           setSelectedLecture(course.sections[0].lectures[0]);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Fetch error:', error);
-      });
+      } finally {
+        setLoading(false); // Set loading to false when the request completes
+      }
+    };
+
+    fetchLectures();
   }, [academyId, id]);
 
   const selectLecture = (sectionId, itemId) => {
@@ -49,6 +35,15 @@ const CoursePage = () => {
     const item = section.lectures[itemId];
     setSelectedLecture(item);
   };
+
+  if (loading) {
+    // Display a loading spinner or message while data is being fetched
+    return (
+      <div className="flex items-center justify-center min-h-screen text-gray-500">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col md:flex-row w-full min-h-screen bg-gray-50">

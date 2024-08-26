@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
+import GlobalTestAccountPopup from './components/popup.component';
 
 const SignInPage = () => {
-  const { publicId_service } = useParams();
-  const navigate = useNavigate();
+  const { publicId_service } = useParams(); 
 
   // Parse publicId and service only if publicId_service is not "admin"
   const publicId = publicId_service && publicId_service !== "admin" ? publicId_service.split('_')[0] : null;
@@ -75,14 +75,7 @@ const SignInPage = () => {
       console.error('Error:', error);
     }
   };
-
-  const setCookie = (name, value, days) => {
-    const d = new Date();
-    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = `expires=${d.toUTCString()}`;
-    document.cookie = `${name}=${value};${expires};path=/;domain=.veryown.com`; // Ensure the domain is correct
-  };
-
+ 
   return (
     <SignInForm
       isAdmin={publicId_service === "admin"}
@@ -101,6 +94,36 @@ const SignUpPage = () => {
     confirmPassword: '',
   });
 
+  const { publicId_service } = useParams(); 
+
+  // Parse publicId and service only if publicId_service is not "admin"
+  const publicId = publicId_service && publicId_service !== "admin" ? publicId_service.split('_')[0] : null;
+  const service = publicId_service && publicId_service !== "admin" ? publicId_service.split('_')[1] : null;
+
+  const [serviceDetails, setServiceDetails] = useState(null); 
+
+  useEffect(() => {
+    if (publicId_service !== "admin" && publicId) {
+      fetchServiceDetails();
+    }
+  }, [publicId, service]);
+
+  const fetchServiceDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/service/${publicId}`);
+
+      if (response.ok) {
+        const serviceDetails = await response.json();
+        setServiceDetails(serviceDetails);
+      } else {
+        console.error('Failed to fetch service details.');
+      }
+    } catch (error) {
+      console.error('Error fetching service details:', error);
+    }
+  };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -113,6 +136,8 @@ const SignUpPage = () => {
 
   return (
     <SignUpForm
+      isAdmin={publicId_service === "admin"}
+      serviceDetails={serviceDetails}
       handleSubmit={handleSignUpSubmit}
       handleChange={handleChange}
       formData={formData}
@@ -124,9 +149,10 @@ const App = () => {
   return (
     <div>
       <Router>
+        <GlobalTestAccountPopup/>
         <Routes>
           <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
-          <Route path="/secure/signup" element={<SignUpPage />} />
+          <Route path="/secure/:publicId_service/signup" element={<SignUpPage />} />
         </Routes>
       </Router>
     </div>
