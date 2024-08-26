@@ -15,5 +15,8 @@
   "devDependencies": {
     "del-cli": "^5.1.0",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
   }
 }

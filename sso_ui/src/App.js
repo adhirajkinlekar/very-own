@@ -1,37 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
-import { useEffect } from 'react';
 
 const SignInPage = () => {
   const { publicId_service } = useParams();
+  const navigate = useNavigate();
 
-  const publicId = publicId_service != "admin" ? publicId_service.split('_')[0] : null;
-  const service = publicId_service != "admin" ? publicId_service.split('_')[1] : null;
-  const [serviceDetails, setServiceDetails] = useState(null)
+  // Parse publicId and service only if publicId_service is not "admin"
+  const publicId = publicId_service && publicId_service !== "admin" ? publicId_service.split('_')[0] : null;
+  const service = publicId_service && publicId_service !== "admin" ? publicId_service.split('_')[1] : null;
+
+  const [serviceDetails, setServiceDetails] = useState(null);
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
   useEffect(() => {
-    if (publicId_service != "admin") {
-      fetch(`http://localhost:5000/api/auth/service/${publicId}`) // Replace with your API URL
-        .then((response) => {
-
-          return response.json();
-        })
-        .then((serviceDetails) => {
-          setServiceDetails(serviceDetails)
-        })
-        .catch((error) => {
-
-        })
+    if (publicId_service !== "admin" && publicId) {
+      fetchServiceDetails();
     }
-
   }, [publicId, service]);
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const fetchServiceDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/service/${publicId}`);
+
+      if (response.ok) {
+        const serviceDetails = await response.json();
+        setServiceDetails(serviceDetails);
+      } else {
+        console.error('Failed to fetch service details.');
+      }
+    } catch (error) {
+      console.error('Error fetching service details:', error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,38 +45,31 @@ const SignInPage = () => {
 
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'  
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {
-
         const result = await response.json();
 
-        localStorage.setItem('JWT_TOKEN', result.token);
+       // localStorage.setItem('JWT_TOKEN', result.token);
 
-        setCookie('isAuthenticated', 'true', 1); // Set cookie for 1 day
+        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
 
-        //   navigate(`http://${publicId}.${service}.veryown.com:3000/`);
-
-        if(publicId_service == "admin") {
+        if (publicId_service == "admin") {
           window.location.href = `http://admin.veryown.com:4200/`;
-
         }
-        else{
+        
+        else if (publicId && service) {
           window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
 
         }
+      } else {
+        console.error('Login failed');
       }
-
-      else {
-        console.log("an erro occured");
-
-      }
-
 
     } catch (error) {
       console.error('Error:', error);
@@ -85,11 +80,17 @@ const SignInPage = () => {
     const d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = `expires=${d.toUTCString()}`;
-    document.cookie = `${name}=${value};${expires};path=/;domain=.veryown.com`; // Note the leading dot in domain
+    document.cookie = `${name}=${value};${expires};path=/;domain=.veryown.com`; // Ensure the domain is correct
   };
 
   return (
-    <SignInForm isAdmin={publicId_service == "admin"} serviceDetails={serviceDetails} handleSubmit={handleSignInSubmit} handleChange={handleChange} formData={formData} />
+    <SignInForm
+      isAdmin={publicId_service === "admin"}
+      serviceDetails={serviceDetails}
+      handleSubmit={handleSignInSubmit}
+      handleChange={handleChange}
+      formData={formData}
+    />
   );
 };
 
@@ -111,20 +112,24 @@ const SignUpPage = () => {
   };
 
   return (
-    <SignUpForm handleSubmit={handleSignUpSubmit} handleChange={handleChange} formData={formData} />
+    <SignUpForm
+      handleSubmit={handleSignUpSubmit}
+      handleChange={handleChange}
+      formData={formData}
+    />
   );
 };
 
 const App = () => {
   return (
-    <div> 
-        <Router>
-          <Routes>
-            <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
-            <Route path="/secure/signup" element={<SignUpPage />} />
-          </Routes>
-        </Router>
-      </div> 
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
+          <Route path="/secure/signup" element={<SignUpPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

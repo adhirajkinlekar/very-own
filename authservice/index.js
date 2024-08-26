@@ -28,10 +28,6 @@ app.use(express.json({ extended: false }));
 // Define Routes
 app.use('/api/auth', authRoutes);
 
-
-
-
-
 // Connect to NATS Streaming server
 const client = stan.connect('test-cluster', 'subscriber', {
   url: 'nats://localhost:4222',

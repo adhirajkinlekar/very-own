@@ -11,7 +11,7 @@ const CourseDetails = () => {
     const [course, setCourse] = useState(null);
 
     const handleButtonClick = () => {
-        if (!isAuthenticated) {
+        if (isAuthenticated) {
             navigate(`./learn`);
         } else {
             window.location.href = `http://sso.veryown.com:3001/secure/${publicId}_academy/signin`;

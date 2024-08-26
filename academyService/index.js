@@ -1,15 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const academyRoutes = require('./routes/academy');
+const academyRoutes = require('./routes/academy'); 
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 const cors = require('cors');
 
 const app = express();
 
 app.use(cors());
-
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+
+
+// Middleware to parse JSON bodies
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://adhirajkinlekar:CcZiZ8rf9uMtdRBf@cluster-0.wo3qq8n.mongodb.net/academyDB', {
