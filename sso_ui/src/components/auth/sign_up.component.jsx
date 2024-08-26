@@ -108,7 +108,7 @@ const SignUpForm = ({ isAdmin, serviceDetails, handleSubmit, handleChange, formD
           fontSize: '0.875rem', // Slightly smaller text size
           color: '#333' // Darker text color for readability
         }}>
-          * When you sign up for any service, you gain access to all services under veryown.com
+          * When you sign up for any service, you gain access to all services under veryown.com with the same account
         </small>
 
       </div>
