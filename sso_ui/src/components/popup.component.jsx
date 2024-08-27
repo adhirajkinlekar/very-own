@@ -13,7 +13,7 @@ const GlobalTestAccountPopup = () => {
       <div className="bg-white rounded-lg shadow-lg w-80 p-4 mt-6 mr-4 pointer-events-auto">
         <h2 className="text-xl font-semibold mb-2 text-gray-800">Test Account</h2>
         <p className="text-gray-700 mb-3 text-sm">
-        Use the following credentials to access the site:
+        Use the following credentials to access the platform:
                 </p>
         <div className="space-y-2">
           <div className="flex items-center justify-between bg-gray-100 rounded p-1 text-sm">

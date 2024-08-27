@@ -25,6 +25,9 @@ const createUser = async (username, email, password) => {
   user.password = await bcrypt.hash(password, salt);
 
   await user.save();
+  
+  return user;
+
 };
 
 router.post('/register', async (req, res) => {

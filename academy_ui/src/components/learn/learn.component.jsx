@@ -33,6 +33,8 @@ const CoursePage = () => {
   const selectLecture = (sectionId, itemId) => {
     const section = lectures[sectionId];
     const item = section.lectures[itemId];
+
+    console.log({item})
     setSelectedLecture(item);
   };
 
@@ -74,12 +76,7 @@ const CoursePage = () => {
         {selectedLecture ? (
           <>
             {/* <h2 className="text-3xl font-extrabold mb-4 text-gray-900">{selectedLecture?.title}</h2> */}
-            <div className="video-container mb-6 p-4 bg-gray-100 rounded-lg shadow-sm">
-              <video controls autoPlay muted className="w-full rounded-lg">
-                <source src={`http://localhost:3004/stream/${selectedLecture?.url}`} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+           <VideoPlayer selectedLecture={selectedLecture}/>
           </>
         ) : (
           <div className="flex items-center justify-center h-full text-gray-500">
@@ -90,5 +87,22 @@ const CoursePage = () => {
     </div>
   );
 };
+
+function VideoPlayer({ selectedLecture }) {
+  return (
+    <div className="video-container mb-6 p-4 bg-gray-100 rounded-lg shadow-sm">
+      <video
+        controls
+        autoPlay
+        muted
+        className="w-full rounded-lg"
+        key={selectedLecture?.url} // Use the URL as the key to force re-render
+      >
+        <source src={`http://localhost:3004/stream/${selectedLecture?.url.split('/').pop()}`} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  );
+}
 
 export default CoursePage;

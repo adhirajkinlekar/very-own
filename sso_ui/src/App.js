@@ -92,6 +92,7 @@ const SignUpPage = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    username:''
   });
 
   const { publicId_service } = useParams(); 
@@ -129,9 +130,43 @@ const SignUpPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     console.log('Sign-Up Form Data:', formData);
+
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'  
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+
+       // localStorage.setItem('JWT_TOKEN', result.token);
+
+        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
+
+        if (publicId_service == "admin") {
+          window.location.href = `http://admin.veryown.com:4200/`;
+        }
+        
+        else if (publicId && service) {
+          window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
+
+        }
+      } else {
+        console.error('Login failed');
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (

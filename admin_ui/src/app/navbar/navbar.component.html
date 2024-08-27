@@ -19,10 +19,8 @@
           <i class="fas fa-user-circle text-gray-500 text-3xl"></i> <!-- Updated icon to fa-user-circle -->
           <span class="hidden md:inline">Adhirajk</span>
         </button>
-        <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div style="z-index: 100;" *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <ul class="py-1">
-            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Visit Profile</a></li>
-            <li><hr class="border-t border-gray-200"></li>
             <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="http://admin.veryown.com:4200">Admin overview</a></li>
             <li><hr class="border-t border-gray-200"></li>
 

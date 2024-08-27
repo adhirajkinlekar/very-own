@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import logo from './../../assets/veryown-admin.png';
 
 const SignInForm = ({ isAdmin, serviceDetails, handleSubmit, handleChange, formData }) => {
