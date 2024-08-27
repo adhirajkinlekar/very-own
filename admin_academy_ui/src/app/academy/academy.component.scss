@@ -1,38 +1,40 @@
 /* Container Styling */
 .container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  position: relative; /* Ensure the button wrapper can be positioned absolutely within this container */
+  position: relative;
 }
 
 /* Card Header Styling */
 .card-header {
   text-align: center;
   margin-bottom: 40px;
-  position: relative; /* Ensure the button wrapper can be positioned absolutely within this header */
+  position: relative;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 600;
   color: #2C3E50;
+  margin-bottom: 20px;
 }
 
 /* Button Wrapper */
 .button-wrapper {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   display: flex;
-  gap: 10px; /* Space between buttons */
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 /* Button Styling */
-.btn-create-course {
+.btn-create-course,
+.btn-view-course,
+.btn-edit-course {
   background-color: #1ABC9C;
   color: #ffffff;
   border: none;
@@ -45,43 +47,41 @@
   box-shadow: 0 6px 12px rgba(26, 188, 156, 0.2);
 }
 
-.btn-create-course:hover {
+.btn-create-course:hover,
+.btn-view-course:hover,
+.btn-edit-course:hover {
   background-color: #16a085;
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(26, 188, 156, 0.3);
 }
 
-.btn-view-course {
-  display: inline-block;
-  background-color: #3498DB;
-  color: #ffffff;
-  padding: 12px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.3s ease-in-out;
+.btn-edit-course {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
-.btn-view-course:hover {
-  background-color: #2980B9;
-}
 
 /* Course Container Styling */
 .course-container {
   display: flex;
-  justify-content: center;
-}
-
-.course-grid {
-  display: flex;
-  gap: 30px;
+  justify-content: center; /* Center the card grid */
   overflow-x: auto;
   padding: 20px 0;
-  scroll-behavior: smooth;
 }
 
+/* Course Grid as Flexbox */
+.course-grid {
+  display: flex;
+  justify-content: center; /* Center the cards horizontally */
+  gap: 30px;
+  flex-wrap: nowrap;
+  padding: 20px 0;
+}
+
+/* Course Card Styling */
 .course-card {
-  flex: 0 0 300px; /* Fixed width for each card */
+  flex: 0 0 auto; /* Prevents cards from stretching */
+  width: 300px; /* Fixed width for each card */
   background-color: #f8f9fa;
   border-radius: 16px;
   overflow: hidden;
@@ -93,6 +93,20 @@
   transform: translateY(-8px);
 }
 
+/* Optional scrollbar styling */
+.course-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.course-container::-webkit-scrollbar-thumb {
+  background-color: #1ABC9C;
+  border-radius: 8px;
+}
+
+
+
+
+ 
 .course-img {
   width: 100%;
   height: 200px;
@@ -118,12 +132,20 @@
   margin-bottom: 20px;
 }
 
-/* Optional scrollbar styling for course grid */
-.course-grid::-webkit-scrollbar {
-  height: 8px;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
 
-.course-grid::-webkit-scrollbar-thumb {
-  background-color: #1ABC9C;
-  border-radius: 8px;
+  .button-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .btn-create-course,
+  .btn-view-course {
+    width: 100%;
+  }
 }

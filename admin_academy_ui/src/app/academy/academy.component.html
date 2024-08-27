@@ -1,10 +1,10 @@
-<div class="container mt-4" style="margin-top: 60px;">
+<div class="container">
   <div class="card-container">
     <div class="card-header">
       <h1 class="title">{{academyName}}</h1>
       <div class="button-wrapper">
         <button (click)="handleClick()" type="button" class="btn-create-course">Create New Course</button>
-        <a [href]="'http://' + publicId + '.academy.veryown.com:3000/'" class="btn-view-course">Go to public view</a>
+        <a [href]="'http://' + publicId + '.academy.veryown.com:3000/'" class="btn-view-course">Go to Public View</a>
       </div>
     </div>
   </div>
@@ -14,10 +14,10 @@
       <div class="course-item" *ngFor="let course of courses">
         <div class="course-card">
           <img [src]="course.imageUrl" class="course-img" alt="Course image">
-          <div class="course-body text-center">
+          <div class="course-body">
             <h5 class="course-title">{{ course.courseName }}</h5>
-            <p class="course-text">{{ truncateText(course.headline, 50) }}</p>
-            <button [disabled]="true" style="pointer-events: none;" class="btn-view-course">Edit Course</button>
+            <p class="course-text">{{ truncateText(course.headline, 35) }}</p>
+            <button disabled class="btn-edit-course">Edit Course</button>
           </div>
         </div>
       </div>

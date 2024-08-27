@@ -1,54 +1,74 @@
-<div class="dashboard-container" style="margin-top: 60px;">
- 
-
-  <div class="dashboard-cards">
-    <!-- Profits Card -->
-    <div class="card card-primary">
-      <div class="card-icon">
-        <i class="fas fa fa-eye"></i>
-      </div>
-      <div class="card-content">
-        <div class="card-number">{{ 0 }}</div>
-        <div class="card-label">Total Visitors</div>
-      </div>
-    </div>
-
-    <!-- Customers Card -->
-    <div class="card card-success">
-      <div class="card-icon">
-        <i class="fas fa-users"></i>
-      </div>
-      <div class="card-content">
-        <div class="card-number">0</div>
-        <div class="card-label">Total Customers</div>
-      </div>
-    </div>
-
-    <!-- Courses Card -->
-    <div class="card card-info">
-      <div class="card-icon">
-        <i class="fas fa-book"></i>
-      </div>
-      <div class="card-content">
-        <div class="card-number">{{courseCount}}</div>
-        <div class="card-label">Total Courses</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="academy-list">
-    <div class="academy-card create-academy">
-      <div class="create-academy-content">
-        <button (click)="CreateAcademy()" class="btn btn-create">Create Academy</button>
-      </div>
-    </div>
-    <div class="academy-card" *ngFor="let academy of academies">
-      <img src="{{ academy?.imageUrl }}" alt="{{ academy?.name }}" class="academy-image"/>
-      <div class="academy-details">
-        <h3 class="academy-title">{{ academy?.academyName }}</h3>
-        <p class="academy-description">{{ academy?.headline }}</p>
-        <button (click)="handleClick(academy?._id)" class="btn btn-view">View Academy</button>
-      </div>
-    </div>
+<div *ngIf="loading; else loadedContent" class="loading-container">
+  <div class="loading-content">
+    <i class="fas fa-spinner fa-spin loading-icon"></i>
+    <p class="loading-text">Loading your academies...</p>
   </div>
 </div>
+
+<ng-template #loadedContent>
+
+  <div class="dashboard-container" style="margin-top: 60px;" *ngIf="academies.length">
+
+
+    <div class="dashboard-cards">
+      <!-- Profits Card -->
+      <div class="card card-primary">
+        <div class="card-icon">
+          <i class="fas fa fa-eye"></i>
+        </div>
+        <div class="card-content">
+          <div class="card-number">{{ 0 }}</div>
+          <div class="card-label">Total Visitors</div>
+        </div>
+      </div>
+
+      <!-- Customers Card -->
+      <div class="card card-success">
+        <div class="card-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="card-content">
+          <div class="card-number">0</div>
+          <div class="card-label">Total Customers</div>
+        </div>
+      </div>
+
+      <!-- Courses Card -->
+      <div class="card card-info">
+        <div class="card-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="card-content">
+          <div class="card-number">{{courseCount}}</div>
+          <div class="card-label">Total Courses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="academy-list">
+      <div class="academy-card create-academy">
+        <div class="create-academy-content">
+          <button (click)="CreateAcademy()" class="btn btn-create">Create Academy</button>
+        </div>
+      </div>
+      <div class="academy-card" *ngFor="let academy of academies">
+        <img src="{{ academy?.imageUrl }}" alt="{{ academy?.name }}" class="academy-image" />
+        <div class="academy-details">
+          <h3 class="academy-title">{{ truncateText(academy.academyName, 18) }}</h3>
+          <p class="academy-description">{{ academy?.headline }}</p>
+          <button (click)="handleClick(academy?._id)" class="btn btn-view">View Academy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!academies.length" class="no-academies-container">
+    <div class="no-academies-content">
+      <i class="fas fa-exclamation-circle no-academies-icon"></i>
+      <h2 class="no-academies-title">No Academies Found</h2>
+      <p class="no-academies-text">
+        You are not enrolled in the academy service. Create an academy to get started!
+      </p>
+      <button (click)="CreateAcademy()" class="btn-create">Create Academy</button>
+    </div>
+  </div>
+</ng-template>

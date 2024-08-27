@@ -172,3 +172,95 @@
   background-color: #3498DB;
   border-radius: 8px;
 }
+
+/* No Academies Container Styling */
+.no-academies-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* No Academies Content */
+.no-academies-content {
+  max-width: 500px;
+}
+
+/* Icon Styling */
+.no-academies-icon {
+  font-size: 4rem;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+/* Title Styling */
+.no-academies-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Text Styling */
+.no-academies-text {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+/* Create Academy Button Styling */
+.btn-create {
+  background-color: #1abc9c;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 12px rgba(26, 188, 156, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-create:hover {
+  background-color: #16a085;
+}
+
+/* Loading Container Styling */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Loading Content */
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Spinner Icon Styling */
+.loading-icon {
+  font-size: 3rem;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+/* Loading Text Styling */
+.loading-text {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
