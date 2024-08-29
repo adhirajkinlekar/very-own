@@ -22,7 +22,7 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
 						"outputPath": "dist/admin_academy_ui",
 						"index": "src/index.html",
@@ -43,8 +43,10 @@
 						],
 						"scripts": [],
 						"main": "src/main.ts",
-						"extraWebpackConfig": "webpack.config.js",
-						"commonChunk": false
+						"commonChunk": false,
+						"customWebpackConfig": {
+							"path": "./webpack.config.js"
+						}
 					},
 					"configurations": {
 						"production": {
@@ -61,7 +63,9 @@
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "webpack.prod.config.js"
+							"customWebpackConfig": {
+								"path": "./webpack.prod.config.js"
+							}
 						},
 						"development": {
 							"optimization": false,
@@ -72,11 +76,10 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "ngx-build-plus:dev-server",
+					"builder": "@angular-builders/custom-webpack:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "admin_academy_ui:build:production",
-							"extraWebpackConfig": "webpack.prod.config.js"
+							"buildTarget": "admin_academy_ui:build:production"
 						},
 						"development": {
 							"buildTarget": "admin_academy_ui:build:development"
@@ -85,8 +88,7 @@
 					"defaultConfiguration": "development",
 					"options": {
 						"port": 4201,
-						"publicHost": "http://localhost:4201",
-						"extraWebpackConfig": "webpack.config.js"
+						"publicHost": "http://localhost:4201"
 					}
 				},
 				"extract-i18n": {

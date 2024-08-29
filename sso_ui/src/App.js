@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import SignInForm from './components/auth/sign_in.component';
 import SignUpForm from './components/auth/sign_up.component';
-import GlobalTestAccountPopup from './components/popup.component';
+import GlobalTestAccountPopup from './components/popup.component';  
+import createPopup from './components/notifier.component';
 
 const SignInPage = () => {
   const { publicId_service } = useParams(); 
@@ -87,7 +88,7 @@ const SignInPage = () => {
   );
 };
 
-const SignUpPage = () => {
+const SignUpPage = ({showPopup}) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -161,11 +162,16 @@ const SignUpPage = () => {
 
         }
       } else {
-        console.error('Login failed');
+        console.error('Registration failed');
+
+        showPopup('Registration failed', 3000); 
+
       }
 
     } catch (error) {
       console.error('Error:', error);
+
+
     }
   };
 
@@ -175,19 +181,25 @@ const SignUpPage = () => {
       serviceDetails={serviceDetails}
       handleSubmit={handleSignUpSubmit}
       handleChange={handleChange}
-      formData={formData}
+      formData={formData} 
     />
   );
 };
 
 const App = () => {
+
+  const showPopup = (message, time) => {
+    createPopup(message, time);
+  };
+
   return (
-    <div>
+    <div> 
+
       <Router>
         <GlobalTestAccountPopup/>
         <Routes>
           <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
-          <Route path="/secure/:publicId_service/signup" element={<SignUpPage />} />
+          <Route path="/secure/:publicId_service/signup" element={<SignUpPage showPopup={showPopup} />} />
         </Routes>
       </Router>
     </div>

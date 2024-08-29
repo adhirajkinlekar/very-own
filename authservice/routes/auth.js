@@ -10,7 +10,7 @@ const ServiceSSODetail = require('../models/ServiceSSO');
 
 dotenv.config();
 
-const createUser = async (username, email, password) => {
+const createUser = async (res, username, email, password) => {
 
   let user = await User.findOne({ email });
 
@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
 
     const { username, email, password } = req.body;
 
-    const user = await createUser(username, email, password);
+    const user = await createUser(res, username, email, password);
 
     const payload = {
       id: user.id,
@@ -68,7 +68,7 @@ router.post('/register-creator', async (req, res) => {
 
     const { username, email, password } = req.body;
 
-    const user = await createUser(username, email, password, true);
+    const user = await createUser(res, username, email, password, true);
 
     // create this inside admin service
     const creator = {

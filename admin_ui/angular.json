@@ -22,7 +22,7 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
 						"outputPath": "dist/admin_ui",
 						"index": "src/index.html",
@@ -36,18 +36,19 @@
 								"glob": "**/*",
 								"input": "public",
 								"output": "."
-							} 
+							}
 						],
 						"styles": [
 							"src/styles.scss",
 							"src/tailwind.css",
 							"node_modules/@ng-select/ng-select/scss/default.theme.scss"
 						],
-						"scripts": [
-						],
+						"scripts": [],
 						"main": "src/main.ts",
-						"extraWebpackConfig": "webpack.config.js",
-						"commonChunk": false
+						"commonChunk": false,
+						"customWebpackConfig": {
+							"path": "./webpack.config.js"
+						}
 					},
 					"configurations": {
 						"production": {
@@ -64,7 +65,9 @@
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "webpack.prod.config.js"
+							"customWebpackConfig": {
+								"path": "./webpack.prod.config.js"
+							}
 						},
 						"development": {
 							"optimization": false,
@@ -75,22 +78,20 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "ngx-build-plus:dev-server",
+					"builder": "@angular-builders/custom-webpack:dev-server",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200"
+					},
 					"configurations": {
 						"production": {
-							"buildTarget": "admin_ui:build:production",
-							"extraWebpackConfig": "webpack.prod.config.js"
+							"buildTarget": "admin_ui:build:production"
 						},
 						"development": {
 							"buildTarget": "admin_ui:build:development"
 						}
 					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
-						"extraWebpackConfig": "webpack.config.js"
-					}
+					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n"

@@ -32,6 +32,8 @@ router.post('/', getCurrentUser, async (req, res) => {
 
     try {
 
+        console.log({body: req.body})
+
         const { academyName, description, headline, imageUrl, publicId } = req.body;
 
         if (!academyName || !description || !headline || !imageUrl || !publicId) {

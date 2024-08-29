@@ -98,7 +98,7 @@ function VideoPlayer({ selectedLecture }) {
         className="w-full rounded-lg"
         key={selectedLecture?.url} // Use the URL as the key to force re-render
       >
-        <source src={`http://localhost:3004/stream/${selectedLecture?.url.split('/').pop()}`} type="video/mp4" />
+        <source src={`http://localhost:3004/stream/${selectedLecture?.url?.split('/')?.pop()}`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
