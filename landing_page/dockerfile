@@ -1,0 +1,20 @@
+# Use an official Node runtime as a parent image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package.json ./
+
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port for React development server
+EXPOSE 3002
+
+# Start the React development server
+CMD ["npm", "start"]
+ 
