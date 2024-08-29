@@ -5,7 +5,7 @@ services:
       context: ./academy_ui
       dockerfile: dockerfile.dev 
     environment:
-      - API_BASE_URL=http://academy_service:3003
+      - API_BASE_URL=http://academy_service:5001
       - API_COMMONSERVICE_URL=http://common_service:3004
     restart: always
     volumes:
@@ -57,7 +57,7 @@ services:
       context: ./admin_academy_ui
       dockerfile: dockerfile.dev 
     environment:
-      - API_BASE_URL=http://academy_service:3003
+      - API_BASE_URL=http://academy_service:5001
       - API_COMMONSERVICE_URL=http://common_service:3004
     restart: always
     volumes:
@@ -101,7 +101,7 @@ services:
       - /app/node_modules
       - ./academyService:/app
     ports: 
-      - 3003:3003
+      - 5001:5001
 
   nats-streaming:
     image: nats-streaming:latest
