@@ -80,6 +80,7 @@
 				"serve": {
 					"builder": "@angular-builders/custom-webpack:dev-server",
 					"options": {
+						"host": "0.0.0.0",
 						"port": 4200,
 						"publicHost": "http://localhost:4200"
 					},

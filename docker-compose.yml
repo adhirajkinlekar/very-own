@@ -1,111 +1,113 @@
 services:
 
-  # academy_ui: 
-  #   build: 
-  #     context: ./academy_ui
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://academy_service:5001
-  #     - API_COMMONSERVICE_URL=http://common_service:3004
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./academy_ui:/app
-  #   ports: 
-  #     - 3000:3000
+  academy_ui: 
+    build: 
+      context: ./academy_ui
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://academy_service:5001
+      - API_COMMONSERVICE_URL=http://common_service:3004
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./academy_ui:/app
+    ports: 
+      - 3000:3000
 
-  # sso_ui: 
-  #   build: 
-  #     context: ./sso_ui
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://auth_service:5000
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./sso_ui:/app
-  #   ports: 
-  #     - 3001:3001
+  sso_ui: 
+    build: 
+      context: ./sso_ui
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://auth_service:5000
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./sso_ui:/app
+    ports: 
+      - 3001:3001
   
-  # landing_page: 
-  #   build: 
-  #     context: ./landing_page
-  #     dockerfile: dockerfile.dev 
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./landing_page:/app
-  #   ports: 
-  #     - 3002:3002
+  landing_page: 
+    build: 
+      context: ./landing_page
+      dockerfile: dockerfile.dev 
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./landing_page:/app
+    ports: 
+      - 3002:3002
   
-  # admin_ui: 
-  #   build: 
-  #     context: ./admin_ui
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://auth_service:5000
-  #     - UI_ACADEMY_URL=http://admin_academy_ui:4201
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./admin_ui:/app
-  #   ports: 
-  #     - 4200:4200
+  admin_ui: 
+    build: 
+      context: ./admin_ui
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://auth_service:5000
+      - UI_ACADEMY_URL=http://admin_academy_ui:4201
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./admin_ui:/app
+    ports: 
+      - 4200:4200
 
-  # admin_academy_ui: 
-  #   build: 
-  #     context: ./admin_academy_ui
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://academy_service:5001
-  #     - API_COMMONSERVICE_URL=http://common_service:3004
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./admin_academy_ui:/app
-  #   ports: 
-  #     - 4201:4201
+  admin_academy_ui: 
+    build: 
+      context: ./admin_academy_ui
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://academy_service:5001
+      - API_COMMONSERVICE_URL=http://common_service:3004
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./admin_academy_ui:/app
+    ports: 
+      - 4201:4201
 
-  # auth_service: 
-  #   build: 
-  #     context: ./authservice
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://nats-streaming:4222
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./authservice:/app
-  #   ports: 
-  #     - 5000:5000
+  auth_service: 
+    build: 
+      context: ./authservice
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://nats-streaming:4222
+      - NATS_URL=nats://nats-streaming:4222
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./authservice:/app
+    ports: 
+      - 5000:5000
 
-  # common_service: 
-  #   build: 
-  #     context: ./commonService
-  #     dockerfile: dockerfile.dev 
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./commonService:/app
-  #   ports: 
-  #     - 3004:3004
+  common_service: 
+    build: 
+      context: ./commonService
+      dockerfile: dockerfile.dev 
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./commonService:/app
+    ports: 
+      - 3004:3004
 
-  # academy_service: 
-  #   build: 
-  #     context: ./academyService
-  #     dockerfile: dockerfile.dev 
-  #   environment:
-  #     - API_BASE_URL=http://nats-streaming:4222
-  #   restart: always
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./academyService:/app
-  #   ports: 
-  #     - 5001:5001
+  academy_service: 
+    build: 
+      context: ./academyService
+      dockerfile: dockerfile.dev 
+    environment:
+      - API_BASE_URL=http://nats-streaming:4222
+      - NATS_URL=nats://nats-streaming:4222
+    restart: always
+    volumes:
+      - /app/node_modules
+      - ./academyService:/app
+    ports: 
+      - 5001:5001
 
   nats-streaming:
     image: nats-streaming:latest
     ports:
-      - "4222:4222"  # Client port
-      - "8222:8222"  # Monitoring port
-    command: ["nats-streaming-server", "-p", "4222", "-m", "8222"]
+      - "4222:4222"
+      - "8222:8222"
+    command: ["-p", "4222", "-m", "8222"]

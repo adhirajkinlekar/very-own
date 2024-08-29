@@ -30,7 +30,7 @@ app.use('/api/auth', authRoutes);
 
 // Connect to NATS Streaming server
 const client = stan.connect('test-cluster', 'subscriber', {
-  url: 'nats://localhost:4222',
+  url: process.env.NATS_URL ? 'nats://nats-streaming:4222' :  'nats://localhost:4222'
 });
 
 client.on('connect', () => {
