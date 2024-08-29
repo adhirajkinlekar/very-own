@@ -44,6 +44,7 @@ services:
       dockerfile: dockerfile.dev 
     environment:
       - API_BASE_URL=http://auth_service:5000
+      - UI_ACADEMY_URL=http://admin_academy_ui:4201
     restart: always
     volumes:
       - /app/node_modules
