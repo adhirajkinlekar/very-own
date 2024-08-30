@@ -30,6 +30,6 @@ EXPOSE 80
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/academy_ui .
+# Docker build : docker build -f dockerfile.prod -t adhirajk/landing_page .
 
-# docker run -p 3000:80  adhirajk/academy_ui
+# docker run -p 3002:80  adhirajk/landing_page

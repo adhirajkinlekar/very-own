@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: academy-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: academy-ui
+  template:
+    metadata:
+      labels:
+        app: academy-ui
+    spec:
+      containers:
+      - name: academy-ui
+        image: <your-docker-image-path>:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: API_BASE_URL
+          value: "http://academy-service:5001"
+        - name: API_COMMONSERVICE_URL
+          value: "http://common-service:3004"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: academy-ui
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30000
+  selector:
+    app: academy-ui

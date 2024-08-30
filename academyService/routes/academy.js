@@ -79,6 +79,7 @@ router.post('/', getCurrentUser, async (req, res) => {
         res.status(201).json({ academyId: savedAcademy.id });
 
     } catch (error) {
+        console.log({error})
          res.status(500).json({ error: 'Failed to create academy' });
     }
 });
