@@ -20,7 +20,7 @@ export class CreateAcademyComponent {
     this.myForm = this.fb.group({
       academyName: ['', Validators.required],
       description: ['', Validators.required],
-      imageUrl: [''],
+      imageUrl: ['',  Validators.required],
       headline: ['', Validators.required],
       // publicId: ['', Validators.required]
     });

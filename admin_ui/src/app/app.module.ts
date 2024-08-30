@@ -8,7 +8,7 @@ import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectModule } f
 import { FormsModule } from '@angular/forms';
 import { ServiceTypesComponent } from './service-types/service-types.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TokenInterceptor } from '../auth.interceptor';
 
 @NgModule({
@@ -24,10 +24,11 @@ import { TokenInterceptor } from '../auth.interceptor';
     FormsModule,
     NgSelectModule,
     NgOptionTemplateDirective,
-    NgLabelTemplateDirective
+    NgLabelTemplateDirective,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    provideHttpClient(withInterceptorsFromDi()) // New way
   ],
   bootstrap: [AppComponent]
 })

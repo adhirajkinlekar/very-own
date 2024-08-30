@@ -1,13 +1,15 @@
 
 import { DOCUMENT } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AppService implements OnDestroy {
-
+ 
+    
   AppConstants = {
     route_my_services: "my_services",
     service_type_academy: "academy",
@@ -25,7 +27,7 @@ export class AppService implements OnDestroy {
   private authStatusSubscription!: Subscription
   public readonly isLoggedIn$ = new BehaviorSubject<boolean | null>(null); // value of this BehaviorSubject should never be set to null after initial initialization
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private http: HttpClient ) {
 
     this.checkLoggedIn();
 
@@ -35,8 +37,6 @@ export class AppService implements OnDestroy {
   private checkLoggedIn(): void {
 
     const token = this.getCookie('VERY_OWN_JWT_TOKEN')
-
-    console.log({ token })
 
     if (token) this.toggleloggedInObservable(true);
 
@@ -105,6 +105,9 @@ export class AppService implements OnDestroy {
     // document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
   };
 
+  getDashboard(): Observable<any> {
+    return this.http.get<any>(`http://localhost:3003/dashboard`);
+  }
 }
 
 

@@ -33,8 +33,7 @@ const CoursePage = () => {
   const selectLecture = (sectionId, itemId) => {
     const section = lectures[sectionId];
     const item = section.lectures[itemId];
-
-    console.log({item})
+ 
     setSelectedLecture(item);
   };
 

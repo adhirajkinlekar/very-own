@@ -133,8 +133,7 @@ const SignUpPage = ({showPopup}) => {
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign-Up Form Data:', formData);
-
+ 
     e.preventDefault();
 
     try {
@@ -170,8 +169,6 @@ const SignUpPage = ({showPopup}) => {
 
     } catch (error) {
       console.error('Error:', error);
-
-
     }
   };
 

@@ -17,8 +17,8 @@ export class AppComponent {
     // if (hostname === 'admin.veryown.com') {
     //   // Perform the redirection
     //   window.location.href = 'http://overview.admin.veryown.com:4200';
-    // }
-
+    // } 
+    
     window.addEventListener('navigate-to-container', (event: Event) => {
       const customEvent = event as CustomEvent;
       const path = customEvent.detail.path;
@@ -44,4 +44,6 @@ export class AppComponent {
       }
     });
   }
+
+ 
 }

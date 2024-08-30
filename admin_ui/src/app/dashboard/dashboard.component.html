@@ -1,3 +1,12 @@
+<div *ngIf="loading; else loadedContent" class="loading-container">
+  <div class="loading-content">
+    <i class="fas fa-spinner fa-spin loading-icon"></i>
+    <p class="loading-text">Loading your academies...</p>
+  </div>
+</div>
+
+<ng-template #loadedContent>
+
 <div class="container mx-auto mt-12 px-4">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -33,13 +42,12 @@
         <li *ngFor="let service of enrolledServices" class="flex justify-between items-center py-4 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-300">
           <div class="flex items-center space-x-4">
             <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-lg font-semibold">
-              {{ service.name.charAt(0) }}
+              {{ service === 'academy' ? 'A' : '' }}
             </div>
-            <span class="text-lg font-medium text-gray-800">{{ service.name }}</span>
+            <span class="text-lg font-medium text-gray-800">{{ service === 'academy' ? 'Academy Service' : '' }}</span>
           </div>
           <a
-            href="http://academy.admin.veryown.com:4200/dashboard"
-            (click)="visitService(service)"
+            href="http://academy.admin.veryown.com:4200/dashboard" 
             class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
           >
             Visit
@@ -57,3 +65,4 @@
   
   
 </div>
+</ng-template>

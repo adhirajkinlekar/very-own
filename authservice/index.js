@@ -46,8 +46,7 @@ client.on('connect', () => {
 
       // Parse the received data if necessary
       const parsedData = JSON.parse(data);
-      console.log({ parsedData });
-
+ 
       // Create a new instance of ServiceSSODetail and save it
       const newssoDetails = new ServiceSSODetail(parsedData);
 

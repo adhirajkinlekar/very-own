@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,19 +8,27 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent { 
   totalRevenue: number = 0; // Example data, replace with actual
-  enrolledServices: Array<{ name: string; status: string }> = [];
+  enrolledServices: Array<string> = [];
+  loading: boolean = true;
 
+
+  constructor(private service: AppService){
+
+    
+  }
+
+  getDashboard(){
+     this.service.getDashboard().subscribe(data=>{ 
+      this.enrolledServices = data.enrolledServices;
+      this.loading = false;
+     },err=>{
+      this.loading = false;
+
+      })
+    }
 
   ngOnInit(): void {
-    // Example data. Replace this with an actual API call to fetch user services
-    this.enrolledServices = [
-      { name: 'Academy Service', status: 'Active' }, 
-    ];
+    this.getDashboard();
   }
 
-  visitService(service: { name: string; status: string }): void {
-    // Logic to handle navigation or open service details
-    // For example, navigate to a service detail page or show a modal
-    console.log(`Visiting ${service.name}`);
-  }
 } 

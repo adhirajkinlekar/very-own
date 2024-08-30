@@ -18,8 +18,7 @@ const getCurrentUser = (req,res,next) =>{
  
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
  
-        console.log({err})
-     if (err) return res.sendStatus(403);  
+      if (err) return res.sendStatus(403);  
  
       req.currentUser = payload;
  
@@ -32,8 +31,7 @@ router.post('/', getCurrentUser, async (req, res) => {
 
     try {
 
-        console.log({body: req.body})
-
+ 
         const { academyName, description, headline, imageUrl, publicId } = req.body;
 
         if (!academyName || !description || !headline || !imageUrl || !publicId) {
@@ -58,6 +56,14 @@ router.post('/', getCurrentUser, async (req, res) => {
             // res.send('Login event published with guid: ' + guid);
         });
 
+        client.publish('service.created', JSON.stringify({ serviceId: savedAcademy._id, type: 'academy', userId: req.currentUser.id}), (err, guid) => {
+            if (err) {
+
+                console.log({err})
+                        }
+            // res.send('Login event published with guid: ' + guid);
+        });
+
 
         // if you need to ensure that the publish action completes successfully before sending the response back to the client, convert client.publish to a Promise
         // await new Promise((resolve, reject) => {
@@ -73,8 +79,7 @@ router.post('/', getCurrentUser, async (req, res) => {
         res.status(201).json({ academyId: savedAcademy.id });
 
     } catch (error) {
-        console.log({ error })
-        res.status(500).json({ error: 'Failed to create academy' });
+         res.status(500).json({ error: 'Failed to create academy' });
     }
 });
 
@@ -111,8 +116,7 @@ router.get('/:academyId', async (req, res) => {
 
 
         const { academyId } = req.params;
-        console.log({ academyId })
-
+ 
         const objectId = new mongoose.Types.ObjectId(academyId);
 
         const academy = await Academy.findById(objectId);
@@ -125,8 +129,7 @@ router.get('/:academyId', async (req, res) => {
         res.json({ academy, courses });
 
     } catch (error) {
-        console.log({ error })
-        res.status(500).json({ error: 'Failed to retrieve academy' });
+         res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -144,8 +147,7 @@ router.get('/customer/:publicId', async (req, res) => {
         res.json({ academy, courses });
 
     } catch (error) {
-        console.log({ error })
-        res.status(500).json({ error: 'Failed to retrieve academy' });
+         res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -161,8 +163,7 @@ router.get('/:academyId/courses/:courseId', async (req, res) => {
         res.json({ course: {academyId: course[0].academyId,courseName: course[0].courseName, description:course[0].description, imageUrl:course[0].imageUrl} });
 
     } catch (error) {
-        console.log({ error })
-        res.status(500).json({ error: 'Failed to retrieve academy' });
+         res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -181,8 +182,7 @@ router.get('/:academyId/courses/:courseId/learn', getCurrentUser, async (req, re
         res.json({ course:course[0] });
 
     } catch (error) {
-        console.log({ error })
-        res.status(500).json({ error: 'Failed to retrieve academy' });
+         res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -218,8 +218,7 @@ router.post('/:academyId/course',getCurrentUser, async (req, res) => {
         res.status(201).json(savedCourse);
     }
     catch (error) {
-        console.log({error})
-        res.status(500).json({ error: 'Failed to Create the course' });
+         res.status(500).json({ error: 'Failed to Create the course' });
     }
 });
 
