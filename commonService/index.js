@@ -30,6 +30,11 @@ const upload = multer({
   }
 });
 
+app.get('/', (req,res)=>{
+
+  res.status(200).send("Health is ok")
+})
+
 // Upload endpoint to handle file uploads
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {

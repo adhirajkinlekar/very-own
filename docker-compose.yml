@@ -51,27 +51,27 @@ services:
     ports: 
       - 4201:80
 
-  auth_service: 
-    build: 
+  auth_service:
+    build:
       context: ./authservice
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     environment:
       - NATS_URL=nats://nats-streaming:4222
-    restart: always 
-    ports: 
+    restart: always
+    ports:
       - 5000:5000
     depends_on:
-      - nats-streaming
+      - nats-streaming 
   
-  admin_service: 
-    build: 
+  admin_service:
+    build:
       context: ./adminService
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     environment:
       - NATS_URL=nats://nats-streaming:4222
-    restart: always 
-    ports: 
-      - 3003:3003
+    restart: always
+    ports:
+      - 3003:3003 
     depends_on:
       - nats-streaming
 
@@ -84,7 +84,7 @@ services:
       - /app/node_modules
       - ./commonService:/app
     ports: 
-      - 3004:3004
+      - 3004:3004 
 
   academy_service: 
     build: 
@@ -94,7 +94,7 @@ services:
       - NATS_URL=nats://nats-streaming:4222
     restart: always 
     ports: 
-      - 5001:5001
+      - 5001:5001 
     depends_on:
       - nats-streaming
 
@@ -104,3 +104,4 @@ services:
       - "4222:4222"
       - "8222:8222"
     command: ["-p", "4222", "-m", "8222"]
+    

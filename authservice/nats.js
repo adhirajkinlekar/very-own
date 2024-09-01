@@ -1,8 +1,9 @@
+// natsClient.js
 const stan = require('node-nats-streaming');
+const ServiceSSODetail = require('./models/ServiceSSO');  
 
-// NATS Streaming server configuration
 const clusterID = 'test-cluster';
-const clientID = 'auth-service';
+const clientID = 'subscriber';
 const url = process.env.NATS_URL ? 'nats://nats-streaming:4222' : 'nats://localhost:4222';
 
 const retries = 5;
@@ -16,6 +17,27 @@ const tryConnect = () => {
 
     client.on('connect', () => {
         console.log('Connected to NATS Streaming');
+
+        // Subscribe to the subject
+        const subscription = client.subscribe('academy.created');
+
+        // Handle incoming messages
+        subscription.on('message', async (msg) => {
+            try {
+                const data = msg.getData();
+                const parsedData = JSON.parse(data);
+
+                console.log({ parsedData });
+
+                // Create a new instance of ServiceSSODetail and save it
+                const newssoDetails = new ServiceSSODetail(parsedData);
+                await newssoDetails.save();
+
+                console.log('Received a message and saved to the database:', parsedData);
+            } catch (error) {
+                console.error('Error processing message:', error);
+            }
+        });
     });
 
     client.on('error', (err) => {
@@ -30,7 +52,7 @@ const tryConnect = () => {
     });
 
     client.on('close', () => {
-        console.log('Subscriber connection closed');
+        console.log('NATS Streaming connection closed');
         attempt++;
         if (attempt < retries) {
             console.log(`Retrying in ${delay / 1000} seconds...`);
@@ -44,5 +66,4 @@ const tryConnect = () => {
 // Start the connection attempt
 tryConnect();
 
-// Export the client object
 module.exports = client;

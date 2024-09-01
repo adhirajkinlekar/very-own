@@ -6,6 +6,13 @@ const serviceEnrollment = require("./models/service_enrollments");
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const client = require('./nats'); // Import the NATS client
+
+// Check NATS client connection
+if (!client || client.isClosed()) {
+  console.error('NATS Streaming client is not connected!');
+  process.exit(1);
+}
 
 dotenv.config();
 
@@ -56,43 +63,6 @@ app.get('/dashboard', getCurrentUser, async (req, res) => {
   }
   catch (err) {
   }
-});
-
-// Connect to NATS Streaming server
-const client = stan.connect('test-cluster', 'admin-service', {
-
-  url: process.env.NATS_URL ? 'nats://nats-streaming:4222' : 'nats://localhost:4222'
-});
-
-client.on('connect', () => {
-  console.log('Subscriber connected to NATS');
-
-  // Subscribe to the subject
-  const subscription = client.subscribe('service.created');
-
-  // Use async in the message callback
-  subscription.on('message', async (msg) => {
-    try {
-      const data = msg.getData();
-
-      // Parse the received data if necessary
-      const parsedData = JSON.parse(data);
-      console.log({ parsedData });
-
-      // Create a new instance of ServiceSSODetail and save it
-      const newServiceEnrollment = new serviceEnrollment(parsedData);
-
-      await newServiceEnrollment.save();
-
-      console.log('Received a message and saved to the database:', parsedData);
-    } catch (error) {
-      console.error('Error processing message:', error);
-    }
-  });
-});
-
-client.on('close', () => {
-  console.log('Subscriber connection closed');
 });
 
 // Start server

@@ -1,5 +1,7 @@
 FROM nats-streaming:latest
+
 EXPOSE 4222 8222
+
 CMD ["nats-streaming-server", "-p", "4222", "-m", "8222"]
 
 
@@ -7,3 +9,4 @@ CMD ["nats-streaming-server", "-p", "4222", "-m", "8222"]
 
 # docker run --name my-nats-streaming-server -p 4222:4222 -p 8222:8222 nats-streaming
 
+# docker stop $(docker ps -q) && docker rm $(docker ps -a -q)

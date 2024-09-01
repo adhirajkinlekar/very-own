@@ -6,6 +6,13 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const stan = require('node-nats-streaming');
 const ServiceSSODetail = require('./models/ServiceSSO');
+const client = require('./nats'); // Import the NATS client
+
+// Check NATS client connection
+if (!client || client.isClosed()) {
+  console.error('NATS Streaming client is not connected!');
+  process.exit(1);
+}
 
 dotenv.config();
 
@@ -28,41 +35,6 @@ app.use(express.json({ extended: false }));
 // Define Routes
 app.use('/api/auth', authRoutes);
 
-// Connect to NATS Streaming server
-const client = stan.connect('test-cluster', 'subscriber', {
-  url: process.env.NATS_URL ? 'nats://nats-streaming:4222' :  'nats://localhost:4222'
-});
-
-client.on('connect', () => {
-  console.log('Subscriber connected to NATS');
-
-  // Subscribe to the subject
-  const subscription = client.subscribe('academy.created');
-
-  // Use async in the message callback
-  subscription.on('message', async (msg) => {
-    try {
-      const data = msg.getData();
-
-      // Parse the received data if necessary
-      const parsedData = JSON.parse(data);
- 
-      // Create a new instance of ServiceSSODetail and save it
-      const newssoDetails = new ServiceSSODetail(parsedData);
-
-      await newssoDetails.save();
-
-      console.log('Received a message and saved to the database:', parsedData);
-    } catch (error) {
-      console.error('Error processing message:', error);
-    }
-  });
-});
-
-client.on('close', () => {
-  console.log('Subscriber connection closed');
-});
-
 const PORT = process.env.PORT  
 
-app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT,  '0.0.0.0',  () => console.log(`Server started on port ${PORT}`));
