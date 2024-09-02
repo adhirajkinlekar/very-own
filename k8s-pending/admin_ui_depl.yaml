@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-ui
+  name: admin-ui-deployment
 spec:
   replicas: 1
   selector:
@@ -14,24 +14,23 @@ spec:
     spec:
       containers:
         - name: admin-ui
-          image: admin-ui:latest # Replace with your image
-          env:
-            - name: API_BASE_URL
-              value: "http://auth-service:5000"
-            - name: UI_ACADEMY_URL
-              value: "http://admin-academy-ui:4201"
+          image: admin_ui_image  # Replace with your image
           ports:
             - containerPort: 4200
+          env:
+            - name: API_BASE_URL
+              value: http://auth-service:5000
+            - name: UI_ACADEMY_URL
+              value: http://admin-academy-ui:4201  # Service name for admin_academy_ui
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-ui
+  name: admin-ui-cluster-ip-service
 spec:
+  type: ClusterIP
   selector:
     app: admin-ui
   ports:
-    - protocol: TCP
-      port: 4200
+    - port: 4200
       targetPort: 4200
-  type: ClusterIP

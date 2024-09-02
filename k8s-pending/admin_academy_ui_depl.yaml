@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-academy-ui
+  name: admin-academy-ui-deployment
 spec:
   replicas: 1
   selector:
@@ -14,24 +14,23 @@ spec:
     spec:
       containers:
         - name: admin-academy-ui
-          image: admin-academy-ui:latest # Replace with your image
-          env:
-            - name: API_BASE_URL
-              value: "http://academy-service:5001"
-            - name: API_COMMONSERVICE_URL
-              value: "http://common-service:3004"
+          image: admin_academy_ui_image  # Replace with your image
           ports:
             - containerPort: 4201
+          env:
+            - name: API_BASE_URL
+              value: http://academy-service:5001
+            - name: API_COMMONSERVICE_URL
+              value: http://common-service:3004
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-academy-ui
+  name: admin-academy-ui-cluster-ip-service
 spec:
+  type: ClusterIP
   selector:
     app: admin-academy-ui
   ports:
-    - protocol: TCP
-      port: 4201
+    - port: 4201
       targetPort: 4201
-  type: ClusterIP

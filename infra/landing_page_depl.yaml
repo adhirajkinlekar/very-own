@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landing-page
+  name: landing-page-deployment
 spec:
   replicas: 1
   selector:
@@ -14,22 +14,21 @@ spec:
     spec:
       containers:
         - name: landing-page
-          image: adhirajk/landing_page:latest # Replace with your image
+          image: adhirajk/landing_page:1.0.1  # Replace with your image
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: landing-page
+  name: landing-page-cluster-ip-service
 spec:
+  type: ClusterIP
   selector:
     app: landing-page
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 3002
       targetPort: 80
-  type: ClusterIP
 
 
-# kubectl 
+# kubectl port-forward svc/landing-page-cluster-ip-service 3002:3002

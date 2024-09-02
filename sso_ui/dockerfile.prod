@@ -30,8 +30,19 @@ EXPOSE 80
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/sso_ui .
 
-# docker run -p 3001:80  adhirajk/
+# Docker build : docker build -f dockerfile.prod -t adhirajk/sso_ui:1.0.1 .
+
+# docker run -p 3001:80 adhirajk/sso_ui:1.0.1
+
+# Recheck if this is optimal for tagging and pushing
+
+# docker tag adhirajk/sso_ui:1.0.1 adhirajk/sso_ui:1.0.1
+
+# docker push adhirajk/sso_ui:1.0.1 
+
+
+# Stop all- 
 
 # docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+

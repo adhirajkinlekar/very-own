@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nats-streaming
+  name: nats-streaming-deployment
 spec:
   replicas: 1
   selector:
@@ -14,21 +14,22 @@ spec:
     spec:
       containers:
         - name: nats-streaming
-          image: nats-streaming:latest
-          command: ["-p", "4222", "-m", "8222"]
+          image: nats-streaming:latest  # Use the appropriate image if needed
           ports:
             - containerPort: 4222
             - containerPort: 8222
+          command: ["nats-streaming-server", "-p", "4222", "-m", "8222"]
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nats-streaming
+  name: nats-streaming-cluster-ip-service
 spec:
+  type: ClusterIP
   selector:
     app: nats-streaming
   ports:
-    - protocol: TCP
-      port: 4222
+    - port: 4222
       targetPort: 4222
-    - protocol:
+    - port: 8222
+      targetPort: 8222

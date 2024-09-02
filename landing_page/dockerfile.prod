@@ -30,12 +30,12 @@ EXPOSE 80
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/landing_page:latest .
+# Docker build : docker build -f dockerfile.prod -t adhirajk/landing_page:1.0.1 .
 
-# docker run -p 3002:80 adhirajk/landing_page:latest
+# docker run -p 3002:80 adhirajk/landing_page:1.0.1 
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/landing_page:latest adhirajk/landing_page:latest
+# docker tag adhirajk/landing_page:1.0.1 adhirajk/landing_page:1.0.1
 
-# docker push adhirajk/landing_page:latest
+# docker push adhirajk/landing_page:1.0.1 

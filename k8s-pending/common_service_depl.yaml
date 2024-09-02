@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: common-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: common-service
+  template:
+    metadata:
+      labels:
+        app: common-service
+    spec:
+      containers:
+        - name: common-service
+          image: common_service_image  # Replace with your image
+          ports:
+            - containerPort: 3004
+          volumeMounts:
+            - mountPath: /app/node_modules
+              name: node-modules
+            - mountPath: /app
+              name: app-volume
+      volumes:
+        - name: node-modules
+        - name: app-volume
+          hostPath:
+            path: ./commonService
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: common-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: common-service
+  ports:
+    - port: 3004
+      targetPort: 3004
