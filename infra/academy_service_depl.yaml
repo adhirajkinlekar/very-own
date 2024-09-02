@@ -13,25 +13,23 @@ spec:
         app: academy-service
     spec:
       containers:
-      - name: academy-service
-        image: <your-docker-image-path>/academy-service:latest
-        ports:
-        - containerPort: 5001
-        env:
-        - name: API_BASE_URL
-          value: "http://nats-streaming:4222"
-        - name: NATS_URL
-          value: "nats://nats-streaming:4222"
+        - name: academy-service
+          image: academy-service:latest # Replace with your image
+          env:
+            - name: NATS_URL
+              value: "nats://nats-streaming:4222"
+          ports:
+            - containerPort: 5001
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: academy-service
 spec:
-  type: NodePort
-  ports:
-  - port: 5001
-    targetPort: 5001
-    nodePort: 30008
   selector:
     app: academy-service
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+  type: ClusterIP

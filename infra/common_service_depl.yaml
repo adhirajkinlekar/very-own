@@ -13,20 +13,20 @@ spec:
         app: common-service
     spec:
       containers:
-      - name: common-service
-        image: <your-docker-image-path>/common-service:latest
-        ports:
-        - containerPort: 3004
+        - name: common-service
+          image: common-service:latest # Replace with your image
+          ports:
+            - containerPort: 3004
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: common-service
 spec:
-  type: NodePort
-  ports:
-  - port: 3004
-    targetPort: 3004
-    nodePort: 30007
   selector:
     app: common-service
+  ports:
+    - protocol: TCP
+      port: 3004
+      targetPort: 3004
+  type: ClusterIP

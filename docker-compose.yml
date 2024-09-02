@@ -1,57 +1,207 @@
-services:
+# services:
 
-  academy_ui: 
-    build: 
+#   academy_ui: 
+#     build: 
+#       context: ./academy_ui
+#       dockerfile: dockerfile.prod 
+#     environment:
+#       - API_BASE_URL=http://academy_service:5001
+#       - API_COMMONSERVICE_URL=http://common_service:3004
+#     restart: always 
+#     ports: 
+#       - 3000:80
+
+#   sso_ui: 
+#     build: 
+#       context: ./sso_ui
+#       dockerfile: dockerfile.prod 
+#     environment:
+#       - API_BASE_URL=http://auth_service:5000
+#     restart: always 
+#     ports: 
+#       - 3001:80
+  
+#   landing_page: 
+#     build: 
+#       context: ./landing_page
+#       dockerfile: dockerfile.prod 
+#     restart: always 
+#     ports: 
+#       - 3002:80
+  
+#   admin_ui: 
+#     build: 
+#       context: ./admin_ui
+#       dockerfile: dockerfile.dev 
+#     environment:
+#       - API_BASE_URL=http://auth_service:5000
+#       - UI_ACADEMY_URL=http://admin_academy_ui:4201
+#     restart: always 
+#     ports: 
+#       - 4200:4200
+
+#   admin_academy_ui: 
+#     build: 
+#       context: ./admin_academy_ui
+#       dockerfile: dockerfile.dev 
+#     environment:
+#       - API_BASE_URL=http://academy_service:5001
+#       - API_COMMONSERVICE_URL=http://common_service:3004
+#     restart: always 
+#     ports: 
+#       - 4201:4201
+#     depends_on:
+#       - admin_ui
+
+#   auth_service:
+#     build:
+#       context: ./authservice
+#       dockerfile: dockerfile.dev
+#     environment:
+#       - NATS_URL=nats://nats-streaming:4222
+#     restart: always
+#     ports:
+#       - 5000:5000
+#     depends_on:
+#       - nats-streaming 
+  
+#   admin_service:
+#     build:
+#       context: ./adminService
+#       dockerfile: dockerfile.dev
+#     environment:
+#       - NATS_URL=nats://nats-streaming:4222
+#     restart: always
+#     ports:
+#       - 3003:3003 
+#     depends_on:
+#       - nats-streaming
+
+#   common_service: 
+#     build: 
+#       context: ./commonService
+#       dockerfile: dockerfile.dev 
+#     restart: always
+#     volumes:
+#       - /app/node_modules
+#       - ./commonService:/app
+#     ports: 
+#       - 3004:3004 
+
+#   academy_service: 
+#     build: 
+#       context: ./academyService
+#       dockerfile: dockerfile.dev 
+#     environment:
+#       - NATS_URL=nats://nats-streaming:4222
+#     restart: always 
+#     ports: 
+#       - 5001:5001 
+#     depends_on:
+#       - nats-streaming
+
+#   nats-streaming:
+#     image: nats-streaming:latest
+#     ports:
+#       - "4222:4222"
+#       - "8222:8222"
+#     command: ["-p", "4222", "-m", "8222"]
+    
+
+version: '3.8'
+
+services:
+  academy_ui:
+    build:
       context: ./academy_ui
-      dockerfile: dockerfile.prod 
+      dockerfile: dockerfile.prod
     environment:
       - API_BASE_URL=http://academy_service:5001
       - API_COMMONSERVICE_URL=http://common_service:3004
-    restart: always 
-    ports: 
+    restart: always
+    ports:
       - 3000:80
+    networks:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  sso_ui: 
-    build: 
+  sso_ui:
+    build:
       context: ./sso_ui
-      dockerfile: dockerfile.prod 
+      dockerfile: dockerfile.prod
     environment:
       - API_BASE_URL=http://auth_service:5000
-    restart: always 
-    ports: 
+    restart: always
+    ports:
       - 3001:80
-  
-  landing_page: 
-    build: 
+    networks:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  landing_page:
+    build:
       context: ./landing_page
-      dockerfile: dockerfile.prod 
-    restart: always 
-    ports: 
+      dockerfile: dockerfile.prod
+    restart: always
+    ports:
       - 3002:80
-  
-  admin_ui: 
-    build: 
+    networks:
+      - frontend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  admin_ui:
+    build:
       context: ./admin_ui
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     environment:
       - API_BASE_URL=http://auth_service:5000
       - UI_ACADEMY_URL=http://admin_academy_ui:4201
-    restart: always 
-    ports: 
+    restart: always
+    ports:
       - 4200:4200
+    networks:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4200 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  admin_academy_ui: 
-    build: 
+  admin_academy_ui:
+    build:
       context: ./admin_academy_ui
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     environment:
       - API_BASE_URL=http://academy_service:5001
       - API_COMMONSERVICE_URL=http://common_service:3004
-    restart: always 
-    ports: 
+    restart: always
+    ports:
       - 4201:4201
     depends_on:
-      - admin_ui
+      admin_ui:
+        condition: service_healthy
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4201 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   auth_service:
     build:
@@ -63,8 +213,16 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - nats-streaming 
-  
+      nats-streaming:
+        condition: service_healthy
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   admin_service:
     build:
       context: ./adminService
@@ -73,32 +231,52 @@ services:
       - NATS_URL=nats://nats-streaming:4222
     restart: always
     ports:
-      - 3003:3003 
+      - 3003:3003
     depends_on:
-      - nats-streaming
+      nats-streaming:
+        condition: service_healthy
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3003 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  common_service: 
-    build: 
+  common_service:
+    build:
       context: ./commonService
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     restart: always
-    volumes:
-      - /app/node_modules
-      - ./commonService:/app
-    ports: 
-      - 3004:3004 
+    ports:
+      - 3004:3004
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3004 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  academy_service: 
-    build: 
+  academy_service:
+    build:
       context: ./academyService
-      dockerfile: dockerfile.dev 
+      dockerfile: dockerfile.dev
     environment:
       - NATS_URL=nats://nats-streaming:4222
-    restart: always 
-    ports: 
-      - 5001:5001 
+    restart: always
+    ports:
+      - 5001:5001
     depends_on:
-      - nats-streaming
+      nats-streaming:
+        condition: service_healthy
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5001 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   nats-streaming:
     image: nats-streaming:latest
@@ -106,4 +284,16 @@ services:
       - "4222:4222"
       - "8222:8222"
     command: ["-p", "4222", "-m", "8222"]
-    
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8222 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
