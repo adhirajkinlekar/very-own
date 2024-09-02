@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: landing-page
-          image: landing-page:latest # Replace with your image
+          image: adhirajk/landing_page:latest # Replace with your image
           ports:
             - containerPort: 80
 ---
@@ -30,3 +30,6 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+
+
+# kubectl 

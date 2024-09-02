@@ -192,9 +192,6 @@ services:
     restart: always
     ports:
       - 4201:4201
-    depends_on:
-      admin_ui:
-        condition: service_healthy
     networks:
       - backend
     healthcheck:
@@ -212,9 +209,6 @@ services:
     restart: always
     ports:
       - 5000:5000
-    depends_on:
-      nats-streaming:
-        condition: service_healthy
     networks:
       - backend
     healthcheck:
@@ -232,9 +226,6 @@ services:
     restart: always
     ports:
       - 3003:3003
-    depends_on:
-      nats-streaming:
-        condition: service_healthy
     networks:
       - backend
     healthcheck:
@@ -266,10 +257,7 @@ services:
       - NATS_URL=nats://nats-streaming:4222
     restart: always
     ports:
-      - 5001:5001
-    depends_on:
-      nats-streaming:
-        condition: service_healthy
+      - 5001:5001 
     networks:
       - backend
     healthcheck:
@@ -286,11 +274,7 @@ services:
     command: ["-p", "4222", "-m", "8222"]
     networks:
       - backend
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8222 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+
 
 networks:
   frontend:
