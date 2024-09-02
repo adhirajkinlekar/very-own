@@ -153,7 +153,7 @@ const jwtSign = (res, payload, username) => {
   jwt.sign(
     payload,
     process.env.JWT_SECRET,
-    { expiresIn: '1h' },
+    { expiresIn: '3d' },
     (err, token) => {
       if (err) {
 

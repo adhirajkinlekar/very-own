@@ -18,3 +18,7 @@ EXPOSE 4201
 
 # Start the Angular development server
 CMD ["npm", "start"]
+
+# docker build -f dockerfile.dev -t adhirajk/admin_academy_ui .
+
+# docker run -p 4201:4201 -v /app/node_modules -v ${PWD}:/app adhirajk/admin_academy_ui

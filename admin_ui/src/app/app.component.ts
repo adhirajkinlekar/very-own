@@ -13,6 +13,11 @@ export class AppComponent {
 
   constructor(private router: Router, public service: AppService) {
 
+    fetch('http://localhost:4201/remoteEntry.js')
+    .then(response => response)
+    .then(console.log) 
+
+  
     // const hostname = window.location.hostname;
     // if (hostname === 'admin.veryown.com') {
     //   // Perform the redirection
