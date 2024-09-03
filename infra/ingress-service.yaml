@@ -82,4 +82,14 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
+    - host: api-academy.admin.veryown.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: academy-service-cluster-ip-service
+                port:
+                  number: 5001
 

@@ -4,15 +4,13 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const dotenv = require('dotenv');
 const cors = require('cors');
-// const stan = require('node-nats-streaming');
-const ServiceSSODetail = require('./models/ServiceSSO');
-// const client = require('./nats'); // Import the NATS client
+const client = require('./nats'); // Import the NATS client
 
 // Check NATS client connection
-// if (!client || client.isClosed()) {
-//   console.error('NATS Streaming client is not connected!');
-//   process.exit(1);
-// }
+if (!client || client.isClosed()) {
+  console.error('NATS Streaming client is not connected!');
+  process.exit(1);
+}
 
 dotenv.config();
 

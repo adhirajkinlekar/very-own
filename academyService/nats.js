@@ -2,7 +2,7 @@ const stan = require('node-nats-streaming');
 
 // NATS Streaming server configuration
 const clusterID = 'test-cluster';
-const clientID = 'auth-service';
+const clientID = 'academy-service';
 const url = process.env.NATS_URL ? 'nats://nats-streaming:4222' : 'nats://localhost:4222';
 
 const retries = 5;

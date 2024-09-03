@@ -7,7 +7,7 @@ const clientID = 'subscriber';
 const url = process.env.NATS_URL || 'nats://localhost:4222';
 
 console.log({url})
-const retries = 5;
+const retries = 20;
 const delay = 5000; // 5 seconds
 
 let attempt = 0;
@@ -43,6 +43,7 @@ const tryConnect = () => {
 
     client.on('error', (err) => {
         console.error(`NATS Streaming connection error: ${err.message}`);
+        console.log({err})
         attempt++;
         if (attempt < retries) {
             console.log(`Retrying in ${delay / 1000} seconds...`);

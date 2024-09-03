@@ -14,7 +14,7 @@ const CoursePage = () => {
   useEffect(() => {
     const fetchLectures = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:5001/api/academy/${academyId}/courses/${id}/learn`);
+        const response = await axiosInstance.get(`http://api-academy.admin.veryown.com/api/academy/${academyId}/courses/${id}/learn`);
         const { course } = response.data;
         setLectures(course.sections);
         if (course.sections.length > 0 && course.sections[0].lectures.length > 0) {
@@ -97,7 +97,7 @@ function VideoPlayer({ selectedLecture }) {
         className="w-full rounded-lg"
         key={selectedLecture?.url} // Use the URL as the key to force re-render
       >
-        <source src={`http://localhost:3004/stream/${selectedLecture?.url?.split('/')?.pop()}`} type="video/mp4" />
+        <source src={`http://api-common.admin.veryown.com/stream/${selectedLecture?.url?.split('/')?.pop()}`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
