@@ -32,16 +32,6 @@ spec:
                 name: sso-ui-cluster-ip-service
                 port:
                   number: 3001
-    - host: api-auth.veryown.com
-      http:
-        paths:
-          - path: /?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: auth-service-cluster-ip-service
-                port:
-                  number: 5000
     - host: remote-academy.admin.veryown.com
       http:
         paths:
@@ -82,7 +72,7 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
-    - host: api-academy.admin.veryown.com
+    - host: api-academy.veryown.com
       http:
         paths:
           - path: /?(.*)
@@ -92,4 +82,44 @@ spec:
                 name: academy-service-cluster-ip-service
                 port:
                   number: 5001
+    - host: api-admin.veryown.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: admin-service-cluster-ip-service
+                port:
+                  number: 3003
+    - host: api-auth.veryown.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: auth-service-cluster-ip-service
+                port:
+                  number: 5000
+    - host: api-common.veryown.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: common-service-cluster-ip-service
+                port:
+                  number: 3004
+    - host: "*.academy.veryown.com"
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: academy-ui-cluster-ip-service
+                port:
+                  number: 3000
 

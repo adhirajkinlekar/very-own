@@ -47,7 +47,7 @@ export class AppService implements OnDestroy {
   private subscribeToAuthStatus(): void {
 
     this.authStatusSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
-      if (!isLoggedIn) window.location.href = `http://sso.veryown.com:3001/secure/admin/signin`;
+      if (!isLoggedIn) window.location.href = `http://sso.veryown.com/secure/admin/signin`;
 
 
     });

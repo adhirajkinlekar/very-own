@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: admin-service
-          image: admin_service_image  # Replace with your image
+          image: adhirajk/admin-service:1.0.0   
           ports:
             - containerPort: 3003
           env:
             - name: NATS_URL
-              value: nats://nats-streaming:4222
+              value: http://nats-streaming-cluster-ip-service:4222
 ---
 apiVersion: v1
 kind: Service

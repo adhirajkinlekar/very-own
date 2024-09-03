@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: landing-page
-          image: adhirajk/landing_page:1.0.1  # Replace with your image
+          image: adhirajk/landing_page:1.0.1   
           ports:
             - containerPort: 80
 ---

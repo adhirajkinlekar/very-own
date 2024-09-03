@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     const fetchAcademyData = async () => {
       try {
-        const response = await axiosInstance.get(`http://api-academy.admin.veryown.com/api/academy/customer/${publicId}`);
+        const response = await axiosInstance.get(`http://api-academy.veryown.com/api/academy/customer/${publicId}`);
         const data = response.data;
 
         setAcademy(data.academy);

@@ -22,7 +22,7 @@ const CourseDetails = () => {
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
-                const response = await axiosInstance.get(`http://api-academy.admin.veryown.com/api/academy/${academyId}/courses/${id}`);
+                const response = await axiosInstance.get(`http://api-academy.veryown.com/api/academy/${academyId}/courses/${id}`);
                 setCourse(response.data.course);
             } catch (error) {
                 console.error('Fetch error:', error); // Added error logging

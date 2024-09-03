@@ -14,19 +14,9 @@ spec:
     spec:
       containers:
         - name: common-service
-          image: common_service_image  # Replace with your image
+          image: adhirajk/common-service:1.0.0
           ports:
             - containerPort: 3004
-          volumeMounts:
-            - mountPath: /app/node_modules
-              name: node-modules
-            - mountPath: /app
-              name: app-volume
-      volumes:
-        - name: node-modules
-        - name: app-volume
-          hostPath:
-            path: ./commonService
 ---
 apiVersion: v1
 kind: Service

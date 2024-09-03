@@ -5,7 +5,7 @@ const GlobalTestAccountPopup = () => {
   const [copied, setCopied] = useState(false);
 
   // Test credentials
-  const email = 'adhirajkinlekar@gmail.com';
+  const email = 'adhirajkkinlekar@gmail.com';
   const password = '1234';
 
   return (

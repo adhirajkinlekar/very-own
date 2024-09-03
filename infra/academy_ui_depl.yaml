@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: academy-ui
-          image: academy_ui_image  # Replace with your image
+          image: adhirajk/academy-ui:1.0.0
           ports:
             - containerPort: 80  # Internal port exposed by the container
           env:

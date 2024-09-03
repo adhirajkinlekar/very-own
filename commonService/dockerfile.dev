@@ -18,3 +18,14 @@ EXPOSE 3004
 
 # Define the command to run your app using CMD
 CMD ["npm", "start"]
+
+
+# Docker build : docker build -f dockerfile.dev -t adhirajk/common-service:1.0.0 .
+
+# docker run -p 3004:3004 adhirajk/common-service:1.0.0
+
+# recheck if this is optimal for tagging and pushing
+
+# docker tag adhirajk/common-service:1.0.0 adhirajk/common-service:1.0.0
+
+# docker push adhirajk/common-service:1.0.0

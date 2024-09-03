@@ -1,7 +1,6 @@
 // index.js
 const express = require('express');
 const cors = require('cors');
-const stan = require('node-nats-streaming');
 const serviceEnrollment = require("./models/service_enrollments");
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
