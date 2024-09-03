@@ -124,3 +124,16 @@ spec:
                 port:
                   number: 3000
 
+
+
+# gcloud auth login
+# gcloud init
+# gcloud config set project veryown
+# gcloud components install kubectl
+# sudo apt-get install kubectl
+# gcloud container clusters get-credentials my-first-cluster-1 --zone asia-south1-a --project veryown
+# gcloud components install gke-gcloud-auth-plugin
+# sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
+
+# kubectl config get-contexts
+# kubectl config use-context docker-desktop
