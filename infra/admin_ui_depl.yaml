@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: admin-ui
-          image: admin_ui_image  # Replace with your image
+          image: adhirajk/admin_ui:1.0.0   
           ports:
-            - containerPort: 4200
+            - containerPort: 80
           env:
             - name: API_BASE_URL
               value: http://auth-service:5000
@@ -33,4 +33,4 @@ spec:
     app: admin-ui
   ports:
     - port: 4200
-      targetPort: 4200
+      targetPort: 80

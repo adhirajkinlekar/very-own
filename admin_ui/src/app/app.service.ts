@@ -106,7 +106,7 @@ export class AppService implements OnDestroy {
   };
 
   getDashboard(): Observable<any> {
-    return this.http.get<any>(`http://localhost:3003/dashboard`);
+    return this.http.get<any>(`http://api-admin.veryown.com/dashboard`);
   }
 }
 

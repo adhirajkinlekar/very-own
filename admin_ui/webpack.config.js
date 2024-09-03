@@ -30,7 +30,7 @@ module.exports = {
 
         // For hosts (please adjust)
         remotes: {
-             "adminAcademyUi": "http://localhost:4201/remoteEntry.js"
+             "adminAcademyUi": "http://remote-academy.admin.veryown.com/remoteEntry.js"
         },
 
         shared: share({

@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: admin-academy-ui
-          image: admin_academy_ui_image  # Replace with your image
+          image: adhirajk/admin_academy_ui:1.0.0 # Replace with your image
           ports:
-            - containerPort: 4201
+            - containerPort: 80
           env:
             - name: API_BASE_URL
               value: http://academy-service:5001
@@ -33,4 +33,4 @@ spec:
     app: admin-academy-ui
   ports:
     - port: 4201
-      targetPort: 4201
+      targetPort: 80

@@ -13,9 +13,9 @@ export class AppComponent {
 
   constructor(private router: Router, public service: AppService) {
 
-    fetch('http://localhost:4201/remoteEntry.js')
-    .then(response => response)
-    .then(console.log) 
+    // fetch('http://remote-academy.admin.veryown.com/remoteEntry.js')
+    // .then(response => response)
+    // .then(console.log) 
 
   
     // const hostname = window.location.hostname;
