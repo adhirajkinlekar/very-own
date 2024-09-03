@@ -8,6 +8,11 @@ const cors = require('cors');
 
 // Initialize express app
 const app = express();
+
+// Increase body size limit to 500MB
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ limit: '25mb', extended: true }));
+
 app.use(cors());
 
 const PORT = process.env.PORT || 3004;
@@ -26,7 +31,7 @@ const bucket = storage.bucket(bucketName);
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024 // Limit file size to 10MB
+    fileSize: 25 * 1024 * 1024 // Limit file size to 25MB
   }
 });
 

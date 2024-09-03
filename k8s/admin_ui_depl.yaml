@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: admin-ui
-          image: adhirajk/admin_ui:1.0.0   
+          image: docker.io/adhirajk/admin_ui:1.0.0   
           ports:
             - containerPort: 80
           env:

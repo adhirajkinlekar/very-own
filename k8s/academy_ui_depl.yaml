@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: academy-ui
-          image: adhirajk/academy-ui:1.0.0
+          image: docker.io/adhirajk/academy-ui:1.0.0
           ports:
             - containerPort: 80  # Internal port exposed by the container
           env:

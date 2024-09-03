@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-service-deployment
+  name: academy-service-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: admin-service
+      app: academy-service
   template:
     metadata:
       labels:
-        app: admin-service
+        app: academy-service
     spec:
       containers:
-        - name: admin-service
-          image: adhirajk/admin-service:1.0.0   
+        - name: academy-service
+          image: docker.io/adhirajk/academy-service:1.0.1  # docker.io is not necessary
           ports:
-            - containerPort: 3003
+            - containerPort: 5001
           env:
             - name: NATS_URL
               value: http://nats-streaming-cluster-ip-service:4222
@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-service-cluster-ip-service
+  name: academy-service-cluster-ip-service
 spec:
   type: ClusterIP
   selector:
-    app: admin-service
+    app: academy-service
   ports:
-    - port: 3003
-      targetPort: 3003
+    - port: 5001
+      targetPort: 5001

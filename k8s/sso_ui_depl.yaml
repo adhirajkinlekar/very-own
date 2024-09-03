@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sso-ui
-          image: adhirajk/sso_ui:1.0.2  
+          image: docker.io/adhirajk/sso_ui:1.0.3
           imagePullPolicy: Always
           ports:
             - containerPort: 80

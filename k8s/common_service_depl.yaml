@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: common-service
-          image: adhirajk/common-service:1.0.0
+          image: docker.io/adhirajk/common-service:1.0.2
           ports:
             - containerPort: 3004
 ---

@@ -61,11 +61,11 @@ const SignInPage = () => {
         document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `http://admin.veryown.com:4200/`;
+          window.location.href = `http://admin.veryown.com`;
         }
         
         else if (publicId && service) {
-          window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
+          window.location.href = `http://${publicId}.${service}.veryown.com`;
 
         }
       } else {
@@ -153,11 +153,11 @@ const SignUpPage = ({showPopup}) => {
         document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `http://admin.veryown.com:4200/`;
+          window.location.href = `http://admin.veryown.com`;
         }
         
         else if (publicId && service) {
-          window.location.href = `http://${publicId}.${service}.veryown.com:3000`;
+          window.location.href = `http://${publicId}.${service}.veryown.com`;
 
         }
       } else {
