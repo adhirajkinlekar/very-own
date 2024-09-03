@@ -4,8 +4,9 @@ const ServiceSSODetail = require('./models/ServiceSSO');
 
 const clusterID = 'test-cluster';
 const clientID = 'subscriber';
-const url = process.env.NATS_URL ? 'nats://nats-streaming:4222' : 'nats://localhost:4222';
+const url = process.env.NATS_URL || 'nats://localhost:4222';
 
+console.log({url})
 const retries = 5;
 const delay = 5000; // 5 seconds
 
@@ -47,7 +48,7 @@ const tryConnect = () => {
             console.log(`Retrying in ${delay / 1000} seconds...`);
             setTimeout(tryConnect, delay);
         } else {
-            console.error('Failed to connect to NATS Streaming after multiple retries');
+            console.error(`(${attempt}) Failed to connect to NATS Streaming after multiple retries`);
         }
     });
 

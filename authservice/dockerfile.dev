@@ -18,3 +18,14 @@ EXPOSE 5000
 
 # Define the command to run your app using CMD
 CMD ["npm", "start"]
+
+
+# Docker build : docker build -f dockerfile.dev -t adhirajk/auth-service:1.0.9 .
+
+# docker run -p 5000:5000 adhirajk/auth-service:1.0.9
+
+# recheck if this is optimal for tagging and pushing
+
+# docker tag adhirajk/auth-service:1.0.9 adhirajk/auth-service:1.0.9
+
+# docker push adhirajk/auth-service:1.0.9

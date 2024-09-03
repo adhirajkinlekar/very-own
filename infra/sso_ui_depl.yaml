@@ -14,12 +14,13 @@ spec:
     spec:
       containers:
         - name: sso-ui
-          image: adhirajk/sso_ui:1.0.1   # Replace with your image
+          image: adhirajk/sso_ui:1.0.2  
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
             - name: API_BASE_URL
-              value: http://auth-service:5000  # Service name for auth_service
+              value: http://auth-service  # Service name for auth_service nats://nats-streaming-cluster-ip-service:4222
 ---
 apiVersion: v1
 kind: Service

@@ -1,12 +1,19 @@
+# Use an appropriate base image
 FROM nats-streaming:latest
 
+# Expose the ports NATS Streaming Server uses
 EXPOSE 4222 8222
 
+# Define the command to run the NATS Streaming Server
 CMD ["nats-streaming-server", "-p", "4222", "-m", "8222"]
 
 
-# docker build -t my-nats-streaming-server .
+# Docker build : docker build -f dockerfile -t adhirajk/my-nats-streaming-server:1.0.2 .
 
-# docker run --name my-nats-streaming-server -p 4222:4222 -p 8222:8222 nats-streaming
+# docker run -p 4222:4222 -p 8222:8222 adhirajk/my-nats-streaming-server:1.0.2 
 
-# docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+# recheck if this is optimal for tagging and pushing
+
+# docker tag adhirajk/my-nats-streaming-server:1.0.2 adhirajk/my-nats-streaming-server:1.0.2
+
+# docker push adhirajk/my-nats-streaming-server:1.0.2 
