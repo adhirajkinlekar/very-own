@@ -20,7 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 //         path: "academy/:academyId",
 //         loadChildren: () => loadRemoteModule({
 //           type:"module",
-//           remoteEntry: "http://localhost:4201/remoteEntry.js",
+//           remoteEntry: "https://localhost:4201/remoteEntry.js",
 //           exposedModule: './app.module',
 //         }).then(m => m.AppModule) 
 //        }
@@ -33,7 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 //         path: "academy",
 //         loadChildren: () => loadRemoteModule({
 //           type:"module",
-//           remoteEntry: "http://localhost:4201/remoteEntry.js",
+//           remoteEntry: "https://localhost:4201/remoteEntry.js",
 //           exposedModule: './app.module',
 //         }).then(m => m.AppModule) 
 //        }
@@ -57,7 +57,7 @@ const academyRoutes:Routes = [
     path: '',  
         loadChildren: () => loadRemoteModule({
           type:"module",
-          remoteEntry: "http://remote-academy.admin.veryown.in/remoteEntry.js",
+          remoteEntry: "https://remote-academy.admin.veryown.in/remoteEntry.js",
           exposedModule: './app.module',
         }).then(m => m.AppModule) 
   }  

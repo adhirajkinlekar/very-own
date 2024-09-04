@@ -47,7 +47,7 @@ export class AppService implements OnDestroy {
   private subscribeToAuthStatus(): void {
 
     this.authStatusSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
-      if (!isLoggedIn) window.location.href = `http://sso.veryown.in/secure/admin/signin`;
+      if (!isLoggedIn) window.location.href = `https://sso.veryown.in/secure/admin/signin`;
 
 
     });
@@ -106,7 +106,7 @@ export class AppService implements OnDestroy {
   };
 
   getDashboard(): Observable<any> {
-    return this.http.get<any>(`http://api-admin.veryown.in/dashboard`);
+    return this.http.get<any>(`https://api-admin.veryown.in/dashboard`);
   }
 }
 

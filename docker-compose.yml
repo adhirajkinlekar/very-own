@@ -5,8 +5,8 @@ services:
       context: ./academy_ui
       dockerfile: dockerfile.prod 
     environment:
-      - API_BASE_URL=http://academy_service:5001
-      - API_COMMONSERVICE_URL=http://common_service:3004
+      - API_BASE_URL=https://academy_service:5001
+      - API_COMMONSERVICE_URL=https://common_service:3004
     restart: always 
     ports: 
       - 3000:80
@@ -16,7 +16,7 @@ services:
       context: ./sso_ui
       dockerfile: dockerfile.prod 
     environment:
-      - API_BASE_URL=http://auth_service:5000
+      - API_BASE_URL=https://auth_service:5000
     restart: always 
     ports: 
       - 3001:80
@@ -34,8 +34,8 @@ services:
       context: ./admin_ui
       dockerfile: dockerfile.dev 
     environment:
-      - API_BASE_URL=http://auth_service:5000
-      - UI_ACADEMY_URL=http://admin_academy_ui:4201
+      - API_BASE_URL=https://auth_service:5000
+      - UI_ACADEMY_URL=https://admin_academy_ui:4201
     restart: always 
     ports: 
       - 4200:4200
@@ -45,8 +45,8 @@ services:
       context: ./admin_academy_ui
       dockerfile: dockerfile.dev 
     environment:
-      - API_BASE_URL=http://academy_service:5001
-      - API_COMMONSERVICE_URL=http://common_service:3004
+      - API_BASE_URL=https://academy_service:5001
+      - API_COMMONSERVICE_URL=https://common_service:3004
     restart: always 
     ports: 
       - 4201:4201 

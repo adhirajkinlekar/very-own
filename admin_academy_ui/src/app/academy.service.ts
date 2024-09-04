@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AcademyService {
-  private apiUrl = 'http://api-academy.veryown.in'; // Replace with your API URL
+  private apiUrl = 'https://api-academy.veryown.in'; // Replace with your API URL
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,6 @@ export class AcademyService {
   }
 
   uploadFile(formData: any){
-    return this.http.post<any>('http://api-common.veryown.in/upload', formData)
+    return this.http.post<any>('https://api-common.veryown.in/upload', formData)
   }
 }

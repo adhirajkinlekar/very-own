@@ -19,7 +19,7 @@ spec:
             - containerPort: 5000
           env:
             - name: NATS_URL
-              value: http://nats-streaming-cluster-ip-service:4222
+              value: https://nats-streaming-cluster-ip-service:4222
 ---                  
 apiVersion: v1
 kind: Service

@@ -1,11 +1,11 @@
 import axios from 'axios'; 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  //baseURL: 'http://localhost:5001', // Your backend API URL
+  //baseURL: 'https://localhost:5001', // Your backend API URL
 });
 // Axios instance for API 2
 const api2Instance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://localhost:5000',
 });
 // Utility function to get the JWT token from cookies
 const getCookie = (name) => {
@@ -39,7 +39,7 @@ axiosInstance.interceptors.response.use(
     if ([401, 403].includes(status)) {
       document.cookie = 'VERY_OWN_JWT_TOKEN=; path=/; domain=.veryown.in; samesite=strict';
       // You could use a redirect here if needed, e.g., window.location.href = '/login';
-      window.location.href = `http://sso.veryown.in/secure/${window.location.hostname.split('.')[0]}_academy/signin`
+      window.location.href = `https://sso.veryown.in/secure/${window.location.hostname.split('.')[0]}_academy/signin`
 
     }
 

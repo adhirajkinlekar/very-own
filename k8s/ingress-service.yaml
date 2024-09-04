@@ -13,6 +13,20 @@ metadata:
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - veryown.in
+        - sso.veryown.in
+        - remote-academy.admin.veryown.in
+        - admin.veryown.in
+        - overview.admin.veryown.in
+        - academy.admin.veryown.in
+        - api-academy.veryown.in
+        - api-admin.veryown.in
+        - api-auth.veryown.in
+        - api-common.veryown.in
+        - "*.academy.veryown.in"
+      secretName: my-tls-secret # The name of the secret containing your TLS certificate and key
   rules:
     - host: veryown.in
       http:
@@ -165,7 +179,6 @@ spec:
 
 
 # 127.0.0.1 veryown.in
-# 127.0.0.1 academy.veryown.in
 # 127.0.0.1 sso.veryown.in
 # 127.0.0.1 admin.veryown.in
 # 127.0.0.1 overview.admin.veryown.in

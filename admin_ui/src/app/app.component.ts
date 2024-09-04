@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router, public service: AppService) {
 
-    // fetch('http://remote-academy.admin.veryown.in/remoteEntry.js')
+    // fetch('https://remote-academy.admin.veryown.in/remoteEntry.js')
     // .then(response => response)
     // .then(console.log) 
 
@@ -21,7 +21,7 @@ export class AppComponent {
     // const hostname = window.location.hostname;
     // if (hostname === 'admin.veryown.in') {
     //   // Perform the redirection
-    //   window.location.href = 'http://overview.admin.veryown.in:4200';
+    //   window.location.href = 'https://overview.admin.veryown.in:4200';
     // } 
     
     window.addEventListener('navigate-to-container', (event: Event) => {

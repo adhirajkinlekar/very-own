@@ -66,5 +66,5 @@ app.get('/dashboard', getCurrentUser, async (req, res) => {
 
 // Start server
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on https://localhost:${port}`);
 });

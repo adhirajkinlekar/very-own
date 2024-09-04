@@ -19,9 +19,9 @@ spec:
             - containerPort: 80  # Internal port exposed by the container
           env:
             - name: API_BASE_URL
-              value: http://academy-service:5001  # Service name for academy_service
+              value: https://academy-service:5001  # Service name for academy_service
             - name: API_COMMONSERVICE_URL
-              value: http://common-service:3004  # Service name for common_service
+              value: https://common-service:3004  # Service name for common_service
 ---
 apiVersion: v1
 kind: Service

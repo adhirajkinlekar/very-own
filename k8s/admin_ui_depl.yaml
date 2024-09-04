@@ -19,9 +19,9 @@ spec:
             - containerPort: 80
           env:
             - name: API_BASE_URL
-              value: http://auth-service:5000
+              value: https://auth-service:5000
             - name: UI_ACADEMY_URL
-              value: http://admin-academy-ui:4201  # Service name for admin_academy_ui
+              value: https://admin-academy-ui:4201  # Service name for admin_academy_ui
 ---
 apiVersion: v1
 kind: Service

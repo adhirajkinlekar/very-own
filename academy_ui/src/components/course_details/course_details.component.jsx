@@ -15,14 +15,14 @@ const CourseDetails = () => {
         if (isAuthenticated) {
             navigate(`./learn`);
         } else {
-            window.location.href = `http://sso.veryown.in/secure/${publicId}_academy/signin`;
+            window.location.href = `https://sso.veryown.in/secure/${publicId}_academy/signin`;
         }
     };
 
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
-                const response = await axiosInstance.get(`http://api-academy.veryown.in/api/academy/${academyId}/courses/${id}`);
+                const response = await axiosInstance.get(`https://api-academy.veryown.in/api/academy/${academyId}/courses/${id}`);
                 setCourse(response.data.course);
             } catch (error) {
                 console.error('Fetch error:', error); // Added error logging

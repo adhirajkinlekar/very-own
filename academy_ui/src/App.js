@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     const fetchAcademyData = async () => {
       try {
-        const response = await axiosInstance.get(`http://api-academy.veryown.in/api/academy/customer/${publicId}`);
+        const response = await axiosInstance.get(`https://api-academy.veryown.in/api/academy/customer/${publicId}`);
         const data = response.data;
 
         setAcademy(data.academy);
@@ -107,12 +107,12 @@ const App = () => {
                   </div>
                 ) : (
                   <div className="flex space-x-2">
-                    <a href={`http://sso.veryown.in/secure/${publicId}_academy/signin`} className="inline-block">
+                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signin`} className="inline-block">
                       <button className="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
                         Sign In
                       </button>
                     </a>
-                    <a href={`http://sso.veryown.in/secure/${publicId}_academy/signup`} className="inline-block">
+                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signup`} className="inline-block">
                       <button className="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
                         Sign Up
                       </button>
