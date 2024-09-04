@@ -47,7 +47,7 @@ export class AppService implements OnDestroy {
   private subscribeToAuthStatus(): void {
 
     this.authStatusSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
-      if (!isLoggedIn) window.location.href = `http://sso.veryown.com/secure/admin/signin`;
+      if (!isLoggedIn) window.location.href = `http://sso.veryown.in/secure/admin/signin`;
 
 
     });
@@ -100,13 +100,13 @@ export class AppService implements OnDestroy {
   }
 
   deleteCookie(name: string) {
-    document.cookie = `${name}=; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
+    document.cookie = `${name}=; path=/; domain=.veryown.in; samesite=strict`;// ;secure; is rquired for http
     this.toggleloggedInObservable(false);
     // document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
   };
 
   getDashboard(): Observable<any> {
-    return this.http.get<any>(`http://api-admin.veryown.com/dashboard`);
+    return this.http.get<any>(`http://api-admin.veryown.in/dashboard`);
   }
 }
 

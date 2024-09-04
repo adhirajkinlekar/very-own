@@ -23,7 +23,7 @@ const SignInPage = () => {
 
   const fetchServiceDetails = async () => {
     try {
-      const response = await fetch(`http://api-auth.veryown.com/api/auth/service/${publicId}`);
+      const response = await fetch(`http://api-auth.veryown.in/api/auth/service/${publicId}`);
 
       if (response.ok) {
         const serviceDetails = await response.json();
@@ -45,7 +45,7 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://api-auth.veryown.com/api/auth/login', {
+      const response = await fetch('http://api-auth.veryown.in/api/auth/login', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'  
@@ -58,14 +58,14 @@ const SignInPage = () => {
 
        // localStorage.setItem('JWT_TOKEN', result.token);
 
-        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
+        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.in; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `http://admin.veryown.com`;
+          window.location.href = `http://admin.veryown.in`;
         }
         
         else if (publicId && service) {
-          window.location.href = `http://${publicId}.${service}.veryown.com`;
+          window.location.href = `http://${publicId}.${service}.veryown.in`;
 
         }
       } else {
@@ -112,7 +112,7 @@ const SignUpPage = ({showPopup}) => {
 
   const fetchServiceDetails = async () => {
     try {
-      const response = await fetch(`http://api-auth.veryown.com/api/auth/service/${publicId}`);
+      const response = await fetch(`http://api-auth.veryown.in/api/auth/service/${publicId}`);
 
       if (response.ok) {
         const serviceDetails = await response.json();
@@ -137,7 +137,7 @@ const SignUpPage = ({showPopup}) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://api-auth.veryown.com/api/auth/register', {
+      const response = await fetch('http://api-auth.veryown.in/api/auth/register', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'  
@@ -150,14 +150,14 @@ const SignUpPage = ({showPopup}) => {
 
        // localStorage.setItem('JWT_TOKEN', result.token);
 
-        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.com; samesite=strict`;// ;secure; is rquired for http
+        document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.in; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `http://admin.veryown.com`;
+          window.location.href = `http://admin.veryown.in`;
         }
         
         else if (publicId && service) {
-          window.location.href = `http://${publicId}.${service}.veryown.com`;
+          window.location.href = `http://${publicId}.${service}.veryown.in`;
 
         }
       } else {

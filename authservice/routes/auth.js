@@ -48,7 +48,7 @@ router.post('/register', async (req, res) => {
 
     // // Set the JWT in a cookie
     // res.cookie('JWT_TOKEN', token, {
-    //   domain: '.veryown.com',  // This will apply to veryown.com and all subdomains
+    //   domain: '.veryown.in',  // This will apply to veryown.in and all subdomains
     //   secure: false,            // Ensure cookies are sent over HTTPS
     //   httpOnly: false,          // Prevent access from JavaScript
     //   sameSite: 'Lax'          // Lax is usually sufficient, adjust if needed
@@ -88,7 +88,7 @@ router.post('/register-creator', async (req, res) => {
 
     // // Set the JWT in a cookie
     // res.cookie('JWT_TOKEN', token, {
-    //   domain: '.veryown.com',  // This will apply to veryown.com and all subdomains
+    //   domain: '.veryown.in',  // This will apply to veryown.in and all subdomains
     //   secure: false,            // Ensure cookies are sent over HTTPS
     //   httpOnly: false,          // Prevent access from JavaScript
     //   sameSite: 'Lax'          // Lax is usually sufficient, adjust if needed

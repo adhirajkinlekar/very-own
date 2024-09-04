@@ -181,7 +181,7 @@ const SignUpForm = ({ isAdmin, serviceDetails, handleSubmit, handleChange, formD
             color: '#333',
           }}
         >
-          * When you sign up for any service, you gain access to all services under veryown.com with the same account
+          * When you sign up for any service, you gain access to all services under veryown.in with the same account
         </small>
       </div>
     </div>

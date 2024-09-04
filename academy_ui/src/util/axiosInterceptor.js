@@ -37,9 +37,9 @@ axiosInstance.interceptors.response.use(
  
     // Handle 401 or 403 errors by removing the token and redirecting if necessary
     if ([401, 403].includes(status)) {
-      document.cookie = 'VERY_OWN_JWT_TOKEN=; path=/; domain=.veryown.com; samesite=strict';
+      document.cookie = 'VERY_OWN_JWT_TOKEN=; path=/; domain=.veryown.in; samesite=strict';
       // You could use a redirect here if needed, e.g., window.location.href = '/login';
-      window.location.href = `http://sso.veryown.com:3001/secure/${window.location.hostname.split('.')[0]}_academy/signin`
+      window.location.href = `http://sso.veryown.in/secure/${window.location.hostname.split('.')[0]}_academy/signin`
 
     }
 

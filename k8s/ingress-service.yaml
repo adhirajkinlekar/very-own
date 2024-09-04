@@ -10,10 +10,11 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     nginx.ingress.kubernetes.io/proxy-body-size: "25m" # Increase body size limit
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   rules:
-    - host: veryown.com
+    - host: veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -23,7 +24,7 @@ spec:
                 name: landing-page-cluster-ip-service
                 port:
                   number: 3002
-    - host: sso.veryown.com
+    - host: sso.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -33,7 +34,7 @@ spec:
                 name: sso-ui-cluster-ip-service
                 port:
                   number: 3001
-    - host: remote-academy.admin.veryown.com
+    - host: remote-academy.admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -43,7 +44,7 @@ spec:
                 name: admin-academy-ui-cluster-ip-service
                 port:
                   number: 4201
-    - host: admin.veryown.com
+    - host: admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -53,7 +54,7 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
-    - host: overview.admin.veryown.com
+    - host: overview.admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -63,7 +64,7 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
-    - host: academy.admin.veryown.com
+    - host: academy.admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -73,7 +74,7 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
-    - host: api-academy.veryown.com
+    - host: api-academy.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -83,7 +84,7 @@ spec:
                 name: academy-service-cluster-ip-service
                 port:
                   number: 5001
-    - host: api-admin.veryown.com
+    - host: api-admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -93,7 +94,7 @@ spec:
                 name: admin-service-cluster-ip-service
                 port:
                   number: 3003
-    - host: api-auth.veryown.com
+    - host: api-auth.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -103,7 +104,7 @@ spec:
                 name: auth-service-cluster-ip-service
                 port:
                   number: 5000
-    - host: api-common.veryown.com
+    - host: api-common.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -113,7 +114,7 @@ spec:
                 name: common-service-cluster-ip-service
                 port:
                   number: 3004
-    - host: "*.academy.veryown.com"
+    - host: "*.academy.veryown.in"
       http:
         paths:
           - path: /?(.*)
@@ -135,5 +136,44 @@ spec:
 # gcloud components install gke-gcloud-auth-plugin
 # sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
 
+# To switch contexts -
+
 # kubectl config get-contexts
 # kubectl config use-context docker-desktop
+
+# Delete context
+
+# kubectl config delete-context <context-name>
+
+# Restart deployment
+
+# kubectl rollout restart deployment <deployment-name> 
+
+
+# To create a load balancer
+
+# kubectl get ingress
+
+# kubectl get svc -A
+
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+#  kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
+
+# kubectl apply -f k8s/ingress-service.yaml (checked if need to run again)
+
+
+
+# 127.0.0.1 veryown.in
+# 127.0.0.1 academy.veryown.in
+# 127.0.0.1 sso.veryown.in
+# 127.0.0.1 admin.veryown.in
+# 127.0.0.1 overview.admin.veryown.in
+# 127.0.0.1 academy.admin.veryown.in
+# 127.0.0.1 api-auth.veryown.in
+# 127.0.0.1 api-admin.veryown.in
+# 127.0.0.1 api-academy.veryown.in
+# 127.0.0.1 api-common.veryown.in
+# 127.0.0.1 smallpond.academy.veryown.in
+# 127.0.0.1 remote-academy.admin.veryown.in
+ 
