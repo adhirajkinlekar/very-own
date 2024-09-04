@@ -10,7 +10,8 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     nginx.ingress.kubernetes.io/proxy-body-size: "25m" # Increase body size limit
-    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
@@ -26,7 +27,7 @@ spec:
         - api-auth.veryown.in
         - api-common.veryown.in
         - "*.academy.veryown.in"
-      secretName: my-tls-secret # The name of the secret containing your TLS certificate and key
+      secretName: veryown-in # The name of the secret containing your TLS certificate and key
   rules:
     - host: veryown.in
       http:
@@ -175,6 +176,36 @@ spec:
 #  kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
 
 # kubectl apply -f k8s/ingress-service.yaml (checked if need to run again)
+
+
+
+# Helm
+
+# curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+
+# chmod 700 get_helm.sh
+
+# ./get_helm.sh
+
+
+# Cert manager install
+
+# Add the Jetstack Helm repository
+
+# helm repo add jetstack https://charts.jetstack.io
+
+# Update your local Helm chart repository cache:
+
+# helm repo update
+
+# Install the cert-manager Helm chart:
+
+# helm install \
+#   cert-manager jetstack/cert-manager \
+#   --namespace cert-manager \
+#   --create-namespace \
+#   --version v1.8.0 \
+#   --set installCRDs=true
 
 
 
