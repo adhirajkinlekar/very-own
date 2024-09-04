@@ -17,16 +17,17 @@ spec:
   tls:
     - hosts:
         - veryown.in
-        - sso.veryown.in
-        - remote-academy.admin.veryown.in
-        - admin.veryown.in
-        - overview.admin.veryown.in
-        - academy.admin.veryown.in
-        - api-academy.veryown.in
-        - api-admin.veryown.in
-        - api-auth.veryown.in
-        - api-common.veryown.in
-        - "*.academy.veryown.in"
+        - www.veryown.in
+        # - sso.veryown.in
+        # - remote-academy.admin.veryown.in
+        # - admin.veryown.in
+        # - overview.admin.veryown.in
+        # - academy.admin.veryown.in
+        # - api-academy.veryown.in
+        # - api-admin.veryown.in
+        # - api-auth.veryown.in
+        # - api-common.veryown.in
+        # - "*.academy.veryown.in"
       secretName: veryown-in # The name of the secret containing your TLS certificate and key
   rules:
     - host: veryown.in
@@ -173,7 +174,7 @@ spec:
 
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 
-#  kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
+# kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
 
 # kubectl apply -f k8s/ingress-service.yaml (checked if need to run again)
 
