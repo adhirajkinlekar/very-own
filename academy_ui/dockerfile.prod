@@ -31,14 +31,14 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/academy-ui:1.0.0 .
+# Docker build : docker build -f dockerfile.prod -t adhirajk/academy-ui:1.0.1 .
 
-# docker run -p 3000:80 adhirajk/academy-ui:1.0.0
+# docker run -p 3000:80 adhirajk/academy-ui:1.0.1
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/academy-ui:1.0.0 adhirajk/academy-ui:1.0.0
+# docker tag adhirajk/academy-ui:1.0.1 adhirajk/academy-ui:1.0.1
 
-# docker push adhirajk/academy-ui:1.0.0
+# docker push adhirajk/academy-ui:1.0.1
 
 

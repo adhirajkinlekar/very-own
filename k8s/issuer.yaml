@@ -11,14 +11,13 @@ spec:
     solvers:
     - dns01:
         cloudflare:
-          email: adhirajkkinlekar@gmail.com
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
       selector:
         dnsZones:
-         - veryown.in   # Only include the top-level domain
+         - veryown.in   # Only include the top-level domain 
 
 
 # kubectl create secret generic cloudflare-api-token-secret \
-# --from-literal=api-token=CIQ10_Yh4Bir_0qrkViUCn6iX73nNsOwzNCiKUz1
+# --from-literal=api-token=6yA6mmh-WAXyJ60zynm3AdQOej-V88Oozxenj9_h

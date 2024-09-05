@@ -3,21 +3,11 @@ kind: Certificate
 metadata:
   name: veryown-in-tls
 spec:
-  secretName: veryown-in
+  secretName: veryown-in # Specifies where the certificate must be stored after it is obtained by the cert manager
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: veryown.in
   dnsNames:
     - veryown.in
-    - www.veryown.in
-    - sso.veryown.in
-    - remote-academy-admin.veryown.in
-    - admin.veryown.in
-    - overview.admin.veryown.in
-    - academy-admin.veryown.in
-    - api-academy.veryown.in
-    - api-admin.veryown.in
-    - api-auth.veryown.in
-    - api-common.veryown.in
-    - "*.veryown.in"
+    # - "*.veryown.in"

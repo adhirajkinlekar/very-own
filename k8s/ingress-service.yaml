@@ -11,22 +11,14 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     nginx.ingress.kubernetes.io/proxy-body-size: "25m" # Increase body size limit
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    #nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - veryown.in
-        - www.veryown.in
-        - sso.veryown.in
-        - "*.veryown.in"
-        - overview-admin.veryown.in
-        - academy-admin.veryown.in
-        - remote-academy-admin.veryown.in
-        - api-academy.veryown.in
-        - api-admin.veryown.in
-        - api-auth.veryown.in
-        - api-common.veryown.in
+        # - www.veryown.in 
+        # - "*.veryown.in" 
       secretName: veryown-in # The name of the secret containing your TLS certificate and key
   rules:
     - host: veryown.in
@@ -119,16 +111,16 @@ spec:
                 name: common-service-cluster-ip-service
                 port:
                   number: 3004
-    - host: "*.veryown.in"
-      http:
-        paths:
-          - path: /?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: academy-ui-cluster-ip-service
-                port:
-                  number: 3000
+    # - host: "*.veryown.in"
+    #   http:
+    #     paths:
+    #       - path: /?(.*)
+    #         pathType: ImplementationSpecific
+    #         backend:
+    #           service:
+    #             name: academy-ui-cluster-ip-service
+    #             port:
+    #               number: 3000
 
 
 
