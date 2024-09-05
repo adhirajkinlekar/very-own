@@ -111,16 +111,16 @@ spec:
                 name: common-service-cluster-ip-service
                 port:
                   number: 3004
-    # - host: "*.veryown.in"
-    #   http:
-    #     paths:
-    #       - path: /?(.*)
-    #         pathType: ImplementationSpecific
-    #         backend:
-    #           service:
-    #             name: academy-ui-cluster-ip-service
-    #             port:
-    #               number: 3000
+    - host: "*.veryown.in"
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: academy-ui-cluster-ip-service
+                port:
+                  number: 3000
 
 
 
