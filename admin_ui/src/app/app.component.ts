@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router, public service: AppService) {
 
-    // fetch('https://remote-academy.admin.veryown.in/remoteEntry.js')
+    // fetch('https://remote-academy-admin.veryown.in/remoteEntry.js')
     // .then(response => response)
     // .then(console.log) 
 

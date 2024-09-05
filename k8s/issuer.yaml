@@ -4,11 +4,21 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: "adhirajkkinlekar@gmail.com"
+    email: adhirajkkinlekar@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory  # Use the production Let's Encrypt server
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        cloudflare:
+          email: adhirajkkinlekar@gmail.com
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
+      selector:
+        dnsZones:
+         - veryown.in   # Only include the top-level domain
+
+
+# kubectl create secret generic cloudflare-api-token-secret \
+# --from-literal=api-token=CIQ10_Yh4Bir_0qrkViUCn6iX73nNsOwzNCiKUz1

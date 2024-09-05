@@ -18,16 +18,15 @@ spec:
     - hosts:
         - veryown.in
         - www.veryown.in
-        # - sso.veryown.in
-        # - remote-academy.admin.veryown.in
-        # - admin.veryown.in
-        # - overview.admin.veryown.in
-        # - academy.admin.veryown.in
-        # - api-academy.veryown.in
-        # - api-admin.veryown.in
-        # - api-auth.veryown.in
-        # - api-common.veryown.in
-        # - "*.academy.veryown.in"
+        - sso.veryown.in
+        - "*.veryown.in"
+        - overview-admin.veryown.in
+        - academy-admin.veryown.in
+        - remote-academy-admin.veryown.in
+        - api-academy.veryown.in
+        - api-admin.veryown.in
+        - api-auth.veryown.in
+        - api-common.veryown.in
       secretName: veryown-in # The name of the secret containing your TLS certificate and key
   rules:
     - host: veryown.in
@@ -50,7 +49,7 @@ spec:
                 name: sso-ui-cluster-ip-service
                 port:
                   number: 3001
-    - host: remote-academy.admin.veryown.in
+    - host: remote-academy-admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -60,7 +59,7 @@ spec:
                 name: admin-academy-ui-cluster-ip-service
                 port:
                   number: 4201
-    - host: admin.veryown.in
+    - host: overview-admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -70,17 +69,7 @@ spec:
                 name: admin-ui-cluster-ip-service
                 port:
                   number: 4200
-    - host: overview.admin.veryown.in
-      http:
-        paths:
-          - path: /?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: admin-ui-cluster-ip-service
-                port:
-                  number: 4200
-    - host: academy.admin.veryown.in
+    - host: academy-admin.veryown.in
       http:
         paths:
           - path: /?(.*)
@@ -130,7 +119,7 @@ spec:
                 name: common-service-cluster-ip-service
                 port:
                   number: 3004
-    - host: "*.academy.veryown.in"
+    - host: "*.veryown.in"
       http:
         paths:
           - path: /?(.*)
@@ -214,11 +203,11 @@ spec:
 # 127.0.0.1 sso.veryown.in
 # 127.0.0.1 admin.veryown.in
 # 127.0.0.1 overview.admin.veryown.in
-# 127.0.0.1 academy.admin.veryown.in
+# 127.0.0.1 academy-admin.veryown.in
 # 127.0.0.1 api-auth.veryown.in
 # 127.0.0.1 api-admin.veryown.in
 # 127.0.0.1 api-academy.veryown.in
 # 127.0.0.1 api-common.veryown.in
 # 127.0.0.1 smallpond.academy.veryown.in
-# 127.0.0.1 remote-academy.admin.veryown.in
+# 127.0.0.1 remote-academy-admin.veryown.in
  

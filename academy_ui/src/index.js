@@ -1,4 +1,4 @@
-// coltsteele.academy.veryown.in
+// coltsteele.veryown.in
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

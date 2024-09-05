@@ -35,7 +35,7 @@ function App() {
             <b>Veryown</b> empowers you to create and manage diverse online services with ease. Whether you want to start an <strong>online store</strong>, set up an <strong>educational academy</strong>, or build a <strong>streaming service</strong>, we provide the tools to turn your ideas into reality.
           </p>
           <p className="mb-6">
-            Once your services are live, your customers can access them seamlessly through personalized URLs. For example, a service could be accessed via <code>store_name.store.veryown.in</code> or <code>academy_name.academy.veryown.in</code>. This structured URL format helps users quickly find and engage with the content they’re interested in.
+            Once your services are live, your customers can access them seamlessly through personalized URLs. For example, a service could be accessed via <code>store_name.store.veryown.in</code> or <code>academy_name.veryown.in</code>. This structured URL format helps users quickly find and engage with the content they’re interested in.
           </p>
           <p className="mb-6">
             A dedicated <strong>admin application</strong> at <code>admin.veryown.in</code> allows you to manage and oversee everything from a central dashboard. You’ll have full control over service creation, user management, and platform settings, ensuring smooth operation and a streamlined experience.

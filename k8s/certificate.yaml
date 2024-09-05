@@ -11,13 +11,13 @@ spec:
   dnsNames:
     - veryown.in
     - www.veryown.in
-    # - sso.veryown.in
-    # - remote-academy.admin.veryown.in
-    # - admin.veryown.in
-    # - overview.admin.veryown.in
-    # - academy.admin.veryown.in
-    # - api-academy.veryown.in
-    # - api-admin.veryown.in
-    # - api-auth.veryown.in
-    # - api-common.veryown.in
-    # - "*.academy.veryown.in"
+    - sso.veryown.in
+    - remote-academy-admin.veryown.in
+    - admin.veryown.in
+    - overview.admin.veryown.in
+    - academy-admin.veryown.in
+    - api-academy.veryown.in
+    - api-admin.veryown.in
+    - api-auth.veryown.in
+    - api-common.veryown.in
+    - "*.veryown.in"

@@ -57,7 +57,7 @@ const academyRoutes:Routes = [
     path: '',  
         loadChildren: () => loadRemoteModule({
           type:"module",
-          remoteEntry: "https://remote-academy.admin.veryown.in/remoteEntry.js",
+          remoteEntry: "https://remote-academy-admin.veryown.in/remoteEntry.js",
           exposedModule: './app.module',
         }).then(m => m.AppModule) 
   }  
