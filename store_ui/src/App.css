@@ -31,15 +31,14 @@ ul {
 .navbar-brand {
   display: flex;
   align-items: center;
-  font-size: 1.7rem;
-  font-weight: 700;
+  font-size: 1.5rem; /* Adjusted for better alignment on mobile */
 }
 
 .navbar-brand .logo {
   border-radius: 50%;
   margin-right: 0.5rem;
-  width: 50px; /* Fixed size for better alignment */
-  height: 50px; /* Fixed size for better alignment */
+  width: 40px; /* Adjusted size */
+  height: 40px; /* Adjusted size */
 }
 
 .navbar-links {
@@ -81,7 +80,8 @@ ul {
   background-color: #1a1a1d;
   padding: 1rem;
   border-radius: 10px;
-  width: 200px;
+  width: 80%;
+  max-width: 300px;
 }
 
 .navbar-menu li {
@@ -98,14 +98,14 @@ ul {
 }
 
 .hero-section h3 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   font-weight: 800;
 }
 
 .hero-section p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 2.5rem;
 }
 
@@ -163,13 +163,13 @@ ul {
 }
 
 .product-details h3 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
 .product-details p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 1.2rem;
   color: #888;
 }
@@ -242,11 +242,11 @@ ul {
   }
 
   .hero-section h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .hero-section p {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .explore-button {
@@ -265,25 +265,25 @@ ul {
 
 @media (max-width: 480px) {
   .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .navbar-brand .logo {
     margin-right: 0.3rem;
-    width: 40px; /* Adjusted size */
-    height: 40px; /* Adjusted size */
+    width: 30px; /* Adjusted size */
+    height: 30px; /* Adjusted size */
   }
 
   .navbar-links li {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .hero-section h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .hero-section p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .explore-button {
@@ -296,10 +296,10 @@ ul {
   }
 
   .product-details h3 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .product-details p {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }

@@ -1,10 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-/* General Styles */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -38,16 +35,22 @@ body {
   color: #666;
 }
 
+/* Auth Buttons Section */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-buttons a {
+  width: 100%;
+}
+
 .text-right {
   display: flex;
   align-items: center;
 }
 
-.button-container {
-  display: flex;
-  gap: 0.5rem;
-}
-
+/* Dropdown Menu */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -104,6 +107,7 @@ button:hover {
   margin: 2rem 1rem;
 }
 
+/* Center Text */
 .text-center {
   text-align: center;
   margin: 2rem;
@@ -124,20 +128,28 @@ button:hover {
     font-size: 0.75rem;
   }
 
-  .text-right {
-    width: 100%;
+  .auth-buttons {
     margin-top: 1rem;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .button-container {
-    flex-direction: column;
-    gap: 0.5rem;
+  .auth-buttons a {
+    margin-top: 0.5rem;
+  }
+
+  .text-right {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
   }
 
   .dropdown-menu {
     position: static;
     box-shadow: none;
     border: none;
+    width: 100%;
   }
 }
 
@@ -157,5 +169,14 @@ button:hover {
   button {
     font-size: 0.75rem;
     padding: 0.5rem;
+  }
+
+  .auth-buttons {
+    width: 100%;
+  }
+
+  .auth-buttons a {
+    width: 100%;
+    text-align: center;
   }
 }

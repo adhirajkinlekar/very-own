@@ -332,3 +332,23 @@ spec:
 
 
 # https://docs.digitalocean.com/products/kubernetes/getting-started/operational-readiness/configure-wildcard-certificates/
+
+# Steps to set up HTTPS
+
+# Intall Heml and cert-manager
+
+# helm install \
+#   cert-manager jetstack/cert-manager \
+#   --namespace cert-manager \
+#   --create-namespace \
+#   --version v1.13.3 \
+#   --set installCRDs=true
+
+# Crete namespace - kubectl create namespace backend
+
+# Create secret of token
+
+# kubectl create secret generic "digitalocean-dns" \
+#   --namespace backend \
+#   --from-literal=access-token=dop_v1_add8658453f93e522522ffad22394eb3736ba09c7680043b59253af648e08136
+ 

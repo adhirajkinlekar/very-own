@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import CourseDetails from './components/course_details/course_details.component';
 import HomePage from './components/home_page/home_page.component';
 import AppContext from './context/app_context';
@@ -80,7 +80,7 @@ const App = () => {
                   </div>
                 </Link>
               </div>
-              <div className="text-right">
+              <div className="auth-buttons text-right mt-4 md:mt-0">
                 {isAuthenticated ? (
                   <div className="relative" ref={dropdownRef}>
                     <button
@@ -106,14 +106,14 @@ const App = () => {
                     )}
                   </div>
                 ) : (
-                  <div className="flex space-x-2">
-                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signin`} className="inline-block">
-                      <button className="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
+                  <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 items-center">
+                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signin`} className="inline-block w-full">
+                      <button className="w-full md:w-auto px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
                         Sign In
                       </button>
                     </a>
-                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signup`} className="inline-block">
-                      <button className="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
+                    <a href={`https://sso.veryown.in/secure/${publicId}_academy/signup`} className="inline-block w-full">
+                      <button className="w-full md:w-auto px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none transition duration-300">
                         Sign Up
                       </button>
                     </a>
@@ -131,7 +131,7 @@ const App = () => {
             </div>
           </div>
         ) : (
-          <div className="text-center">Academy could not be found or it no longer exists</div>
+          <div className="text-center">Service could not be found or it no longer exists</div>
         )}
       </AppContext.Provider>
     </Router>

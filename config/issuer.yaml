@@ -25,8 +25,3 @@ spec:
 
 # kubectl create secret generic cloudflare-api-token-secret \
 # --from-literal=api-token=JY2nSyOja7hcYnyH3XeSYH95vyPvbtaY7rqKejW4
-
-# kubectl create secret generic "digitalocean-dns" \
-#   --namespace backend \
-#   --from-literal=access-token=dop_v1_add8658453f93e522522ffad22394eb3736ba09c7680043b59253af648e08136
- 

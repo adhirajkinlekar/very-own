@@ -6,16 +6,14 @@ import { AcademyService } from '../academy.service';
 @Component({
   selector: 'app-create-academy',
   templateUrl: './create-academy.component.html',
-  styleUrl: './create-academy.component.scss'
+  styleUrls: ['./create-academy.component.scss']
 })
 export class CreateAcademyComponent {
 
   myForm: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
 
-
   constructor(private fb: FormBuilder, private router: Router, private academyService: AcademyService) {
-
     // Initialize the form group here
     this.myForm = this.fb.group({
       academyName: ['', Validators.required],
@@ -24,14 +22,11 @@ export class CreateAcademyComponent {
       headline: ['', Validators.required],
       // publicId: ['', Validators.required]
     });
-    // instructorTitle should be part of Admin
   }
 
   ngOnInit(): void {
     // Any initialization logic
   }
-
- 
 
   onImageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -66,10 +61,7 @@ export class CreateAcademyComponent {
     });
   }
 
-
-
   onSubmit(): void {
-
     this.academyService.createAcademy(
       {
         academyName: this.myForm.value.academyName,
@@ -78,23 +70,34 @@ export class CreateAcademyComponent {
         headline: this.myForm.value.headline,
         imageUrl: this.myForm.value.imageUrl,
       }).subscribe((data) => {
-
         const navigateEvent = new CustomEvent('navigate-to-container', {
           detail: { path: `my_services/academy/${data._id}` }
         });
 
         window.dispatchEvent(navigateEvent);
       }, err => {
-
+        console.error('Error creating academy:', err);
       })
-
-
-
-    // this.router.navigateByUrl('my_services/academy/1') check if it works direcly
-
   }
 
   validateName(str: string) {
     return str.replace(/\s+/g, '').toLocaleLowerCase();
+  }
+
+  fillFormWithRandomData(): void {
+    const randomAcademyName = `Academy ${Math.floor(Math.random() * 1000)}`;
+    const randomHeadline = `The Best Academy ${Math.floor(Math.random() * 1000)}`;
+    const randomDescription = `This is a description for ${randomAcademyName}. It is a top-notch academy that provides exceptional services.`;
+    const randomImageUrl = 'https://via.placeholder.com/150'; // Placeholder image URL
+
+    this.myForm.setValue({
+      academyName: randomAcademyName,
+      headline: randomHeadline,
+      description: randomDescription,
+      imageUrl: randomImageUrl
+    });
+
+    // Set image preview
+    this.imagePreview = randomImageUrl;
   }
 }

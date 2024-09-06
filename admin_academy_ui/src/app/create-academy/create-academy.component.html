@@ -1,11 +1,17 @@
 <div class="container mt-5" style="margin-top: 60px;">
-
   <div class="header mb-4">
     <div class="text-center">
       <h1 class="title">Create Academy</h1>
       <p class="subheading">Fill out the form below to set up your very own academy</p>
       <hr class="divider">
     </div>
+  </div>
+
+  <!-- Button to fill form with random values -->
+  <div class="text-right mb-4">
+    <button (click)="fillFormWithRandomData()" class="btn btn-secondary">
+      Fill with dummy Data
+    </button>
   </div>
 
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
@@ -29,7 +35,7 @@
         Headline is required.
       </div>
     </div>
- 
+
     <!-- Description -->
     <div class="form-group mt-4">
       <label for="description" class="form-label">Description</label>
@@ -52,7 +58,6 @@
         <img [src]="imagePreview" alt="Image Preview" class="image-thumbnail" width="200" />
       </div>
     </div>
-    
 
     <!-- Submit Button -->
     <button type="submit" class="btn-submit mt-4" [disabled]="myForm.invalid">
