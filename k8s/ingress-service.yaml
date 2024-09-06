@@ -119,9 +119,9 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: landing-page-cluster-ip-service
+                name: academy-ui-cluster-ip-service
                 port:
-                  number: 3002
+                  number: 3000
   ingressClassName: nginx
 
 
@@ -319,3 +319,6 @@ spec:
 # kubectl get secret clouddns-secret --namespace default
 # kubectl describe secret clouddns-secret --namespace default
 # kubectl get secret clouddns-secret --namespace default -o jsonpath='{.data.key\.json}' | base64 --decode
+
+
+# https://docs.digitalocean.com/products/kubernetes/getting-started/operational-readiness/configure-wildcard-certificates/
