@@ -1,7 +1,9 @@
+# An Ingress resource is a Kubernetes API object that defines rules for routing external HTTP/HTTPS traffic to services within a Kubernetes cluster.
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-service
+  name: ingress-backend
   annotations:
     nginx.ingress.kubernetes.io/use-regex: 'true'
     nginx.ingress.kubernetes.io/rewrite-target: /$1
@@ -10,16 +12,15 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     nginx.ingress.kubernetes.io/proxy-body-size: "25m" # Increase body size limit
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/issuer: letsencrypt-nginx
     #nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  namespace: backend
 spec:
-  ingressClassName: nginx
   tls:
     - hosts:
         - veryown.in
-        # - www.veryown.in 
-        # - "*.veryown.in" 
-      secretName: veryown-in # The name of the secret containing your TLS certificate and key
+        - "*.veryown.in"
+      secretName: doks-starter-kit.page
   rules:
     - host: veryown.in
       http:
@@ -118,9 +119,10 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: academy-ui-cluster-ip-service
+                name: landing-page-cluster-ip-service
                 port:
-                  number: 3000
+                  number: 3002
+  ingressClassName: nginx
 
 
 
@@ -146,6 +148,113 @@ spec:
 
 # kubectl rollout restart deployment <deployment-name> 
 
+
+# To create a load balancer
+
+# Ingress-NGINX is a Kubernetes Ingress controller that uses NGINX as a reverse proxy and load balancer to manage external access to services in a Kubernetes cluster. It allows you to expose HTTP and HTTPS routes to services and provides features like SSL termination, path-based routing, and load balancing.
+
+# kubectl get ingress
+
+# kubectl get svc -A
+
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+# kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
+
+# kubectl apply -f k8s/ingress-service.yaml (checked if need to run again)
+
+
+
+# Helm
+
+# curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+
+# chmod 700 get_helm.sh
+
+# ./get_helm.sh
+
+
+# Cert manager install
+
+# Add the Jetstack Helm repository
+
+# helm repo add jetstack https://charts.jetstack.io
+
+# Update your local Helm chart repository cache:
+
+# helm repo update
+
+# Install the cert-manager Helm chart:
+
+# helm install \
+#   cert-manager jetstack/cert-manager \
+#   --namespace cert-manager \
+#   --create-namespace \
+#   --version v1.8.0 \
+#   --set installCRDs=true
+
+
+
+# 127.0.0.1 veryown.in
+# 127.0.0.1 sso.veryown.in
+# 127.0.0.1 admin.veryown.in
+# 127.0.0.1 overview.admin.veryown.in
+# 127.0.0.1 academy-admin.veryown.in
+# 127.0.0.1 api-auth.veryown.in
+# 127.0.0.1 api-admin.veryown.in
+# 127.0.0.1 api-academy.veryown.in
+# 127.0.0.1 api-common.veryown.in
+# 127.0.0.1 smallpond.academy.veryown.in
+# 127.0.0.1 remote-academy-admin.veryown.in
+ 
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ingress-service
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/use-regex: 'true'
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1
+#     nginx.ingress.kubernetes.io/enable-cors: "true"
+#     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+#     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
+#     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+#     nginx.ingress.kubernetes.io/proxy-body-size: "25m" # Increase body size limit
+#     kubernetes.io/ingress.class: "nginx"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     #nginx.ingress.kubernetes.io/ssl-redirect: "true"
+# spec:
+#   ingressClassName: nginx
+#   tls:
+#     - hosts:
+#         - "veryown.in"
+#         - "*.veryown.in"
+#       secretName: veryown-in-tls # The name of the secret containing your TLS certificate and key
+  
+
+# gcloud auth login
+# gcloud init
+# gcloud config set project veryown
+# gcloud components install kubectl
+# sudo apt-get install kubectl 
+# gcloud container clusters get-credentials my-first-cluster-2 --zone us-central1-c --project veryown
+# gcloud components install gke-gcloud-auth-plugin
+# sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
+
+# To switch contexts -
+
+# kubectl config get-contexts
+# kubectl config use-context docker-desktop
+
+# Delete context
+
+# kubectl delete context <context-name>
+
+# Restart deployment
+
+# kubectl rollout restart deployment <deployment-name> 
 
 # To create a load balancer
 
@@ -203,3 +312,10 @@ spec:
 # 127.0.0.1 smallpond.academy.veryown.in
 # 127.0.0.1 remote-academy-admin.veryown.in
  
+
+
+# kubectl create secret generic clouddns-secret --from-file=key.json=./veryown-d497e61123f7.json --namespace default
+# kubectl delete secret clouddns-secret --namespace cert-manager
+# kubectl get secret clouddns-secret --namespace default
+# kubectl describe secret clouddns-secret --namespace default
+# kubectl get secret clouddns-secret --namespace default -o jsonpath='{.data.key\.json}' | base64 --decode

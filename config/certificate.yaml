@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: doks-starter-kit.page
+  namespace: backend
+spec:
+  secretName: doks-starter-kit.page
+  issuerRef:
+    name: letsencrypt-dev-wcard
+    kind: Issuer
+    group: cert-manager.io
+  commonName: "*.veryown.in"
+  dnsNames:
+    - "veryown.in"
+    - "*.veryown.in"
+
+
+ # https://ruanbekker.hashnode.dev/cert-manager-dns-challenge-with-cloudflare-on-kubernetes

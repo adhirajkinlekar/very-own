@@ -1,0 +1,32 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-dev-wcard
+  namespace: backend
+spec:
+  acme:
+    email: adhirajkkinlekar@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-dev-wcard-private
+    # List of challenge solvers that will be used to solve ACME challenges for the matching domains.
+    solvers:
+    # Use the DigitalOcean DNS API to manage DNS-01 challenge records.
+      - dns01:
+          digitalocean:
+            # Kubernetes secret that contains the DO API token.
+            # Must be in the same namespace as the Issuer CRD.
+            tokenSecretRef:
+              name: digitalocean-dns
+              key: access-token
+
+ 
+# In Kubernetes, the ClusterIssuer resource is a cluster-scoped resource, so it does not reside in a specific namespace. Instead, it is available across the entire cluster.
+
+# kubectl create secret generic cloudflare-api-token-secret \
+# --from-literal=api-token=JY2nSyOja7hcYnyH3XeSYH95vyPvbtaY7rqKejW4
+
+# kubectl create secret generic "digitalocean-dns" \
+#   --namespace backend \
+#   --from-literal=access-token=dop_v1_add8658453f93e522522ffad22394eb3736ba09c7680043b59253af648e08136
+ 
