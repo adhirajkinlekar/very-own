@@ -61,7 +61,7 @@ const SignInPage = () => {
         document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.in; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `https://admin.veryown.in`;
+          window.location.href = `https://overview-admin.veryown.in`;
         }
         
         else if (publicId && service) {
@@ -153,7 +153,7 @@ const SignUpPage = ({showPopup}) => {
         document.cookie = `VERY_OWN_JWT_TOKEN=${result.token}; path=/; domain=.veryown.in; samesite=strict`;// ;secure; is rquired for http
 
         if (publicId_service == "admin") {
-          window.location.href = `https://admin.veryown.in`;
+          window.location.href = `https://overview-admin.veryown.in`;
         }
         
         else if (publicId && service) {

@@ -1,0 +1,7 @@
+aside {
+    max-height: calc(100vh - 2rem); /* Adjust the value based on your header/footer height if necessary */
+  }
+  
+  .overflow-y-auto {
+    overflow-y: auto;
+  }

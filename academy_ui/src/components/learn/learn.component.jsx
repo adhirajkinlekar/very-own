@@ -47,49 +47,50 @@ const CoursePage = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen bg-gray-50">
-      <aside className="w-full md:w-1/4 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-        <input
-          type="text"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-100"
-          placeholder="Search feature is not yet implemented"
-        />
-        {lectures.map((section, i) => (
-          <div key={i} className="mb-6">
-            <h3 className="text-xl font-semibold mb-2 text-gray-900">{section.title}</h3>
-            {section.lectures.map((item, j) => (
-              <div
-                key={j}
-                className={`cursor-pointer p-3 rounded-lg flex items-center transition-colors duration-300 ${selectedLecture === item ? 'bg-indigo-100 border border-indigo-200' : 'hover:bg-indigo-50'}`}
-                onClick={() => selectLecture(i, j)}
-              >
-                <div className="text-gray-800">
-                  {j + 1}. {item.title}
-                </div>
-              </div>
-            ))}
+    <div className="flex flex-col lg:flex-row w-full min-h-screen bg-gray-50">
+  <aside className="w-full lg:w-1/4 p-4 lg:p-6 bg-white shadow-lg rounded-lg border border-gray-200 overflow-y-auto">
+    <input
+      type="text"
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-6 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-100"
+      placeholder="Search feature is not yet implemented"
+    />
+    {lectures.map((section, i) => (
+      <div key={i} className="mb-4 lg:mb-6">
+        <h3 className="text-lg lg:text-xl font-semibold mb-2 text-gray-900">{section.title}</h3>
+        {section.lectures.map((item, j) => (
+          <div
+            key={j}
+            className={`cursor-pointer p-2 lg:p-3 rounded-lg flex items-center transition-colors duration-300 ${selectedLecture === item ? 'bg-indigo-100 border border-indigo-200' : 'hover:bg-indigo-50'}`}
+            onClick={() => selectLecture(i, j)}
+          >
+            <div className="text-gray-800">
+              {j + 1}. {item.title}
+            </div>
           </div>
         ))}
-      </aside>
-      <main className="w-full md:w-3/4 p-6 bg-white shadow-lg rounded-lg ml-0 md:ml-4">
-        {selectedLecture ? (
-          <>
-            {/* <h2 className="text-3xl font-extrabold mb-4 text-gray-900">{selectedLecture?.title}</h2> */}
-           <VideoPlayer selectedLecture={selectedLecture}/>
-          </>
-        ) : (
-          <div className="flex items-center justify-center h-full text-gray-500">
-            <p>Select a lecture to start learning</p>
-          </div>
-        )}
-      </main>
-    </div>
+      </div>
+    ))}
+  </aside>
+  <main className="w-full lg:w-3/4 p-4 lg:p-6 bg-white shadow-lg rounded-lg mt-4 lg:mt-0 lg:ml-4">
+    {selectedLecture ? (
+      <>
+        {/* <h2 className="text-2xl lg:text-3xl font-extrabold mb-4 text-gray-900">{selectedLecture?.title}</h2> */}
+        <VideoPlayer selectedLecture={selectedLecture} />
+      </>
+    ) : (
+      <div className="flex items-center justify-center h-full text-gray-500">
+        <p>Select a lecture to start learning</p>
+      </div>
+    )}
+  </main>
+</div>
+
   );
 };
 
 function VideoPlayer({ selectedLecture }) {
   return (
-    <div className="video-container mb-6 p-4 bg-gray-100 rounded-lg shadow-sm">
+    <div className="video-container mb-4 lg:mb-6 p-2 lg:p-4 bg-gray-100 rounded-lg shadow-sm">
       <video
         controls
         autoPlay
