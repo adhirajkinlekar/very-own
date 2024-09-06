@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src="https://via.placeholder.com/50" alt="Logo" className="logo" />
+        <img src="https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Logo" className="logo" />
         <span>Luxuria</span>
       </div>
       <ul className="navbar-links">

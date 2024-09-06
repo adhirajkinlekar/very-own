@@ -3,7 +3,7 @@ import { FaGraduationCap, FaVideo, FaStore } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function HomeSection() {
-    
+
     return (<div>
         {/* Services Section */}
         <section className="py-16">
@@ -19,8 +19,15 @@ function HomeSection() {
                         <p className="text-gray-700 mb-6">
                             Start your own streaming service for video content, with seamless playback, subscriptions, and user engagement features.
                         </p>
-                        <small style={{ color: 'red', fontSize: '14px' }}>(coming soon)</small>
+                        <div>
 
+                            <small style={{ color: 'red', fontSize: '15px' }}>(coming soon)</small>
+
+                        </div>
+
+                        <Link to="/popular-academies" className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-500 transition-colors duration-300">
+                            Learn More
+                        </Link>
                         {/* <a  className="text-indigo-600 hover:text-indigo-400 font-semibold">Learn More</a> */}
                     </div>
 
@@ -33,6 +40,12 @@ function HomeSection() {
                         <p className="text-gray-700 mb-6">
                             Launch your own online learning platform, complete with courses, quizzes, and certification options. Perfect for educators and institutions.
                         </p>
+
+                        <div>
+
+                            <small style={{ color: 'green', fontSize: '15px' }}>(Service is live)</small>
+
+                        </div>
                         <Link to="/popular-academies" className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-500 transition-colors duration-300">
                             Learn More
                         </Link>
@@ -41,13 +54,21 @@ function HomeSection() {
 
 
                     {/* Store Service */}
-                    <div style={{ opacity: 0.7, pointerEvents: 'none' }} className="bg-white shadow-2xl rounded-lg p-8 text-center hover:transform hover:scale-105 transition-transform duration-300">
+                    <div className="bg-white shadow-2xl rounded-lg p-8 text-center hover:transform hover:scale-105 transition-transform duration-300">
                         <FaStore className="text-green-600 text-6xl mx-auto mb-6" />
                         <h3 className="text-2xl font-bold mb-4">Store</h3>
                         <p className="text-gray-700 mb-6">
                             Set up your own e-commerce store to sell products globally. Manage inventory, payments, and shipping with ease using our comprehensive platform.
                         </p>
-                        <small style={{ color: 'red', fontSize: '14px' }}>(coming soon)</small>
+                        <div>
+
+                            <small style={{ color: 'red', fontSize: '15px' }}>(Coming soon - Demo available)</small>
+
+                        </div>
+
+                        <Link to="/popular-stores" className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-500 transition-colors duration-300">
+                            Learn More
+                        </Link>
 
                         {/* <a className="text-indigo-600 hover:text-indigo-400 font-semibold">Learn More</a> */}
                     </div>

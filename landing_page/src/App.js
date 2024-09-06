@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import AcademyShowcase from './AcademyShowcase';
 import HomeSection from './Home';
+import StoreShowcase from './StoreShowcase';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeSection />} />
           <Route path="/popular-academies" element={<AcademyShowcase />} />
+          <Route path="/popular-stores" element={<StoreShowcase />} />
           {/* Add more routes here for other pages */}
         </Routes>
 

@@ -25,6 +25,7 @@ ul {
   align-items: center;
   padding: 1rem 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .navbar-brand {
@@ -37,6 +38,8 @@ ul {
 .navbar-brand .logo {
   border-radius: 50%;
   margin-right: 0.5rem;
+  width: 50px; /* Fixed size for better alignment */
+  height: 50px; /* Fixed size for better alignment */
 }
 
 .navbar-links {
@@ -53,6 +56,36 @@ ul {
 
 .navbar-links li:hover {
   color: #f39c12;
+}
+
+/* Mobile Menu Button */
+.navbar-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-menu.active {
+  display: block;
+  position: absolute;
+  top: 60px;
+  right: 1rem;
+  background-color: #1a1a1d;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.navbar-menu li {
+  margin-bottom: 1rem;
 }
 
 /* Hero Section */
@@ -183,4 +216,90 @@ ul {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   font-size: 1rem;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-section h3 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  .explore-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .product-list {
+    gap: 1rem;
+  }
+
+  .product-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-brand .logo {
+    margin-right: 0.3rem;
+    width: 40px; /* Adjusted size */
+    height: 40px; /* Adjusted size */
+  }
+
+  .navbar-links li {
+    font-size: 0.9rem;
+  }
+
+  .hero-section h3 {
+    font-size: 1.8rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .explore-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .product-details h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-details p {
+    font-size: 1.1rem;
+  }
 }
