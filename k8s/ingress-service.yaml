@@ -112,6 +112,16 @@ spec:
                 name: common-service-cluster-ip-service
                 port:
                   number: 3004
+    - host: "demo-store.veryown.in"
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: store-ui-cluster-ip-service
+                port:
+                  number: 3005
     - host: "*.veryown.in"
       http:
         paths:
@@ -123,7 +133,6 @@ spec:
                 port:
                   number: 3000
   ingressClassName: nginx
-
 
 
 # gcloud auth login
@@ -139,6 +148,7 @@ spec:
 
 # kubectl config get-contexts
 # kubectl config use-context docker-desktop
+# kubectl config use-context gke_veryown_us-central1-c_my-first-cluster-1
 
 # Delete context
 

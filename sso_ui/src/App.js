@@ -65,7 +65,7 @@ const SignInPage = () => {
         }
         
         else if (publicId && service) {
-          window.location.href = `https://${publicId}.${service}.veryown.in`;
+          window.location.href = `https://${publicId}.veryown.in`;
 
         }
       } else {
@@ -157,7 +157,7 @@ const SignUpPage = ({showPopup}) => {
         }
         
         else if (publicId && service) {
-          window.location.href = `https://${publicId}.${service}.veryown.in`;
+          window.location.href = `https://${publicId}.veryown.in`;
 
         }
       } else {

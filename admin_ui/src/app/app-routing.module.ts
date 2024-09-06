@@ -65,10 +65,9 @@ const academyRoutes:Routes = [
 
 const hostnameSplit = window.location.hostname.split(".");
 
-const routes = (hostnameSplit.length === 3 || 
-  (hostnameSplit.length === 4 && hostnameSplit[0] === "overview")) 
+const routes = ( hostnameSplit[0] === "overview-admin")
   ? overviewRoutes 
-  : hostnameSplit[0] === "academy" 
+  : hostnameSplit[0] === "academy-admin" 
   ? academyRoutes 
   : [];
  

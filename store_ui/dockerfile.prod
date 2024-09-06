@@ -1,0 +1,44 @@
+# Stage 1: Build the Angular app
+FROM node:18-alpine AS build
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the Angular app
+RUN npm run build --prod
+
+# Stage 2: Serve the app with Nginx
+FROM nginx:alpine
+
+# Copy the custom Nginx configuration file
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Copy the built Angular app to the Nginx directory
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+
+# Docker build : docker build -f dockerfile.prod -t adhirajk/store-ui:1.0.0 .
+
+# docker run -p 3005:80 adhirajk/store-ui:1.0.0
+
+# recheck if this is optimal for tagging and pushing
+
+# docker tag adhirajk/store-ui:1.0.0 adhirajk/store-ui:1.0.0
+
+# docker push adhirajk/store-ui:1.0.0
+
+

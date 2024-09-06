@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-ui-deployment
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-ui
+  template:
+    metadata:
+      labels:
+        app: store-ui
+    spec:
+      containers:
+        - name: store-ui
+          image: docker.io/adhirajk/store-ui:1.0.0
+          ports:
+            - containerPort: 80  # Internal port exposed by the container
+          env:
+            - name: API_BASE_URL
+              value: https://store-service:5001  # Service name for academy_service
+            - name: API_COMMONSERVICE_URL
+              value: https://common-service:3004  # Service name for common_service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-ui-cluster-ip-service
+  namespace: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: store-ui
+  ports:
+    - port: 3005  # Exposed port
+      targetPort: 80  # The port inside the container
