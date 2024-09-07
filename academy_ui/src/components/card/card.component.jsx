@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Card extends Component {
   render() {
-    const { id, title, imageURL, rating } = this.props;
+    const { id, title, imageURL } = this.props;
 
     return (
       <Link to={`/courses/${id}`}>
@@ -19,10 +19,10 @@ class Card extends Component {
               {title.length > 30 ? `${title.slice(0, 30)}...` : title}
             </h5>
             <div className="card-rating">
-              <div className="rating-text">{rating} / 5</div>
+              <div className="rating-text">5 / 5</div>
               <div className="rating-stars">
                 {[...Array(5)].map((_, index) => (
-                  <span key={index} className={`star ${index < Math.round(rating) ? 'filled' : ''}`}>
+                  <span key={index} className={`star ${index < Math.round(5) ? 'filled' : ''}`}>
                     &#9733;
                   </span>
                 ))}

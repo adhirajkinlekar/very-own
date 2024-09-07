@@ -67,9 +67,9 @@ const CourseDetails = () => {
                                 alt={course.title}
                                 className="w-full h-64 object-cover rounded-lg shadow-lg"
                             />
-                            <button
+                            <button style={{background: '#3b82f6'}}
                                 onClick={handleButtonClick}
-                                className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+                                className="w-full py-3 text-white text-lg font-semibold rounded-lg shadow-md transition duration-300"
                             >
                                 {isAuthenticated ? 'Go to course' : 'Login to view'}
                             </button>

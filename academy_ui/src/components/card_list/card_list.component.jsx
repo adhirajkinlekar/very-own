@@ -13,8 +13,7 @@ const CardList = () => {
                         <Card
                             id={course._id}
                             title={course.courseName}
-                            imageURL={course.imageUrl}
-                            rating={course.rating}
+                            imageURL={course.imageUrl} 
                         />
                     </div>
                 ))
