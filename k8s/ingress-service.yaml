@@ -119,9 +119,19 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: store-ui-cluster-ip-service
+                name: customer-reverse-proxy-cluster-ip-service
                 port:
-                  number: 3005
+                  number: 3006
+    - host: "smallpond.veryown.in"
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: customer-reverse-proxy-cluster-ip-service
+                port:
+                  number: 3006
     - host: "*.veryown.in"
       http:
         paths:

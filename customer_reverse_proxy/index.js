@@ -15,23 +15,20 @@ app.use((req, res, next) => {
             subdomain = domainParts[0]; // Subdomain will be the first part
         } else {
             throw new Error("Bad Request: No subdomain found");
-        }
+        } 
 
         // Set the target based on the subdomain
         const target = subdomain === "smallpond"
-            ? "https://academy-ui-cluster-ip-service:3000"
-            : "https://store-ui-cluster-ip-service:3005";
+            ? "http://academy-ui-cluster-ip-service:3000"
+            : "http://store-ui-cluster-ip-service:3005";
 
-        console.log(`Proxying request to: ${target}`);
+            console.log(`Proxying request to: ${target}`);
 
         // Create and call the proxy middleware with the dynamic target
         const proxy = createProxyMiddleware({
             target,
             changeOrigin: true,
-            onError(err, req, res) {
-                console.error('Proxy error:', err);
-                res.status(500).send('Proxy error');
-            }
+            secure: true
         });
 
         // Pass the request to the proxy middleware
