@@ -257,7 +257,7 @@ spec:
 
 # kubectl config get-contexts
 # kubectl config use-context docker-desktop
-
+# kubectl config use-context gke_veryown_us-central1-c_my-first-cluster-1 
 # Delete context
 
 # kubectl delete context <context-name>
@@ -305,7 +305,7 @@ spec:
 #   cert-manager jetstack/cert-manager \
 #   --namespace cert-manager \
 #   --create-namespace \
-#   --version v1.8.0 \
+#   --version v1.13.3 \
 #   --set installCRDs=true
 
 
@@ -335,6 +335,10 @@ spec:
 
 # Steps to set up HTTPS
 
+# Install ingress load balancer
+
+# Add IP address to dns records
+
 # Intall Heml and cert-manager
 
 # helm install \
@@ -347,6 +351,8 @@ spec:
 # Crete namespace - kubectl create namespace backend
 
 # Create secret of token
+
+# Check if IP address is propagated
 
 # kubectl create secret generic "digitalocean-dns" \
 #   --namespace backend \

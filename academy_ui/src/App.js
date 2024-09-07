@@ -10,6 +10,7 @@ import axiosInstance from './util/axiosInterceptor';
 import './App.css';  
 
 const App = () => {
+  const url = window.location.hostname;
   const [publicId] = useState(url.split('.')[0]);
   const [academy, setAcademy] = useState(null);
   const [courses, setCourses] = useState(null);
@@ -111,10 +112,10 @@ const App = () => {
                     </div>
                   ) : (
                     <div className="auth-buttons">
-                      <a href={`http://sso.veryown.in/secure/${publicId}_academy/signin`} className="auth-link">
+                      <a href={`https://sso.veryown.in/secure/${publicId}_academy/signin`} className="auth-link">
                         <button className="auth-button">Sign In</button>
                       </a>
-                      <a href={`http://sso.veryown.in/secure/${publicId}_academy/signup`} className="auth-link">
+                      <a href={`https://sso.veryown.in/secure/${publicId}_academy/signup`} className="auth-link">
                         <button className="auth-button">Sign Up</button>
                       </a>
                     </div>
