@@ -20,8 +20,8 @@ app.get('/', (req, res, next) => {
 
         // Set the target based on the subdomain
         const target = subdomain === "smallpond"
-            ? "http://landing.in/3002"
-            : "http://landing.in/3002";
+            ? "https://admin-academy-ui-cluster-ip-service:3000"
+            : "http://store-ui-cluster-ip-service/3005";
 
         console.log(`Proxying request to: ${target}`);
 
@@ -41,13 +41,15 @@ app.get('/', (req, res, next) => {
     }
 });
 
+
 // Global error-handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack for debugging
     res.status(500).json({ message: err.message || "Internal Server Error" });
 });
 
-app.listen(3000, '0.0.0.0', () => { // Make sure that your server listens on all interfaces (or at least 127.0.0.1) with this configuration:
-    console.log('Proxy server is running on port 3000');
+// Start the server
+const PORT = process.env.PORT || 3006;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Reverse proxy server is running on port ${PORT}`);
 });
-
