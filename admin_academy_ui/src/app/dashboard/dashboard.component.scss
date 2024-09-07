@@ -14,6 +14,7 @@
   gap: 30px;
   justify-content: space-between;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 /* Dashboard Card Styling */
@@ -28,12 +29,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 250px; /* Ensure a minimum width for cards */
+  max-width: calc(33.33% - 30px); /* Max width for three cards layout */
 }
 
 .card:hover {
   transform: translateY(-8px);
 }
 
+/* Icon Styling */
 .card-icon {
   font-size: 2.5rem;
   margin-bottom: 15px;
@@ -264,3 +268,14 @@
   font-weight: 500;
 }
 
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+  .dashboard-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    max-width: 100%; /* Cards take full width on smaller screens */
+  }
+}

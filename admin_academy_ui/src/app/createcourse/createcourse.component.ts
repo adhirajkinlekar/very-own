@@ -125,4 +125,31 @@ export class CreatecourseComponent {
       );
     }
   }
+
+  fillWithDummyData() {
+    this.course = {
+      title: `Introduction to ${Math.floor(Math.random() * 1000)}`,
+      headline: `Learn ${Math.floor(Math.random() * 1000)} scratch`,
+      description: `This course provides a comprehensive introduction to ${Math.floor(Math.random() * 1000)}, covering basic to advanced concepts.`,
+      sections: [
+        {
+          title: `Getting Started with ${Math.floor(Math.random() * 1000)}`,
+          lectures: [
+            { title: `Introduction to ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741926017.mp4` },
+            { title: `Setting up ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
+          ]
+        },
+        {
+          title: `Advanced ${Math.floor(Math.random() * 1000)} Topics`,
+          lectures: [
+            { title: `${Math.floor(Math.random() * 1000)} and ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724781950981.mp4` },
+            { title: `Create new ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4`}
+          ]
+        }
+      ]
+    };
+    // Optional: Set a dummy image URL
+    this.courseImagePreview = 'https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4491461.webp';
+    this.course.imageUrl = 'https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4491461.webp';
+  }
 }

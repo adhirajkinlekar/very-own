@@ -4,14 +4,13 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 // Middleware to handle subdomain logic and proxy
-app.get('/', (req, res, next) => {
+app.use((req, res, next) => {
     try {
-
         const host = req.headers.host; // Get the host from the request headers
         const domainParts = host.split('.'); // Split the host by dots
 
         let subdomain;
-        // Check if there is a subdomain
+
         if (domainParts.length > 2) {
             subdomain = domainParts[0]; // Subdomain will be the first part
         } else {
@@ -20,8 +19,8 @@ app.get('/', (req, res, next) => {
 
         // Set the target based on the subdomain
         const target = subdomain === "smallpond"
-            ? "https://admin-academy-ui-cluster-ip-service:3000"
-            : "http://store-ui-cluster-ip-service/3005";
+            ? "https://academy-ui-cluster-ip-service:3000"
+            : "https://store-ui-cluster-ip-service:3005";
 
         console.log(`Proxying request to: ${target}`);
 
@@ -29,22 +28,23 @@ app.get('/', (req, res, next) => {
         const proxy = createProxyMiddleware({
             target,
             changeOrigin: true,
+            onError(err, req, res) {
+                console.error('Proxy error:', err);
+                res.status(500).send('Proxy error');
+            }
         });
 
         // Pass the request to the proxy middleware
         proxy(req, res, next);
-
-
     } catch (err) {
-        console.log({ err })
+        console.error('Error in proxy handling:', err);
         next(err); // Pass the error to the global error handler
     }
 });
 
-
 // Global error-handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack); // Log the error stack for debugging
+    console.error('Global error handler:', err.stack); // Log the error stack for debugging
     res.status(500).json({ message: err.message || "Internal Server Error" });
 });
 

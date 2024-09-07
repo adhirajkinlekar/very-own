@@ -84,11 +84,11 @@ export class CreateAcademyComponent {
     return str.replace(/\s+/g, '').toLocaleLowerCase();
   }
 
-  fillFormWithRandomData(): void {
-    const randomAcademyName = `Academy ${Math.floor(Math.random() * 1000)}`;
-    const randomHeadline = `The Best Academy ${Math.floor(Math.random() * 1000)}`;
-    const randomDescription = `This is a description for ${randomAcademyName}. It is a top-notch academy that provides exceptional services.`;
-    const randomImageUrl = 'https://via.placeholder.com/150'; // Placeholder image URL
+  fillFormWithRandomData(): void { 
+    const randomAcademyName = this.getRandomAcademyName();
+    const randomHeadline = `A premier learning institution`;
+    const randomDescription = `This is a description for ${randomAcademyName}. It is a premier institution renowned for its exceptional educational services and innovative learning approaches. With a commitment to excellence, it offers a diverse range of programs designed to cater to the needs of students at all levels. The academy boasts a team of highly qualified educators and industry professionals dedicated to delivering top-notch instruction and support. Students benefit from state-of-the-art facilities, cutting-edge resources, and a dynamic curriculum that prepares them for success in their chosen fields. `;
+    const randomImageUrl = this.getRandomUrl()
 
     this.myForm.setValue({
       academyName: randomAcademyName,
@@ -99,5 +99,53 @@ export class CreateAcademyComponent {
 
     // Set image preview
     this.imagePreview = randomImageUrl;
+  }
+
+  getRandomAcademyName() {
+    const academyNames = [
+      "Horizon Academy", "Phoenix Scholars", "Summit Learning", "Redwood Academy", "Beacon Hill",
+      "Silver Oak", "Nova Academy", "Crestview Academy", "Legacy Academy", "Blue Ridge",
+      "Pioneer Academy", "Starlight Academy", "Evergreen Academy", "Unity Scholars", "Valor Academy",
+      "Zenith Scholars", "Aspen Grove", "Radiant Academy", "Orion Academy", "Ivywood Academy",
+      "Sunrise Academy", "Vanguard Academy", "Solstice Academy", "Harmony Scholars", "Ironwood Academy",
+      "Celestial Academy", "Noble Path", "Crimson Peak", "Willow Creek", "Ascend Scholars",
+      "Synergy Academy", "Blue Horizon", "Ember Academy", "Sapphire Academy", "Eagle Heights",
+      "Lighthouse Academy", "Riverstone Academy", "Summit Crest", "Phoenix Heights", "Monarch Academy",
+      "Bright Futures", "Arbor Academy", "Paragon Scholars", "Golden Leaf", "Canyon View",
+      "Atlas Academy", "Grandview Academy", "Aurora Scholars", "Zenith Point", "Odyssey Academy",
+      "Riverbend Academy", "Silver Creek", "Blue Wave", "Wildwood Academy", "Pinnacle Academy",
+      "Radiance Academy", "Summit Ridge", "Iron Gate", "Quest Academy", "Sapphire Scholars",
+      "Woodland Academy", "Vanguard Heights", "Bright Horizons", "Westwood Academy", "Noble Heights",
+      "Coastal Scholars", "Crescent Ridge", "Legacy Heights", "Sterling Academy", "Suncrest Academy",
+      "Summit Edge", "Sapphire Ridge", "Windward Academy", "Harbor Scholars", "Ember Ridge",
+      "Tranquil Scholars", "Cascade Academy", "Starcrest Academy", "Liberty Ridge", "Brookstone Academy",
+      "Evergreen Scholars", "Alpine Heights", "Brightstone Academy", "Mountainview Academy"
+    ];
+  
+    // Select a random name from the list
+    const randomAcademyName = academyNames[Math.floor(Math.random() * academyNames.length)];
+  
+    // Generate a random 4-digit number
+    const randomNumber = Math.floor(1000 + Math.random() * 9000);
+  
+    // Combine the academy name with the random number
+    return `${randomAcademyName}${randomNumber}`;
+  }
+
+  getRandomUrl() {
+
+    const urls = [
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-joshua-mcknight-442355-1139311.jpg",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-1007027.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-4778403.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-5088188.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-7594419.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-8472998.webp"
+    ];
+  
+    // Select a random URL from the array
+    const randomUrl = urls[Math.floor(Math.random() * urls.length)];
+  
+    return randomUrl;
   }
 }

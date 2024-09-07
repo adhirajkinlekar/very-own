@@ -8,11 +8,8 @@
   </div>
 
   <!-- Button to fill form with random values -->
-  <div class="text-right mb-4">
-    <button (click)="fillFormWithRandomData()" class="btn btn-secondary">
-      Fill with dummy Data
-    </button>
-  </div>
+  <button class="btn-fill-dummy" (click)="fillFormWithRandomData()"> Fill with dummy Data </button>
+
 
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <!-- Academy Name -->

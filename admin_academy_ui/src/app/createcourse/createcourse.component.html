@@ -1,6 +1,9 @@
 <div class="create-course-container">
   <h2 class="title">Create a New Course</h2>
 
+  <button class="btn-fill-dummy" (click)="fillWithDummyData()">Fill with Dummy Data</button>
+
+  <!-- Rest of the form -->
   <div class="form-group">
     <label for="courseTitle">Course Title:</label>
     <input id="courseTitle" class="form-input" [(ngModel)]="course.title" required>

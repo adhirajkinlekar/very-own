@@ -156,3 +156,15 @@ button {
 .form-input, textarea.form-input, button {
   transition: all 0.3s ease;
 }
+
+.btn-fill-dummy {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+}

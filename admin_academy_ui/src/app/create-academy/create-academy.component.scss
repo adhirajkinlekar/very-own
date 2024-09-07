@@ -120,3 +120,55 @@ textarea.form-control {
 .form-control, textarea.form-control {
   transition: all 0.3s ease;
 }
+
+
+/* Add this CSS to your stylesheet */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Adjust as needed */
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Adjust as needed */
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Focus outline for accessibility */
+}
+
+/* Optional: Adding a shadow effect for better visual */
+.btn-secondary {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
+}
+
+.btn-fill-dummy {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+}

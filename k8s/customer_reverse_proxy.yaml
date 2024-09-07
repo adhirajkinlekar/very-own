@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: academy-service-deployment
+  name: customer-reverse-proxy-deployment
   namespace: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: academy-service
+      app: customer-reverse-proxy
   template:
     metadata:
       labels:
-        app: academy-service
+        app: customer-reverse-proxy
     spec:
       containers:
-        - name: academy-service
-          image: docker.io/adhirajk/academy-service:1.0.2   
+        - name: customer-reverse-proxy
+          image: docker.io/adhirajk/customer-reverse-proxy:1.0.0 
           ports:
-            - containerPort: 5001
+            - containerPort: 3006
           env:
             - name: NATS_URL
               value: https://nats-streaming-cluster-ip-service:4222
----
+---                  
 apiVersion: v1
 kind: Service
 metadata:
-  name: academy-service-cluster-ip-service
+  name: customer-reverse-proxy-cluster-ip-service
   namespace: backend
 spec:
   type: ClusterIP
   selector:
-    app: academy-service
+    app: customer-reverse-proxy
   ports:
-    - port: 5001
-      targetPort: 5001
+    - port: 3006
+      targetPort: 3006

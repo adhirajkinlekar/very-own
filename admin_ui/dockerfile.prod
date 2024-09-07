@@ -32,13 +32,13 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
  
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/admin_ui:1.0.1 .
+# Docker build : docker build -f dockerfile.prod -t adhirajk/admin_ui:1.0.2 .
 
-# docker run -p 4200:80 adhirajk/admin_ui:1.0.1
+# docker run -p 4200:80 adhirajk/admin_ui:1.0.2
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/admin_ui:1.0.1 adhirajk/admin_ui:1.0.1
+# docker tag adhirajk/admin_ui:1.0.2 adhirajk/admin_ui:1.0.2
 
-# docker push adhirajk/admin_ui:1.0.1
+# docker push adhirajk/admin_ui:1.0.2
 
