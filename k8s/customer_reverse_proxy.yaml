@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: customer-reverse-proxy
-          image: docker.io/adhirajk/customer-reverse-proxy:1.1.5
+          image: docker.io/adhirajk/customer-reverse-proxy:1.1.6
           ports:
             - containerPort: 3006
           env:

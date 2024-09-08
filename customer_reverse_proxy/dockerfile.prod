@@ -20,13 +20,13 @@ EXPOSE 3006
 CMD ["npm", "start"]
 
 
-# Docker build : docker build -f dockerfile.prod -t adhirajk/customer-reverse-proxy:1.1.5 .
+# Docker build : docker build -f dockerfile.prod -t adhirajk/customer-reverse-proxy:1.1.6 .
 
-# docker run -p 3006:3006 adhirajk/customer-reverse-proxy:1.1.5
+# docker run -p 3006:3006 adhirajk/customer-reverse-proxy:1.1.6
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/customer-reverse-proxy:1.1.5 adhirajk/customer-reverse-proxy:1.1.5
+# docker tag adhirajk/customer-reverse-proxy:1.1.6 adhirajk/customer-reverse-proxy:1.1.6
 
-# docker push adhirajk/customer-reverse-proxy:1.1.5
+# docker push adhirajk/customer-reverse-proxy:1.1.6
 

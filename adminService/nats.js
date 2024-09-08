@@ -13,7 +13,7 @@ let attempt = 0;
 let client;
 
 const tryConnect = () => {
-    client = stan.connect(clusterID, clientID, { url });
+    client = stan.connect(clusterID, clientID,  { url, waitOnFirstConnect: true});
 
     client.on('connect', () => {
         console.log('Connected to NATS Streaming');

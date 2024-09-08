@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: docker.io/adhirajk/auth-service:1.1.1 
+          image: docker.io/adhirajk/auth-service:1.1.2
           ports:
             - containerPort: 5000
           env:

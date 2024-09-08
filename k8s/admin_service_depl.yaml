@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: admin-service
-          image: docker.io/adhirajk/admin-service:1.0.2
+          image: docker.io/adhirajk/admin-service:1.0.3
           ports:
             - containerPort: 3003
           env:

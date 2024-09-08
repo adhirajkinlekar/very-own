@@ -3,14 +3,13 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const mongoose = require('mongoose');
 const { createClient } = require('redis');
 const Subdomain = require('./models/subdomain');
-// const client = require('./nats'); // Import the NATS client
-
+const client = require('./nats'); // Import the NATS client
 
 // Check NATS client connection
-// if (!client || client.isClosed()) {
-//     console.error('NATS Streaming client is not connected!');
-//     process.exit(1);
-// }
+if (!client || client.isClosed()) {
+    console.error('NATS Streaming client is not connected!');
+    process.exit(1);
+}
 
 const app = express();
 

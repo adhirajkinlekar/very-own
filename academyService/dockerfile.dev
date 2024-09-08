@@ -20,12 +20,13 @@ EXPOSE 5001
 CMD ["npm", "start"]
 
 
-# Docker build : docker build -f dockerfile.dev -t adhirajk/academy-service:1.0.4 .
+# Docker build : docker build -f dockerfile.dev -t adhirajk/academy-service:1.0.5 .
 
-# docker run -p 5000:5000 adhirajk/academy-service:1.0.4
+# docker run -p 5000:5000 adhirajk/academy-service:1.0.5
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/academy-service:1.0.4 adhirajk/academy-service:1.0.4
+# docker tag adhirajk/academy-service:1.0.5 adhirajk/academy-service:1.0.5
 
-# docker push adhirajk/academy-service:1.0.4
+# docker push adhirajk/academy-service:1.0.5
+

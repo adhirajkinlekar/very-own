@@ -20,12 +20,12 @@ EXPOSE 3003
 CMD ["npm", "start"]
 
 
-# Docker build : docker build -f dockerfile.dev -t adhirajk/admin-service:1.0.2 .
+# Docker build : docker build -f dockerfile.dev -t adhirajk/admin-service:1.0.3 .
 
-# docker run -p 3003:3003 adhirajk/admin-service:1.0.2
+# docker run -p 3003:3003 adhirajk/admin-service:1.0.3
 
 # recheck if this is optimal for tagging and pushing
 
-# docker tag adhirajk/admin-service:1.0.2 adhirajk/admin-service:1.0.2
+# docker tag adhirajk/admin-service:1.0.3 adhirajk/admin-service:1.0.3
 
-# docker push adhirajk/admin-service:1.0.2
+# docker push adhirajk/admin-service:1.0.3
