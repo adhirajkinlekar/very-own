@@ -5,7 +5,7 @@ const clusterID = 'test-cluster';
 const clientID = 'academy-service';
 const url = process.env.NATS_URL || 'nats://localhost:4222';
 
-const retries = 5;
+const retries = 20;
 const delay = 5000; // 5 seconds
 
 let attempt = 0;
@@ -30,7 +30,7 @@ const tryConnect = () => {
     });
 
     client.on('close', () => {
-        console.log('Subscriber connection closed');
+        console.log('academy-service connection closed');
         attempt++;
         if (attempt < retries) {
             console.log(`Retrying in ${delay / 1000} seconds...`);
@@ -44,5 +44,4 @@ const tryConnect = () => {
 // Start the connection attempt
 tryConnect();
 
-// Export the client object
 module.exports = client;

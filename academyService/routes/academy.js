@@ -49,31 +49,12 @@ router.post('/', getCurrentUser, async (req, res) => {
 
         const savedAcademy = await newAcademy.save();
 
-        client.publish('academy.created', JSON.stringify({ serviceImageURL: imageUrl, servicePublicId: publicId, serviceId: savedAcademy._id }), (err, guid) => {
+        client.publish('service.created', JSON.stringify({ serviceImageURL: imageUrl, servicePublicId: publicId, serviceId: savedAcademy._id, type: 'academy', userId: req.currentUser.id }), (err, guid) => {
             // if (err) {
             //   return res.status(500).send('Publish failed: ' + err);
             // }
             // res.send('Login event published with guid: ' + guid);
         });
-
-        client.publish('service.created', JSON.stringify({ serviceId: savedAcademy._id, type: 'academy', userId: req.currentUser.id}), (err, guid) => {
-            if (err) {
-
-                console.log({err})
-                        }
-            // res.send('Login event published with guid: ' + guid);
-        });
-
-
-        // if you need to ensure that the publish action completes successfully before sending the response back to the client, convert client.publish to a Promise
-        // await new Promise((resolve, reject) => {
-        //     client.publish('academy.created', JSON.stringify(savedAcademy), (err, guid) => {
-        //         if (err) {
-        //             return reject(err);
-        //         }
-        //         resolve(guid);
-        //     });
-        // });
 
 
         res.status(201).json({ academyId: savedAcademy.id });

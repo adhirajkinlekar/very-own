@@ -20,7 +20,7 @@ const tryConnect = () => {
         console.log('Connected to NATS Streaming');
 
         // Subscribe to the subject
-        const subscription = client.subscribe('academy.created');
+        const subscription = client.subscribe('service.created');
 
         // Handle incoming messages
         subscription.on('message', async (msg) => {
@@ -30,8 +30,11 @@ const tryConnect = () => {
 
                 console.log({ parsedData });
 
+                const {serviceImageURL, servicePublicId, serviceId} = parsedData
+
                 // Create a new instance of ServiceSSODetail and save it
-                const newssoDetails = new ServiceSSODetail(parsedData);
+                const newssoDetails = new ServiceSSODetail({serviceImageURL, servicePublicId, serviceId});
+                
                 await newssoDetails.save();
 
                 console.log('Received a message and saved to the database:', parsedData);

@@ -6,7 +6,7 @@ const clusterID = 'test-cluster';
 const clientID = 'admin-service';
 const url = process.env.NATS_URL || 'nats://localhost:4222';
 
-const retries = 5;
+const retries = 10;
 const delay = 5000; // 5 seconds
 
 let attempt = 0;
@@ -29,11 +29,15 @@ const tryConnect = () => {
 
                 console.log({ parsedData });
 
+                const {serviceId, type, userId} = parsedData;
+
                 // Create a new instance of ServiceSSODetail and save it
-                const newServiceEnrollment = new serviceEnrollment(parsedData);
+                const newServiceEnrollment = new serviceEnrollment({serviceId, type, userId});
+
                 await newServiceEnrollment.save();
 
                 console.log('Received a message and saved to the database:', parsedData);
+
             } catch (error) {
                 console.error('Error processing message:', error);
             }

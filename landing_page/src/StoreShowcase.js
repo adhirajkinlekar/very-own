@@ -3,7 +3,7 @@ import React from 'react';
 function StoreShowcase() {
   return (
     <div className="bg-gray-50 flex flex-col items-center pt-8 pb-16">
-      <h2 className="text-4xl font-semibold text-center mb-8 text-indigo-800 pt-8">Famous Academies</h2>
+      <h2 className="text-4xl font-semibold text-center mb-8 text-indigo-800 pt-8">Famous Stores</h2>
 
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-md w-full">
         <div className="relative h-48">
