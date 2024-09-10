@@ -21,6 +21,8 @@
 
   <!-- Course Image Upload -->
   <div class="form-group">
+    <small style="color: rgb(17, 143, 17);">* (only mp4, webm, ogg, avi, mkv files are allowed)</small>
+
     <label for="courseImage">Upload Course Image:</label>
     <input type="file" id="courseImage" (change)="onImageSelected($event)" class="form-input" accept="image/*">
     <div *ngIf="courseImagePreview" class="image-preview mt-3">
@@ -30,6 +32,8 @@
   </div>
 
   <h3 class="sections-title">Sections</h3>
+
+  <small style="color: rgb(17, 143, 17);">* (only mp4, webm, ogg, avi, mkv files are allowed)</small>
 
   <div *ngFor="let section of course.sections; let i = index" class="section-card">
     <h4 class="section-header">Section {{i + 1}}</h4>

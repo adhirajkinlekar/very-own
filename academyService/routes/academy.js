@@ -174,6 +174,10 @@ router.post('/:academyId/course',getCurrentUser, async (req, res) => {
 
         const course = req.body;
 
+        if (!course.title || !course.headline || !course.imageUrl || !course.description || course.sections?.length == 0) {
+            return res.status(400).json({ error: 'Please fill in all the details' });
+        }
+
         const { academyId } = req.params;
 
         const academyObjectId = new mongoose.Types.ObjectId(academyId);

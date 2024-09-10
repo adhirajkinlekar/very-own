@@ -59,14 +59,14 @@ export class CreatecourseComponent {
 
   isValid(): boolean {
     return this.course.title.trim() !== '' &&
-           this.course.headline.trim() !== '' &&
-           this.course.description.trim() !== '' &&
-           this.course.sections.length > 0 &&
-           this.course.sections.every(section =>
-             section.title.trim() !== '' &&
-             section.lectures.length > 0 &&
-             section.lectures.every(lecture => lecture.title.trim() !== '' && lecture.url.trim() !== '')
-           );
+      this.course.headline.trim() !== '' &&
+      this.course.description.trim() !== '' &&
+      this.course.sections.length > 0 &&
+      this.course.sections.every(section =>
+        section.title.trim() !== '' &&
+        section.lectures.length > 0 &&
+        section.lectures.every(lecture => lecture.title.trim() !== '' && lecture.url.trim() !== '')
+      );
   }
 
   createCourse() {
@@ -88,6 +88,21 @@ export class CreatecourseComponent {
     if (input.files && input.files[0]) {
       const file = input.files[0];
 
+      // Validate file type (MIME types)
+      const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/avi', 'video/mkv'];
+      if (!validVideoTypes.includes(file.type)) {
+        console.error('Invalid file type. Please upload a valid video file (MP4, WebM, Ogg, AVI, or MKV).');
+        return;
+      }
+
+      // Validate file extension as an extra safety check
+      const validExtensions = ['mp4', 'webm', 'ogg', 'avi', 'mkv'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (!fileExtension || !validExtensions.includes(fileExtension)) {
+        console.error('Invalid file extension. Please upload a valid video file with an appropriate extension (MP4, WebM, Ogg, AVI, or MKV).');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('file', file);
 
@@ -106,6 +121,21 @@ export class CreatecourseComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+
+      // Validate file type (MIME types)
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+      if (!validImageTypes.includes(file.type)) {
+        this.courseImagePreview = null;
+        return;
+      }
+
+      // Validate file extension as an extra safety check
+      const validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (!fileExtension || !validExtensions.includes(fileExtension)) {
+        this.courseImagePreview = null;
+        return;
+      }
 
       const formData = new FormData();
       formData.append('file', file);
@@ -143,7 +173,7 @@ export class CreatecourseComponent {
           title: `Advanced ${Math.floor(Math.random() * 1000)} Topics`,
           lectures: [
             { title: `${Math.floor(Math.random() * 1000)} and ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724781950981.mp4` },
-            { title: `Create new ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4`}
+            { title: `Create new ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
           ]
         }
       ]

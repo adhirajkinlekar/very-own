@@ -198,7 +198,7 @@ spec:
 # 127.0.0.1 veryown.in
 # 127.0.0.1 sso.veryown.in
 # 127.0.0.1 admin.veryown.in
-# 127.0.0.1 overview.admin.veryown.in
+# 127.0.0.1 overview-admin.veryown.in
 # 127.0.0.1 academy-admin.veryown.in
 # 127.0.0.1 api-auth.veryown.in
 # 127.0.0.1 api-admin.veryown.in
@@ -303,7 +303,7 @@ spec:
 # 127.0.0.1 veryown.in
 # 127.0.0.1 sso.veryown.in
 # 127.0.0.1 admin.veryown.in
-# 127.0.0.1 overview.admin.veryown.in
+# 127.0.0.1 overview-admin.veryown.in
 # 127.0.0.1 academy-admin.veryown.in
 # 127.0.0.1 api-auth.veryown.in
 # 127.0.0.1 api-admin.veryown.in

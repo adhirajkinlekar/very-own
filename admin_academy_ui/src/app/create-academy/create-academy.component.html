@@ -48,6 +48,8 @@
 
     <!-- User Image Upload -->
     <div class="form-group mt-4">
+      <small style="color: rgb(17, 143, 17);">* (only mp4, webm, ogg, avi, mkv files are allowed)</small>
+
       <label for="image" class="form-label">Upload Academy Image</label>
       <input type="file" id="image" (change)="onImageSelected($event)" class="form-control" accept="image/*" />
       <div *ngIf="imagePreview" class="image-preview mt-3">

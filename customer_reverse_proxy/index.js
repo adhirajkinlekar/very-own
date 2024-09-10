@@ -152,8 +152,7 @@ app.use((err, req, res, next) => {
         <body>
             <div class="container">
                 <h1>Something Went Wrong</h1>
-                <p>We’re sorry, but something went wrong on our end. Please try again later.</p>
-                <p>If the problem persists, <a href="/">return to the homepage</a>.</p>
+                <p>We're sorry, but the service you're trying to access either doesn't exist, or something went wrong on our end. Please try again later.</p>
             </div>
         </body>
         </html>

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: admin-academy-ui
-          image: docker.io/adhirajk/admin_academy_ui:1.0.3
+          image: docker.io/adhirajk/admin_academy_ui:1.0.5
           ports:
             - containerPort: 80
           env:

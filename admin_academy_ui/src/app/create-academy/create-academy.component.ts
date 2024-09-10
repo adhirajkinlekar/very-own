@@ -32,6 +32,23 @@ export class CreateAcademyComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+
+        // Validate file type (MIME types)
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+        if (!validImageTypes.includes(file.type)) {
+           this.imagePreview = null;
+          return;
+        }
+  
+        // Validate file extension as an extra safety check
+        const validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!fileExtension || !validExtensions.includes(fileExtension)) {
+           this.imagePreview = null;
+          return;
+        }
+
+
       this.myForm.patchValue({ image: file });
       this.myForm.get('image')?.updateValueAndValidity();
 

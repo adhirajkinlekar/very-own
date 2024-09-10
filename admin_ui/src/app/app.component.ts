@@ -21,7 +21,7 @@ export class AppComponent {
     // const hostname = window.location.hostname;
     // if (hostname === 'admin.veryown.in') {
     //   // Perform the redirection
-    //   window.location.href = 'https://overview.admin.veryown.in:4200';
+    //   window.location.href = 'https://overview-admin.veryown.in:4200';
     // } 
     
     window.addEventListener('navigate-to-container', (event: Event) => {
