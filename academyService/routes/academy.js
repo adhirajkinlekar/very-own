@@ -8,34 +8,41 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 
-const getCurrentUser = (req,res,next) =>{ 
+const getCurrentUser = (req, res, next) => {
 
     const authHeader = req.headers['authorization'];
 
-    const token = authHeader && authHeader.split(' ')[1]; 
- 
-    if (!token) return res.sendStatus(401);  
- 
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.sendStatus(401);
+
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
- 
-      if (err) return res.sendStatus(403);  
- 
-      req.currentUser = payload;
- 
-     next();  
-   });
- }
+
+        if (err) return res.sendStatus(403);
+
+        req.currentUser = payload;
+
+        next();
+    });
+}
 
 // Create academy endpoint
 router.post('/', getCurrentUser, async (req, res) => {
 
     try {
 
- 
+
         const { academyName, description, headline, imageUrl, publicId } = req.body;
 
         if (!academyName || !description || !headline || !imageUrl || !publicId) {
             return res.status(400).json({ error: 'Please fill in all the details' });
+        }
+
+        // Check if an academy with the same name already exists
+        const existingAcademy = await Academy.findOne({ publicId }).exec();
+
+        if (existingAcademy) {
+            return res.status(400).json({ error: 'An academy with this name already exists' });
         }
 
         const newAcademy = new Academy({
@@ -60,26 +67,26 @@ router.post('/', getCurrentUser, async (req, res) => {
         res.status(201).json({ academyId: savedAcademy.id });
 
     } catch (error) {
-        console.log({error})
-         res.status(500).json({ error: 'Failed to create academy' });
+        console.log({ error })
+        res.status(500).json({ error: 'Failed to create academy' });
     }
 });
 
-router.get('/dashboard', getCurrentUser,  async (req, res) => {
-    try { 
+router.get('/dashboard', getCurrentUser, async (req, res) => {
+    try {
 
         // Assuming userId is hardcoded, ensure it’s a valid ObjectId
         const userId = new mongoose.Types.ObjectId(req.currentUser.id);
- 
+
         // Fetch academies based on userId
         const academies = await Academy.find({ userId }).select('headline academyName _id imageUrl');
- 
+
         // Extract academy IDs from the academies
         const academyIds = academies.map(academy => academy._id);
 
         // Get the count of courses related to the academies
         const courseCount = await Course.countDocuments({ academyId: { $in: academyIds } });
- 
+
         // Return academies and the course count as JSON
         res.status(200).json({ academies, courseCount });
 
@@ -98,7 +105,7 @@ router.get('/:academyId', async (req, res) => {
 
 
         const { academyId } = req.params;
- 
+
         const objectId = new mongoose.Types.ObjectId(academyId);
 
         const academy = await Academy.findById(objectId);
@@ -111,7 +118,7 @@ router.get('/:academyId', async (req, res) => {
         res.json({ academy, courses });
 
     } catch (error) {
-         res.status(500).json({ error: 'Failed to retrieve academy' });
+        res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -129,7 +136,7 @@ router.get('/customer/:publicId', async (req, res) => {
         res.json({ academy, courses });
 
     } catch (error) {
-         res.status(500).json({ error: 'Failed to retrieve academy' });
+        res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
@@ -142,17 +149,17 @@ router.get('/:academyId/courses/:courseId', async (req, res) => {
 
         if (!course) return res.status(400).json({ error: 'Could not find academy' });
 
-        res.json({ course: {academyId: course[0].academyId,courseName: course[0].courseName, description:course[0].description, imageUrl:course[0].imageUrl} });
+        res.json({ course: { academyId: course[0].academyId, courseName: course[0].courseName, description: course[0].description, imageUrl: course[0].imageUrl } });
 
     } catch (error) {
-         res.status(500).json({ error: 'Failed to retrieve academy' });
+        res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
 
 
 router.get('/:academyId/courses/:courseId/learn', getCurrentUser, async (req, res) => {
-    
+
     try {
 
         const { courseId, academyId } = req.params;
@@ -161,15 +168,15 @@ router.get('/:academyId/courses/:courseId/learn', getCurrentUser, async (req, re
 
         if (!course) return res.status(400).json({ error: 'Could not find academy' });
 
-        res.json({ course:course[0] });
+        res.json({ course: course[0] });
 
     } catch (error) {
-         res.status(500).json({ error: 'Failed to retrieve academy' });
+        res.status(500).json({ error: 'Failed to retrieve academy' });
     }
 });
 
 
-router.post('/:academyId/course',getCurrentUser, async (req, res) => {
+router.post('/:academyId/course', getCurrentUser, async (req, res) => {
     try {
 
         const course = req.body;
@@ -186,7 +193,14 @@ router.post('/:academyId/course',getCurrentUser, async (req, res) => {
 
         if (!academy) return res.status(400).json({ error: 'Could not find academy' });
 
-        if(academy.userId != req.currentUser.id) return res.status(403).json({ error: 'Forbidden' });
+        if (academy.userId != req.currentUser.id) return res.status(403).json({ error: 'Forbidden' });
+
+        // Check if a course with the same title and academyId already exists
+        const existingCourse = await Course.findOne({ courseName: course.title, academyId: academyObjectId }).exec();
+
+        if (existingCourse) {
+            return res.status(400).json({ error: 'A course with this title already exists in the specified academy' });
+        }
 
         const courseDetails = {
             courseName: course.title,
@@ -204,7 +218,7 @@ router.post('/:academyId/course',getCurrentUser, async (req, res) => {
         res.status(201).json(savedCourse);
     }
     catch (error) {
-         res.status(500).json({ error: 'Failed to Create the course' });
+        res.status(500).json({ error: 'Failed to Create the course' });
     }
 });
 

@@ -6,6 +6,7 @@
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .title {
@@ -14,6 +15,14 @@
   color: #2C3E50;
   text-align: center;
   margin-bottom: 30px;
+}
+
+/* Error message styling */
+.error-message {
+  color: #e74c3c;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Form Group Styling */
@@ -167,4 +176,42 @@ button {
   display: block;
   width: fit-content;
   margin: 20px auto;
+}
+
+/* Spinner Styles */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3);
+  border-top: 8px solid #1ABC9C;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Image preview styling */
+.image-preview {
+  margin-top: 10px;
+}
+
+.image-thumbnail {
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
 }

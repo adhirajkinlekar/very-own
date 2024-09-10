@@ -5,7 +5,7 @@ import SignUpForm from './components/auth/sign_up.component';
 import GlobalTestAccountPopup from './components/popup.component';  
 import createPopup from './components/notifier.component';
 
-const SignInPage = () => {
+const SignInPage = ({showPopup}) => {
   const { publicId_service } = useParams(); 
 
   // Parse publicId and service only if publicId_service is not "admin"
@@ -69,6 +69,8 @@ const SignInPage = () => {
 
         }
       } else {
+        showPopup('Login failed', 3000); 
+
         console.error('Login failed');
       }
 
@@ -195,7 +197,7 @@ const App = () => {
       <Router>
         <GlobalTestAccountPopup/>
         <Routes>
-          <Route path="/secure/:publicId_service/signin" element={<SignInPage />} />
+          <Route path="/secure/:publicId_service/signin" element={<SignInPage showPopup={showPopup}/>} />
           <Route path="/secure/:publicId_service/signup" element={<SignUpPage showPopup={showPopup} />} />
         </Routes>
       </Router>

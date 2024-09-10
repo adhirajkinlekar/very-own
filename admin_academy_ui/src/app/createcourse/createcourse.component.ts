@@ -34,6 +34,8 @@ export class CreatecourseComponent {
     sections: []
   };
   courseImagePreview: string | ArrayBuffer | null = null; // For image preview
+  isLoading = false; // New loading state
+  errorMessage: string = ''; // Error message state
 
   constructor(private academyService: AcademyService, private route: ActivatedRoute) {
     this.route.paramMap.subscribe((params: any) => {
@@ -71,6 +73,8 @@ export class CreatecourseComponent {
 
   createCourse() {
     if (this.isValid()) {
+      this.errorMessage = ''; // Clear any previous errors
+
       this.academyService.createCourse(this.course, this.academyId).subscribe(
         data => {
           const navigateEvent = new CustomEvent('navigate-to-container', {
@@ -78,7 +82,10 @@ export class CreatecourseComponent {
           });
           window.dispatchEvent(navigateEvent);
         },
-        err => { console.error('Course creation failed:', err); }
+        err => { 
+          console.error('Course creation failed:', err);
+          this.errorMessage = 'There was an issue creating the course. Please try again later.';
+         }
       );
     }
   }
@@ -88,18 +95,14 @@ export class CreatecourseComponent {
     if (input.files && input.files[0]) {
       const file = input.files[0];
 
+      // Show spinner
+      this.isLoading = true;
+
       // Validate file type (MIME types)
       const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/avi', 'video/mkv'];
       if (!validVideoTypes.includes(file.type)) {
         console.error('Invalid file type. Please upload a valid video file (MP4, WebM, Ogg, AVI, or MKV).');
-        return;
-      }
-
-      // Validate file extension as an extra safety check
-      const validExtensions = ['mp4', 'webm', 'ogg', 'avi', 'mkv'];
-      const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      if (!fileExtension || !validExtensions.includes(fileExtension)) {
-        console.error('Invalid file extension. Please upload a valid video file with an appropriate extension (MP4, WebM, Ogg, AVI, or MKV).');
+        this.isLoading = false;
         return;
       }
 
@@ -108,11 +111,15 @@ export class CreatecourseComponent {
 
       this.academyService.uploadFile(formData).subscribe(
         (response: any) => {
+          this.isLoading = false; // Hide spinner
           if (response && response.url) {
             this.course.sections[sectionIndex].lectures[lectureIndex].url = response.url;
           }
         },
-        error => { console.error('File upload failed:', error); }
+        error => {
+          console.error('File upload failed:', error);
+          this.isLoading = false; // Hide spinner on error
+        }
       );
     }
   }
@@ -122,18 +129,14 @@ export class CreatecourseComponent {
     if (input.files && input.files[0]) {
       const file = input.files[0];
 
+      // Show spinner
+      this.isLoading = true;
+
       // Validate file type (MIME types)
       const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
       if (!validImageTypes.includes(file.type)) {
-        this.courseImagePreview = null;
-        return;
-      }
-
-      // Validate file extension as an extra safety check
-      const validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
-      const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      if (!fileExtension || !validExtensions.includes(fileExtension)) {
-        this.courseImagePreview = null;
+        console.error('Invalid file type. Please upload a valid image file (JPEG, PNG, GIF, WebP, SVG).');
+        this.isLoading = false;
         return;
       }
 
@@ -142,6 +145,7 @@ export class CreatecourseComponent {
 
       this.academyService.uploadFile(formData).subscribe(
         (response: any) => {
+          this.isLoading = false; // Hide spinner
           if (response && response.url) {
             this.course.imageUrl = response.url; // Set the course image URL
             const reader = new FileReader();
@@ -151,35 +155,101 @@ export class CreatecourseComponent {
             reader.readAsDataURL(file);
           }
         },
-        error => { console.error('File upload failed:', error); }
+        error => {
+          console.error('File upload failed:', error);
+          this.isLoading = false; // Hide spinner on error
+        }
       );
     }
   }
 
+
+  getLink() {
+    const links = [
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/free-photo-of-anne-eli.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-12078486.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-1524620.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-16689311.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-17887854.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861943.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861946.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861949.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3912364.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-4491461.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-5848017.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-7214483.webp"
+    ];
+  
+    const randomIndex = Math.floor(Math.random() * links.length);
+    return links[randomIndex];
+  }
+  
+
+  generateRandomCharacter(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < 5; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
   fillWithDummyData() {
+
+    const courseName = this.generateRandomCharacter();
+
     this.course = {
-      title: `Introduction to ${Math.floor(Math.random() * 1000)}`,
-      headline: `Learn ${Math.floor(Math.random() * 1000)} scratch`,
-      description: `This course provides a comprehensive introduction to ${Math.floor(Math.random() * 1000)}, covering basic to advanced concepts.`,
+      title: `Introduction to ${courseName}`,
+      headline: `Learn ${courseName} scratch`,
+      description: `This course provides a comprehensive introduction to ${courseName}, covering basic to advanced concepts. Starting with an overview of core concepts, participants will gain a strong foundation, including its theoretical underpinnings and practical applications. As the course progresses, learners will explore advanced techniques and strategies, empowering them to confidently tackle real-world challenges. By the end of this course, participants will have acquired the knowledge and skills necessary to effectively apply the skills in various contexts, ensuring they are well-prepared to leverage its full potential in their professional endeavors."`,
       sections: [
         {
-          title: `Getting Started with ${Math.floor(Math.random() * 1000)}`,
+          title: `Getting Started`,
           lectures: [
-            { title: `Introduction to ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741926017.mp4` },
-            { title: `Setting up ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
+            { title: `Introduction to ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/109018-683077133_medium.mp4` },
+            { title: `Setting up ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/185096-874643413_medium.mp4` }
           ]
         },
         {
-          title: `Advanced ${Math.floor(Math.random() * 1000)} Topics`,
+          title: `Advanced Topics`,
           lectures: [
-            { title: `${Math.floor(Math.random() * 1000)} and ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724781950981.mp4` },
-            { title: `Create new ${Math.floor(Math.random() * 1000)}`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/200298-912370118_small.mp4` },
+            { title: `Create new ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/202693-918730367_medium.mp4` }
+          ]
+        },
+        {
+          title: `Why is it needed`,
+          lectures: [
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/205923_medium.mp4` },
+            { title: `Here's why...`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/215471_medium.mp4` }
+          ]
+        },
+        {
+          title: `Use cases`,
+          lectures: [
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/39010-420224640_medium.mp4` },
+            { title: `Use cases...`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/50961-464062995_medium.mp4` }
+          ]
+        },
+        {
+          title: `Current trends`,
+          lectures: [
+            { title: `Local trends`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/68-135732328_medium.mp4` },
+            { title: `National trends`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
+          ]
+        },
+        {
+          title: `Bonus`,
+          lectures: [
+            { title: `Other courses`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/80-135733160_medium.mp4` },
+            { title: `Interesting facts`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/69625-531621058_medium.mp4` }, 
           ]
         }
       ]
     };
+    const link = this.getLink();
     // Optional: Set a dummy image URL
-    this.courseImagePreview = 'https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4491461.webp';
-    this.course.imageUrl = 'https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4491461.webp';
+    this.courseImagePreview = link;
+    this.course.imageUrl = link;
   }
 }

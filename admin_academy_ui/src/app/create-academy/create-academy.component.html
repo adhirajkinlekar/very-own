@@ -7,9 +7,12 @@
     </div>
   </div>
 
-  <!-- Button to fill form with random values -->
   <button class="btn-fill-dummy" (click)="fillFormWithRandomData()"> Fill with dummy Data </button>
 
+  <!-- Error message display -->
+  <div *ngIf="errorMessage" class="error-message mt-4">
+    {{ errorMessage }}
+  </div>
 
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <!-- Academy Name -->
@@ -63,4 +66,11 @@
       Submit
     </button>
   </form>
+
+
+
+    <!-- Spinner overlay -->
+    <div *ngIf="isLoading" class="spinner-overlay">
+      <div class="spinner"></div>
+    </div>
 </div>
