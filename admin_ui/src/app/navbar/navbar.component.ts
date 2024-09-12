@@ -9,27 +9,27 @@ import { AppService } from '../app.service';
 })
 export class NavbarComponent {
   isDropdownOpen = false;
+  isNavbarOpen = false;  // For toggling mobile navbar visibility
 
- 
-  constructor(private router: Router, public appService: AppService){
- 
-  }
+  constructor(private router: Router, public appService: AppService) {}
+
   toggleNavbar() {
-    // Toggle mobile navbar (you may need to use Angular's ViewChild to control this)
+    this.isNavbarOpen = !this.isNavbarOpen;  // Toggle mobile navbar
   }
 
   toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-  // when navigated by routes to services/serviceId, update the selected value
-  onChange(selected: any) { 
- 
-    if(selected.id == this.appService.AppConstants.default_option) this.router.navigateByUrl('/');
-    else this.router.navigateByUrl(`/academy/${selected.id}`);
+    this.isDropdownOpen = !this.isDropdownOpen;  // Toggle dropdown
   }
 
-  logOut(){
+  onChange(selected: any) {
+    if (selected.id == this.appService.AppConstants.default_option) {
+      this.router.navigateByUrl('/');
+    } else {
+      this.router.navigateByUrl(`/academy/${selected.id}`);
+    }
+  }
 
-  this.appService.deleteCookie('VERY_OWN_JWT_TOKEN');
- }
+  logOut() {
+    this.appService.deleteCookie('VERY_OWN_JWT_TOKEN');
+  }
 }

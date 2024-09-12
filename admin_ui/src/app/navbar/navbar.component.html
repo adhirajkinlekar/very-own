@@ -1,8 +1,8 @@
-<nav class="bg-white shadow-md py-4 px-6"> <!-- Increased navbar height -->
+<nav class="bg-white shadow-md py-4 px-6 sticky-navbar">
   <div class="container mx-auto flex items-center justify-between">
     <!-- Logo and Brand Link -->
     <a class="flex items-center" [routerLink]="['/']">
-      <i class="fas fa-user-shield text-4xl text-blue-600"></i> <!-- Increased icon size and changed color -->
+      <i class="fas fa-user-shield text-4xl text-blue-600"></i>
     </a>
 
     <!-- Toggler Button for Mobile View -->
@@ -12,29 +12,22 @@
       </svg>
     </button>
 
-    <div *ngIf="appService.isLoggedIn$.getValue()" class="hidden lg:flex items-center space-x-4">
+    <!-- Navbar Content -->
+    <div [ngClass]="{ 'block': isNavbarOpen, 'hidden lg:flex': !isNavbarOpen }" class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
       <!-- User Dropdown -->
       <div class="relative">
         <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none" id="userDropdown" type="button" (click)="toggleDropdown()">
-          <i class="fas fa-user-circle text-gray-500 text-3xl"></i> <!-- Updated icon to fa-user-circle -->
+          <i class="fas fa-user-circle text-gray-500 text-3xl"></i>
           <span class="hidden md:inline">Hello, Admin</span>
         </button>
         <div style="z-index: 100;" *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <ul class="py-1">
             <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="https://overview-admin.veryown.in">Admin overview</a></li>
             <li><hr class="border-t border-gray-200"></li>
-
             <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" (click)="logOut()">Logout</a></li>
           </ul>
         </div>
       </div>
     </div>
-    
-<!-- 
-    <div *ngIf="!appService.isLoggedIn$.getValue()" class="hidden lg:flex">
-      <a href="https://sso.veryown.in/secure/admin/signin" class="inline-flex items-center px-4 py-2 text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600"> <!-- Custom color for Sign In button -->
-        <!-- Sign In -->
-      <!-- </a>
-    </div> -->
   </div>
 </nav>

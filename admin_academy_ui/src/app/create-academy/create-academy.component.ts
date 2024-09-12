@@ -149,13 +149,13 @@ export class CreateAcademyComponent {
 
   getRandomUrl() {
     const urls = [
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-1181534.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-4145347.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-4260314.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-5212361.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-5428262.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-6925361.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/academy/pexels-photo-7593802.webp"
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-1181534.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4145347.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4260314.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-5212361.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-5428262.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-6925361.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-7593802.webp"
     ];
     
     // Select a random URL from the array

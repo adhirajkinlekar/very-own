@@ -166,18 +166,18 @@ export class CreatecourseComponent {
 
   getLink() {
     const links = [
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/free-photo-of-anne-eli.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-12078486.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-1524620.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-16689311.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-17887854.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861943.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861946.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3861949.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-3912364.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-4491461.webp",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-5848017.jpeg",
-      "https://storage.googleapis.com/veryown_primary_bucket/dummy/course/cover/pexels-photo-7214483.webp"
+      "https://storage.googleapis.com/veryown_primary_bucket/free-photo-of-anne-eli.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-12078486.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-1524620.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-16689311.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-17887854.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-3861943.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-3861946.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-3861949.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-3912364.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-4491461.webp",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-5848017.jpeg",
+      "https://storage.googleapis.com/veryown_primary_bucket/pexels-photo-7214483.webp"
     ];
   
     const randomIndex = Math.floor(Math.random() * links.length);
@@ -201,48 +201,48 @@ export class CreatecourseComponent {
     this.course = {
       title: `Introduction to ${courseName}`,
       headline: `Learn ${courseName} scratch`,
-      description: `This course provides a comprehensive introduction to ${courseName}, covering basic to advanced concepts. Starting with an overview of core concepts, participants will gain a strong foundation, including its theoretical underpinnings and practical applications. As the course progresses, learners will explore advanced techniques and strategies, empowering them to confidently tackle real-world challenges. By the end of this course, participants will have acquired the knowledge and skills necessary to effectively apply the skills in various contexts, ensuring they are well-prepared to leverage its full potential in their professional endeavors."`,
+      description: `This course provides a comprehensive introduction to ${courseName}, covering basic to advanced concepts. Starting with an overview of core concepts, participants will gain a strong foundation, including its theoretical underpinnings and practical applications. As the course progresses, learners will explore advanced techniques and strategies, empowering them to confidently tackle real-world challenges. By the end of this course, participants will have acquired the knowledge and skills necessary to effectively apply the skills in various contexts, ensuring they are well-prepared to leverage its full potential in their professional endeavors.`,
       sections: [
         {
           title: `Getting Started`,
           lectures: [
-            { title: `Introduction to ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/109018-683077133_medium.mp4` },
-            { title: `Setting up ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/185096-874643413_medium.mp4` }
+            { title: `Intro to ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/185096-874643413_medium.mp4` },
+            { title: `Setting up ${courseName}`, url: `https://storage.googleapis.com/veryown_primary_bucket/109018-683077133_medium.mp4` }
           ]
         },
         {
           title: `Advanced Topics`,
           lectures: [
-            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/200298-912370118_small.mp4` },
-            { title: `Create new ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/202693-918730367_medium.mp4` }
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/200298-912370118_small.mp4` },
+            { title: `Create new ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/202693-918730367_medium.mp4` }
           ]
         },
         {
           title: `Why is it needed`,
           lectures: [
-            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/205923_medium.mp4` },
-            { title: `Here's why...`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/215471_medium.mp4` }
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/205923_medium.mp4` },
+            { title: `Here's why...`, url: `https://storage.googleapis.com/veryown_primary_bucket/215471_medium.mp4` }
           ]
         },
         {
           title: `Use cases`,
           lectures: [
-            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/39010-420224640_medium.mp4` },
-            { title: `Use cases...`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/50961-464062995_medium.mp4` }
+            { title: `${this.generateRandomCharacter()} and ${this.generateRandomCharacter()}`, url: `https://storage.googleapis.com/veryown_primary_bucket/39010-420224640_medium.mp4` },
+            { title: `Use cases...`, url: `https://storage.googleapis.com/veryown_primary_bucket/50961-464062995_medium.mp4` }
           ]
         },
         {
           title: `Current trends`,
           lectures: [
-            { title: `Local trends`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/68-135732328_medium.mp4` },
+            { title: `Local trends`, url: `https://storage.googleapis.com/veryown_primary_bucket/68-135732328_medium.mp4` },
             { title: `National trends`, url: `https://storage.googleapis.com/veryown_primary_bucket/1724741940013.mp4` }
           ]
         },
         {
           title: `Bonus`,
           lectures: [
-            { title: `Other courses`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/80-135733160_medium.mp4` },
-            { title: `Interesting facts`, url: `https://storage.googleapis.com/veryown_primary_bucket/dummy/course/content/69625-531621058_medium.mp4` }, 
+            { title: `Other courses`, url: `https://storage.googleapis.com/veryown_primary_bucket/80-135733160_medium.mp4` },
+            { title: `Interesting facts`, url: `https://storage.googleapis.com/veryown_primary_bucket/69625-531621058_medium.mp4` }, 
           ]
         }
       ]

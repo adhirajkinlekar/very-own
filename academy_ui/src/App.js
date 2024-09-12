@@ -7,7 +7,7 @@ import CoursePage from './components/learn/learn.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import axiosInstance from './util/axiosInterceptor';
-import './App.css';  
+import './App.css';
 
 const App = () => {
   const url = window.location.hostname;
@@ -53,7 +53,7 @@ const App = () => {
     setAuthStatus(false);
     if (window.location.pathname !== '/') {
       window.location.assign('/'); // Redirect to '/'
-   }
+    }
   };
 
   const toggleDropdown = () => {
@@ -74,36 +74,33 @@ const App = () => {
         {academy ? (
           <div className="app-container">
             <header className="header">
-              <div className="header-content">
-                <Link to="/" className="academy-link">
-                  <img src={academy.imageUrl} alt="Academy Profile" className="academy-image" />
+              <div className="header-content flex justify-between items-center p-4">
+                <Link to="/" className="academy-link flex items-center space-x-2">
+                  <img src={academy.imageUrl} alt="Academy Profile" className="academy-image h-10 w-10" />
                   <div className="academy-info">
-                    <h1 className="academy-name">{academy.academyName}</h1>
-                    <p className="academy-title">{academy.title}</p>
+                    <h1 className="academy-name text-lg font-bold">{academy.academyName}</h1>
+                    <p className="academy-title text-sm">{academy.title}</p>
                   </div>
                 </Link>
 
-                <nav className="nav" ref={dropdownRef}>
+                <nav className="nav flex items-center" ref={dropdownRef}>
                   {isAuthenticated ? (
-                    <div className="dropdown">
+                    <div className="dropdown relative">
                       <button
                         onClick={toggleDropdown}
                         aria-expanded={dropdownOpen}
-                        className="dropdown-button"
+                        className="dropdown-button flex items-center"
                       >
-                        <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
+                        <FontAwesomeIcon icon={faUserCircle} className="user-icon h-8 w-8" />
                       </button>
                       {dropdownOpen && (
-                        <ul className="dropdown-menu" style={{ color: 'black' }}>
-                          <li className="dropdown-item">Hello, User</li>
-                          <li className="dropdown-item">
-                            <button className="dropdown-item-button">Profile</button>
+                        <ul className="dropdown-menu absolute right-0 mt-2 bg-white border rounded shadow-md">
+                          <li className="dropdown-item p-2">Hello, User</li>
+                          <li className="dropdown-item p-2">
+                            <button className="dropdown-item-button" style={{textDecorationLine:'line-through'}}>Profile</button>
                           </li>
-                          <li className="dropdown-item">
-                            <button
-                              onClick={handleSignOut}
-                              className="dropdown-item-button"
-                            >
+                          <li className="dropdown-item p-2">
+                            <button onClick={handleSignOut} className="dropdown-item-button">
                               Sign Out
                             </button>
                           </li>
@@ -111,7 +108,7 @@ const App = () => {
                       )}
                     </div>
                   ) : (
-                    <div className="auth-buttons">
+                    <div className="auth-buttons flex space-x-2">
                       <a href={`https://sso.veryown.in/secure/${publicId}_academy/signin`} className="auth-link">
                         <button className="auth-button">Sign In</button>
                       </a>
@@ -123,6 +120,7 @@ const App = () => {
                 </nav>
               </div>
             </header>
+
 
             <main className="main-content">
               <div className="content-container">
