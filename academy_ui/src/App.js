@@ -94,10 +94,10 @@ const App = () => {
                         <FontAwesomeIcon icon={faUserCircle} className="user-icon h-8 w-8" />
                       </button>
                       {dropdownOpen && (
-                        <ul className="dropdown-menu absolute right-0 mt-2 bg-white border rounded shadow-md">
+                        <ul className="dropdown-menu absolute right-0 mt-2 bg-white border rounded shadow-md" style={{zIndex: 100}}>
                           <li className="dropdown-item p-2">Hello, User</li>
                           <li className="dropdown-item p-2">
-                            <button className="dropdown-item-button" style={{textDecorationLine:'line-through'}}>Profile</button>
+                            <button className="dropdown-item-button" style={{textDecorationLine: 'line-through'}}>Profile</button>
                           </li>
                           <li className="dropdown-item p-2">
                             <button onClick={handleSignOut} className="dropdown-item-button">
