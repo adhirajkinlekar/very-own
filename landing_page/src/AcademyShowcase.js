@@ -50,7 +50,7 @@ function AcademyShowcase() {
                   </p>
 
                   <a  href={academy.link} className="text-indigo-600 hover:text-indigo-400 font-semibold mt-4">
-                    View store
+                    View academy
                   </a>
                 </div>
               </div>

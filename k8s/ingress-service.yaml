@@ -266,8 +266,6 @@ spec:
 
 # kubectl get svc -A -l app.kubernetes.io/name=ingress-nginx (You will find the external ip here)
 
-# kubectl apply -f k8s/ingress-service.yaml (checked if need to run again)
-
 
 
 # Helm
@@ -342,7 +340,7 @@ spec:
 
 # Create secret of token
 
-# Check if IP address is propagated
+# Check if IP address is propagated - https://dnschecker.org/#A/veryown.in
 
 # kubectl create secret generic "digitalocean-dns" \
 #   --namespace backend \
