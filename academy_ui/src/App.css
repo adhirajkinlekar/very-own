@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* App.css */
-
 .app-container {
   display: flex;
   flex-direction: column;
