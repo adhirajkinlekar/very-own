@@ -25,3 +25,4 @@ spec:
 
 # kubectl create secret generic cloudflare-api-token-secret \
 # --from-literal=api-token=JY2nSyOja7hcYnyH3XeSYH95vyPvbtaY7rqKejW4
+
