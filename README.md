@@ -2,7 +2,9 @@
 
 **veryown** is a customizable, all-in-one platform for building and managing services like teaching academies, online stores, and more — similar to Shopify, but built for service-based businesses with flexibility in mind.
 
-![Demo Video](https://www.youtube.com/watch?v=mk-yHecaxBg)
+Watch a full demo of the platform on YouTube:
+👉 veryown Platform Demo - https://www.youtube.com/watch?v=mk-yHecaxBg
+
 
 ---
 
