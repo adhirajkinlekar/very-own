@@ -42,3 +42,4 @@ CMD ["nginx", "-g", "daemon off;"]
 # docker tag adhirajk/admin_academy_ui:1.1.0 adhirajk/admin_academy_ui:1.1.0
 
 # docker push adhirajk/admin_academy_ui:1.1.0
+
